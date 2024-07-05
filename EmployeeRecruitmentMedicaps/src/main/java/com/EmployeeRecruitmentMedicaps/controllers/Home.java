@@ -13,5 +13,20 @@ public class Home {
 		return "home";
 		
 	}
+	
+	@RequestMapping(value ="/registration")
+	public String registrationPage()
+	{
+		return "registration";
+		
+	}
+	
+	@RequestMapping(value ="/logins")
+	public String loginPage()
+	{
+		return "logins";
+		
+	}
+	
 
 }

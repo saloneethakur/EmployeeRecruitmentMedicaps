@@ -21,17 +21,24 @@ public class medicaps {
 	
 	@Autowired
 	public UserService userService;
+	public Boolean status;
 	
 	@Autowired
 	public OtpService otpService;
 	@RequestMapping(value="/user_reg")
 	public String signUp(UserRegistrationModel model, ModelMap map,Model m) {
 		m.addAttribute("mail",model.getEmail());
-		
+		//m.addAttribute("status", res)
+	
 		ApiResponse res = null;
 		 res= userService.saveUser(model);
 		if (res.getStatus())
+		{
+			status = res.getStatus();
+			m.addAttribute("status", status);
 			return "successful";
+		}
+			
 		else
 			return "dummy";
 		
@@ -55,7 +62,7 @@ public class medicaps {
 	@RequestMapping(value ="/register")
 	public String registerPage()
 	{
-		return "login";
+		return "register";
 		
 	}
 	
@@ -98,6 +105,8 @@ public class medicaps {
 		System.out.println(user.getRole());
 		if(user.getRole().equals("ROLE_USER"))
 			return "loginSuccessful";
+		else if(user.getRole().equals("ROLE_ADMIN"))
+			return "/admin/adminHome";
 		
 		else
 			return "register";

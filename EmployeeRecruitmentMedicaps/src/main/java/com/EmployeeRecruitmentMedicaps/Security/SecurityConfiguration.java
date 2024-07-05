@@ -42,9 +42,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 	        http.authorizeRequests()        
 	        .antMatchers("/").permitAll()
 	        .antMatchers("/medicaps/**").permitAll()
+	        
 	                
 	        .antMatchers("/user/**").hasRole("USER")	
-	        .antMatchers("/user/**").hasRole("USER")
+	        .antMatchers("/admin/**").hasRole("ADMIN")
 	        .antMatchers("/user/**").hasAnyRole("ADMIN","USER")
 	        .and()        
 	        .formLogin().loginPage("/medicaps/login").permitAll()

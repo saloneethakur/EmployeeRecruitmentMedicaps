@@ -18,7 +18,7 @@
           <li><a href="#about">About Us</a></li>
           <li><a href="#academics">Academics</a></li>
           <li><a href="#campus">Campus Life</a></li>
-          <li><a href="registration.html">Login</a></li>
+          <li><a href="/home/registration">login</a></li>
         </ul>
       </div>
       <div class="hamburger">
