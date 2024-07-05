@@ -112,10 +112,10 @@
         <form action="/medicaps/login" method="post" >
             <h1>Login Here</h1>
             <div class="input-box">
-                <input type="email" placeholder="email" required>
+                <input type="email" placeholder="Email" name="email" required>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="password" required>
+                <input type="password" placeholder="Password" name="password" required>
             </div>
             <div class="remember-forgot">
                 <label for="">
