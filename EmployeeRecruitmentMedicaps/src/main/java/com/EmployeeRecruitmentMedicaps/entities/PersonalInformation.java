@@ -47,6 +47,9 @@ public class PersonalInformation {
     private String country;
 
     @Column(nullable = true)
+    private String examQualified;
+
+    @Column(nullable = true)
     private String researcherId;
 
     @Column(nullable = true)
@@ -54,12 +57,43 @@ public class PersonalInformation {
 
     @Column(nullable = true)
     private String orcid;
-    
-    @Column(nullable = true)
-    private String examQualified;
-
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+	public PersonalInformation(String alternatePhoneNumber, Date dob, String gender, String caste, String address,
+			String pincode, String district, String state, String country) {
+		super();
+		this.alternatePhoneNumber = alternatePhoneNumber;
+		this.dob = dob;
+		this.gender = gender;
+		this.caste = caste;
+		this.address = address;
+		this.pincode = pincode;
+		this.district = district;
+		this.state = state;
+		this.country = country;
+	}
+
+	public PersonalInformation(String alternatePhoneNumber, Date dob, String gender, String caste, String address,
+			String pincode, String district, String state, String country, String examQualified) {
+		super();
+		this.alternatePhoneNumber = alternatePhoneNumber;
+		this.dob = dob;
+		this.gender = gender;
+		this.caste = caste;
+		this.address = address;
+		this.pincode = pincode;
+		this.district = district;
+		this.state = state;
+		this.country = country;
+		this.examQualified = examQualified;
+	}
+    
+    
+    
+    
+    
+    
 }
