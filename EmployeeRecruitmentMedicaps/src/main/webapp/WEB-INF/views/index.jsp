@@ -1,1 +1,1 @@
-<% response.sendRedirect("/medicaps/register"); %>
+<% response.sendRedirect("/home/home1"); %>
