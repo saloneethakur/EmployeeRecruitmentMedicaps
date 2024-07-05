@@ -17,15 +17,14 @@ public class Vacancy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    
 
     @Column(nullable = false)
-    private String postType;
+    private String faculty;
 
     @Column(nullable = false)
     private String department;
 
-    @Column(nullable = true)
-    private String degreeAppliedFor;
 
     @Column(nullable = false)
     private String postAppliedFor;

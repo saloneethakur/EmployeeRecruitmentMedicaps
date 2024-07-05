@@ -55,7 +55,7 @@ public class medicaps {
 	@RequestMapping(value ="/register")
 	public String registerPage()
 	{
-		return "login";
+		return "register";
 		
 	}
 	
