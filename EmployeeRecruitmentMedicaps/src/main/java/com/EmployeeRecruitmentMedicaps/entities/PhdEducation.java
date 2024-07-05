@@ -31,6 +31,8 @@ public class PhdEducation {
     @Column(nullable = false)
     private String fieldOfStudy;
 
+    @Column(nullable = false)
+	private Date joiningYear;
     
     @Column(nullable = false)
 	private Date completionYear;

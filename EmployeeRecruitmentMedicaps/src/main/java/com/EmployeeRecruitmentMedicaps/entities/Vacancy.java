@@ -39,4 +39,16 @@ public class Vacancy {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+	public Vacancy(String faculty, String department, String postAppliedFor, Date vstart, Date vlast, User user) {
+		super();
+		this.faculty = faculty;
+		this.department = department;
+		this.postAppliedFor = postAppliedFor;
+		this.vstart = vstart;
+		this.vlast = vlast;
+		this.user = user;
+	}
+    
+    
 }

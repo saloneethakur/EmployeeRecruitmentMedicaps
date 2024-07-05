@@ -11,13 +11,14 @@
   <body>
     <div class="container">
       <h2>UPDATE VACCANCY</h2>
-      <form id="vacancyForm">
+      <form action="/admin/addVacancy" method="post">
         <div class="vacancy-section" id="vacancy1">
           <div class="form-group">
             <label for="faculty1">Faculty:</label>
             <select
               id="faculty1"
               class="faculty-dropdown"
+              name="faculty"
               onchange="populateDepartments(this, 1)"
             >
               <option value="">Select Faculty</option>
@@ -33,13 +34,13 @@
           </div>
           <div class="form-group">
             <label for="department1">Department:</label>
-            <select id="department1" class="department-dropdown">
+            <select id="department1" name="department" class="department-dropdown">
               <option value="">Select Department</option>
             </select>
           </div>
           <div class="form-group">
             <label for="post1">Post:</label>
-            <select id="post1" class="post-dropdown">
+            <select id="post1" class="post-dropdown" name="postAppliedFor">
               <option value="">Select Post</option>
               <option value="Lecturer">Lecturer</option>
               <option value="Assistant Professor">Assistant Professor</option>
@@ -48,16 +49,17 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="date1">Date:</label>
-            <input type="date" id="date1" name="date[]" required />
+            <label for="date1" >Date:</label>
+            <input type="date" id="date" name="vstart" required />
           </div>
           <div class="form-group">
             <label for="lastDate1">Last Date for Submission:</label>
-            <input type="date" id="lastDate1" name="lastDate[]" required />
+            <input type="date" id="date" name="vlast" required />
           </div>
+           <button type="submit"  id="addVacancy">Add Vacancy</button>
         </div>
       </form>
-      <button type="button" id="addVacancy">Add Vacancy</button>
+     
     </div>
 
     <script src="/assets/JS/vaccany1.js"></script>

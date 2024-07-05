@@ -23,6 +23,13 @@ public class PersonalInformation {
     
     @Column(nullable = false)
 	private Date dob;
+    
+    @Column(nullable = false)
+    private String gender;
+    
+    @Column(nullable = false)
+    private String caste;
+
 
     @Column(nullable = false)
     private String address;
@@ -47,6 +54,10 @@ public class PersonalInformation {
 
     @Column(nullable = true)
     private String orcid;
+    
+    @Column(nullable = true)
+    private String examQualified;
+
 
     @OneToOne
     @JoinColumn(name = "user_id")
