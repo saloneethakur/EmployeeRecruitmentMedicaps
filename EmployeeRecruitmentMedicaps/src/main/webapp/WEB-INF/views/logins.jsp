@@ -106,16 +106,16 @@
 </head>
 <body>
     <div class="wrapper">
-        <button class="close-btn" onclick="window.location.href='home.jsp'">
+        <button class="close-btn" onclick="location.href='home1'">
             <i class="fas fa-times-circle"></i>
         </button>
-        <form action="">
+        <form action="/medicaps/login" method="post" >
             <h1>Login Here</h1>
             <div class="input-box">
-                <input type="email" placeholder="Email" required>
+                <input type="email" placeholder="email" required>
             </div>
             <div class="input-box">
-                <input type="password" placeholder="Password" required>
+                <input type="password" placeholder="password" required>
             </div>
             <div class="remember-forgot">
                 <label for="">
