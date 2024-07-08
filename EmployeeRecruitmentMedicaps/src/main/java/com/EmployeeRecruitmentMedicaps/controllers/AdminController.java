@@ -46,7 +46,7 @@ public class AdminController {
 	@RequestMapping(value="/vacancy")
 	public String homee() {
 		
-			return "/admin/vacancyDemo";
+			return "/admin/vacancy";
 		
 	}
 
