@@ -32,7 +32,7 @@
     <h1>Welcome to Medi-Caps University</h1>
     <p>Your future starts here</p>
     <form action="/medicaps/vacancies">
-     <button class="view-vacancy-btn" >View Vacancy</button>
+     <button type="submit" class="view-vacancy-btn" >View Vacancy</button>
 </form>  
   </div>
 </section>
