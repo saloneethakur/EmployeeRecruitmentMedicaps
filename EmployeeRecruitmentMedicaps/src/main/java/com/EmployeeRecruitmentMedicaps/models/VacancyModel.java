@@ -16,5 +16,6 @@ public class VacancyModel {
     private String postAppliedFor;
     private String vstart; // Date stored as String
     private String vlast;  // Date stored as String
+    
    
 }

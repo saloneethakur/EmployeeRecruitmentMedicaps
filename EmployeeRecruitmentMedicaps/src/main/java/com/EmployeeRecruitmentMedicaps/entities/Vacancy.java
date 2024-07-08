@@ -35,6 +35,7 @@ public class Vacancy {
     
     @Column(nullable = false)
 	private Date vlast;
+   
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -48,6 +49,7 @@ public class Vacancy {
 		this.vstart = vstart;
 		this.vlast = vlast;
 		this.user = user;
+		
 	}
     
     
