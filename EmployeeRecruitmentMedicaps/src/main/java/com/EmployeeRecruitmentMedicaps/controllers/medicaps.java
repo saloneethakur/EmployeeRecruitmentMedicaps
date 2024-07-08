@@ -123,7 +123,8 @@ public class medicaps {
     public String getAllVacancies(Model model) {
         List<Vacancy> vacancies = vacancyService.getAllVacancies();
         model.addAttribute("vacancies", vacancies);
-        return "vacancies";
+        return ""
+        		+ "vacancies";
     }
 	
 
