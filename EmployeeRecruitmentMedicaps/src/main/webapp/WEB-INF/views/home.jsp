@@ -31,7 +31,7 @@
   <div class="background-content">
     <h1>Welcome to Medi-Caps University</h1>
     <p>Your future starts here</p>
-     <button class="view-vacancy-btn">View Vacancy</button>
+     <button class="view-vacancy-btn" onclick="href='/medicaps/vacancies'" >View Vacancy</button>
   </div>
 </section>
 
