@@ -1,5 +1,7 @@
 package com.EmployeeRecruitmentMedicaps.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import com.EmployeeRecruitmentMedicaps.services.*;
 
 import com.EmployeeRecruitmentMedicaps.Utils.*;
 import com.EmployeeRecruitmentMedicaps.entities.User;
+import com.EmployeeRecruitmentMedicaps.entities.Vacancy;
 import com.EmployeeRecruitmentMedicaps.entities.Otp;
 
 @Controller
@@ -21,6 +24,10 @@ public class medicaps {
 	
 	@Autowired
 	public UserService userService;
+	
+	@Autowired
+	public VacancyService vacancyService;
+	
 	public Boolean status;
 	
 	@Autowired
@@ -111,6 +118,13 @@ public class medicaps {
 		else
 			return "register";
 	}
+	
+	@RequestMapping("/vacancies")
+    public String getAllVacancies(Model model) {
+        List<Vacancy> vacancies = vacancyService.getAllVacancies();
+        model.addAttribute("vacancies", vacancies);
+        return "vacancies";
+    }
 	
 
 }
