@@ -2,6 +2,7 @@ package com.EmployeeRecruitmentMedicaps.services;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.EmployeeRecruitmentMedicaps.Utils.ApiResponse;
 import com.EmployeeRecruitmentMedicaps.entities.PersonalInformation;
 import com.EmployeeRecruitmentMedicaps.entities.User;
+import com.EmployeeRecruitmentMedicaps.models.OptionalPersonal;
 import com.EmployeeRecruitmentMedicaps.models.PersonalDetailsModel;
 import com.EmployeeRecruitmentMedicaps.repositories.PersonalRepo;
 
@@ -54,6 +56,8 @@ public class EmployeeService {
                 );
             }
             
+           
+            
             // Associate the user with the PersonalInformation
             pi.setUser(user);
             
@@ -68,6 +72,39 @@ public class EmployeeService {
 		
 		
 		
+		
+		
+	}
+	
+	public void saveResearcherDataForUser(OptionalPersonal model) {  
+		
+		try {
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			User user = (User)principal;
+			
+			 Optional<PersonalInformation> op = personalRepo.findByUser(user);
+	            if (op.isPresent()) {
+	                PersonalInformation pi = op.get();
+	                
+	                // Update the fields in the PersonalInformation object
+	                if (model.getResearcherId() != null) {
+	                    pi.setResearcherId(model.getResearcherId());
+	                }
+	                if (model.getScopusId() != null) {
+	                    pi.setScopusId(model.getScopusId());
+	                }
+	                if (model.getOrcid() != null) {
+	                    pi.setOrcid(model.getOrcid());
+	                }
+
+	                // Save the updated PersonalInformation object
+	                personalRepo.save(pi);
+	            } else {
+	                System.out.println("Personal information not found for the user");
+	            }
+	        } catch (Exception e) {
+	            System.err.println(e.getMessage());
+	        }
 	}
 
 	
