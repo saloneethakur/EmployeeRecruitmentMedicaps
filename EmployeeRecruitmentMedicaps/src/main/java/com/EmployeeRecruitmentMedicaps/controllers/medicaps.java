@@ -52,15 +52,20 @@ public class medicaps {
 	}
 	
 	@RequestMapping(value="/verifyOtp")
-	public String checkOtp(OtpVerifyModel model)
+	public String checkOtp(OtpVerifyModel model,Model m)
 	{
 		ApiResponse res = null;
-		 res= otpService.checkUser(model);
+		res = otpService.checkUser(model);
+		// res= otpService.checkUser(model);
 		 System.out.println(res.getStatus());
 		 if(res.getStatus())
 			 return "login";
 		 else
-			 return "register";
+		 {
+			 m.addAttribute("verify", res.getMessage());
+			 return "successful";
+		 }
+			 
 
 		
 		
@@ -72,13 +77,20 @@ public class medicaps {
 		return "register";
 		
 	}
+	@RequestMapping(value ="/loginpage")
+	public String loginPage()
+	{
+		return "login";
+		
+	}
 	
 	@RequestMapping(value = "/login")	
 	public String login(ModelMap model, String error, String logout) 
 	{
 		System.out.println(error);
 		if (error != null)
-		{	System.err.println(error);
+		{
+			System.err.println(error);
 			model.addAttribute("errorMsg", "Your username and password are invalid.");
 			
 		}
@@ -103,20 +115,33 @@ public class medicaps {
 	}
 	
 	@RequestMapping(value = "/home")	
-	public String home(ModelMap map) 
+	public String home(ModelMap map,Model model) 
 	{
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user = (User)principal;
 		System.out.println(user);
 		
 		System.out.println(user.getRole());
-		if(user.getRole().equals("ROLE_USER"))
-			return "loginSuccessful";
-		else if(user.getRole().equals("ROLE_ADMIN"))
-			return "/admin/adminHome";
-		
+		if(user.getActiveStatus()== true)
+		{
+			if(user.getRole().equals("ROLE_USER"))
+				return "loginSuccessful";
+			else if(user.getRole().equals("ROLE_ADMIN"))
+				return "/admin/adminHome";
+			
+			else
+				return "register";
+		}
 		else
-			return "register";
+		{
+			model.addAttribute("mail", user.getEmail());
+			userService.sendOtp(user.getEmail(), user);
+			return "successful";
+		     // model.addAttribute("status", "Email Already Exist,please verify the otp");
+			
+		      
+		}
+		
 	}
 	
 	@RequestMapping("/vacancies")

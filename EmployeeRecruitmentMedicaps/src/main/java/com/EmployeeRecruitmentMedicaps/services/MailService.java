@@ -21,8 +21,8 @@ public class MailService
 		mailSender = new JavaMailSenderImpl();
 	    mailSender.setHost("smtp.gmail.com");
 	    mailSender.setPort(587);	    
-	    mailSender.setUsername("miifoundationmu@gmail.com");
-	    mailSender.setPassword("adrr uwjn mtca joqe");
+	    mailSender.setUsername("priyanshumandlik444@gmail.com");
+	    mailSender.setPassword("brdgqnccvspudprw");
 	    
 	    props = mailSender.getJavaMailProperties();
 	    props.put("mail.transport.protocol", "smtp");
@@ -59,7 +59,7 @@ public class MailService
 			helper.setText(htmlMsg, true); 
 			helper.setTo(mail);
 			helper.setSubject("OTP Via Mii Foundation");
-			helper.setFrom("miifoundationmu@gmail.com");
+			helper.setFrom("priyanshumandlik444@gmail.com");
 			mailSender.send(mimeMessage);
 	}
 

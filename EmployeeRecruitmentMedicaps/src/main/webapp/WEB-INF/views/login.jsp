@@ -60,6 +60,7 @@
             <div class="form-group">
                 <button type="submit">Login</button>
             </div>
+           
         </form>
         ${{errorMsg}}
     </div>

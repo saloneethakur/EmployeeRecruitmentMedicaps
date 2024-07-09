@@ -9,6 +9,7 @@ import com.EmployeeRecruitmentMedicaps.Utils.ApiResponse;
 import com.EmployeeRecruitmentMedicaps.entities.*;
 import com.EmployeeRecruitmentMedicaps.models.OtpVerifyModel;
 import com.EmployeeRecruitmentMedicaps.repositories.OtpRepo;
+import com.EmployeeRecruitmentMedicaps.repositories.UserRepository;
 
 @Service
 public class OtpService {
@@ -18,6 +19,9 @@ public class OtpService {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private UserRepository userRepo;
 
 	public Otp findByUser(User user) {
 		Optional<Otp> obj = otpRepo.findByUser(user);
@@ -42,6 +46,9 @@ public class OtpService {
 				Boolean b = otp.getOtpNumber().matches(model.otp);
 				if(b){
 					 response  = new ApiResponse(true, "OTP is Correct !");
+					 user.setActiveStatus(true);
+					 userRepo.save(user);
+					 
 					 System.out.println(response);
 					if(response.getStatus())
 						return response;
