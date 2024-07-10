@@ -48,6 +48,9 @@
 <body>
     <div class="container">
         <h2>OTP Verification</h2>
+        <c:if test="${not empty verify}">
+            <p class="error-message">${verify}</p>
+        </c:if>
         <form action="/medicaps/verifyOtp" method="post">
             <div class="form-group">
                 <label for="otp">OTP:</label>

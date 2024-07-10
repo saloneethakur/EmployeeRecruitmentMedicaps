@@ -68,6 +68,9 @@
                 <button type="submit">Register</button>
             </div>
         </form>
+        <form action="/medicaps/loginpage">
+       <button type="submit" >login</button>
+        </form>
     </div>
 </body>
 </html>
