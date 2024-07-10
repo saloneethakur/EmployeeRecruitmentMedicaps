@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.EmployeeRecruitmentMedicaps.Utils.ApiResponse;
+import com.EmployeeRecruitmentMedicaps.models.OptionalPersonal;
 import com.EmployeeRecruitmentMedicaps.models.PersonalDetailsModel;
 import com.EmployeeRecruitmentMedicaps.services.EmployeeService;
 import com.EmployeeRecruitmentMedicaps.services.UserService;
@@ -38,5 +39,15 @@ public class user {
 		
 		empService.savePersonal(model);
 	}
+	@RequestMapping(value="/saveResearch")
+	public void optionalPersonal(OptionalPersonal model)
+	{
+		
+		 empService.saveResearcherDataForUser(model);
+		
+		
+	
+	}
 
+	
 }
