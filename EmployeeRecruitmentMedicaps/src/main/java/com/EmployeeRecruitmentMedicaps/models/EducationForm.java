@@ -58,7 +58,7 @@ public class EducationForm{
     private String pHDSummary;
     
     
-
+/*
     // Constructor for condition 1: 10th, 12th, UG, PG
     public EducationForm(String school_name10, String board_name10, String passing_year10, String percentage10,
                          String school_name12, String board_name12, String passing_year12, String percentage12,String field_of_study12,
@@ -440,6 +440,6 @@ public class EducationForm{
         this.pHDSummary = pHDSummary;
     }
 
-    
+   */ 
    
 }
