@@ -3,37 +3,33 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Vacancies</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-time Vacancy Updates</title>
+    <link rel="stylesheet" href="/assets/css/admincheck.css">
 </head>
 <body>
-    <h1>Vacancies</h1>
-     <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Faculty</th>
-                <th>Department</th>
-                <th>Post Applied For</th>
-                <th>Start Date</th>
-                <th>Last Date</th>
-                <th>User</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="vacancy" items="${vacancies}">
-                <tr>
-                    <td>${vacancy.id}</td>
-                    <td>${vacancy.faculty}</td>
-                    <td>${vacancy.department}</td>
-                    <td>${vacancy.postAppliedFor}</td>
-                    <td>${vacancy.vstart}</td>
-                    <td>${vacancy.vlast}</td>
-                    <td>${vacancy.user.name}</td> <!-- assuming user has a name field -->
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
+ <c:forEach var="vacancy" items="${vacancies}">
+    <div class="box-container">
+        <div id="card-container" class="card-container">
+       
+            <div class="card">
+                <div class="card-content">
+                    <h3>${vacancy.faculty}</h3>
+                    <p>${vacancy.department}</p>
+                </div>
+                <div class="card-popup">
+                    <button class="eligibility-button">ELIGIBILITY</button>
+                    <button class="apply-button">APPLY</button>
+                </div>
+            </div>
+            
+            <!-- Cards will be dynamically inserted here -->
+        </div>
+    </div>
+</c:forEach>
+    <script src="/assets/JS/admincheck.js"></script>
 </body>
 </html>

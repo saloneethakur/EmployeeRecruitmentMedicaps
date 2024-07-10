@@ -16,12 +16,22 @@ public class user {
 	public EmployeeService empService;
 	
 	
-	@RequestMapping(value ="/user_panel")
+	@RequestMapping(value ="/userPanel")
 	public String registerPage()
 	{
-		return "user_panel";
+		return "userPanel";
 		
 	}
+	
+	@RequestMapping(value ="/Personal")
+	public String personDetail()
+	{
+		return "/user/PersonalDetails";
+		
+	}
+	
+	
+	
 	@RequestMapping(value="/personalDetails")
 	public void personalDetails(PersonalDetailsModel model)
 	{

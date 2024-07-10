@@ -125,7 +125,7 @@ public class medicaps {
 		if(user.getActiveStatus()== true)
 		{
 			if(user.getRole().equals("ROLE_USER"))
-				return "loginSuccessful";
+				return "/userPanel";
 			else if(user.getRole().equals("ROLE_ADMIN"))
 				return "/admin/adminHome";
 			

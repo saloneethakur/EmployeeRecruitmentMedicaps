@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<p>User Panel<p>
+<h1>User Panel</h1>
+<form action="/user/Personal">
+<button type="submit" >hello</button>
+</form>
 </body>
 </html>
