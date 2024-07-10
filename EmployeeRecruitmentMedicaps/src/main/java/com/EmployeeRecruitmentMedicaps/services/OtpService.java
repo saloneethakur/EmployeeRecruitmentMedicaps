@@ -37,9 +37,9 @@ public class OtpService {
 	
 	
 	
-	public ApiResponse checkUser(OtpVerifyModel model) {
+	public ApiResponse checkUser(OtpVerifyModel model,String mail) {
 		ApiResponse response = null;
-		User user = userService.findByEmail(model.getMail());
+		User user = userService.findByEmail(mail);
 		if(user!=null){
 			Otp otp = findByUser(user);	
 			if(otp!=null){

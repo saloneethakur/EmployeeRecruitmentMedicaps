@@ -62,7 +62,7 @@
             </div>
            
         </form>
-        ${{errorMsg}}
+        
     </div>
 </body>
 </html>
