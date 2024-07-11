@@ -10,10 +10,10 @@ body {
 }
 
 /* Header styles */
-h1 {
+h3 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #fff;
+  color: rgb(0,0,1);
 }
 
 span {
@@ -81,6 +81,7 @@ h6 {
 .card-content {
   padding: 20px;
   text-align: center;
+  color: black;
 }
 
 .card-popup {

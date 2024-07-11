@@ -63,7 +63,10 @@
                             <div class="card">
                               <div class="card-content">
                                 <h3>${vacancy.faculty}</h3>
+                                <br>
                                 <p>${vacancy.department}</p>
+                                <p>${vacancy.postAppliedFor}</p>
+                                <p>${vacancy.vlast}</p>
                               </div>
                               <div class="card-popup">
                                 <button class="eligibility-button">ELIGIBILITY</button>
@@ -75,101 +78,14 @@
                           </div>
                         </div>
                       </div>
-                      <div class="col-sm-4">
-                        <div class="box-container">
-                          <div id="card-container" class="card-container">
-                            <div class="card">
-                              <div class="card-content">
-                                <h3></h3>
-                                <p></p>
-                              </div>
-                              <div class="card-popup">
-                                <button class="eligibility-button">ELIGIBILITY</button>
-                                <button class="apply-button">APPLY</button>
-                              </div>
-                            </div>
-              
+                      </c:forEach>
+                      
+                     
+                    
+                     
+                      
                             <!-- Cards will be dynamically inserted here -->
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="box-container">
-                          <div id="card-container" class="card-container">
-                            <div class="card">
-                              <div class="card-content">
-                                <h3></h3>
-                                <p></p>
-                              </div>
-                              <div class="card-popup">
-                                <button class="eligibility-button">ELIGIBILITY</button>
-                                <button class="apply-button">APPLY</button>
-                              </div>
-                            </div>
-                        
-                            <!-- Cards will be dynamically inserted here -->
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="row" style="margin-top: 37px;">
-                      <div class="col-sm-4">
-                        <div class="box-container">
-                          <div id="card-container" class="card-container">
-                            <div class="card">
-                              <div class="card-content">
-                                <h3></h3>
-                                <p></p>
-                              </div>
-                              <div class="card-popup">
-                                <button class="eligibility-button">ELIGIBILITY</button>
-                                <button class="apply-button">APPLY</button>
-                              </div>
-                            </div>
-              
-                            <!-- Cards will be dynamically inserted here -->
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="box-container">
-                          <div id="card-container" class="card-container">
-                            <div class="card">
-                              <div class="card-content">
-                                <h3></h3>
-                                <p></p>
-                              </div>
-                              <div class="card-popup">
-                                <button class="eligibility-button">ELIGIBILITY</button>
-                                <button class="apply-button">APPLY</button>
-                              </div>
-                            </div>
-              
-                            <!-- Cards will be dynamically inserted here -->
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-sm-4">
-                        <div class="box-container">
-                          <div id="card-container" class="card-container">
-                            <div class="card">
-                              <div class="card-content">
-                                <h3></h3>
-                                <p></p>
-                              </div>
-                              <div class="card-popup">
-                                <button class="eligibility-button">ELIGIBILITY</button>
-                                <button class="apply-button">APPLY</button>
-                              </div>
-                            </div>
                            
-              
-                                  <!-- Cards will be dynamically inserted here -->
-                                </div>
-                              </div>
-                            </div>
-                            <!-- Cards will be dynamically inserted here -->
-                            </c:forEach>
                           </div>
                         </div>
                       </div>
