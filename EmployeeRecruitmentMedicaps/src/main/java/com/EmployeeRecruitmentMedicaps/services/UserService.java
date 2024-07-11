@@ -68,12 +68,12 @@ public class UserService implements UserDetailsService{
 				}
 			}
 			else {
-				response = new ApiResponse(false, "user not Saved !");
+				response = new ApiResponse(false, "User Registeration Failed !");
 			}
 		}
 		catch (Exception e) {
 			System.err.println(e.getMessage());
-			response = new ApiResponse(false, "Customer Save Failed !", e.getMessage());
+			response = new ApiResponse(false, "User Registeration Failed ", e.getMessage());
 		}		
 		return response;
 	}
@@ -92,12 +92,12 @@ public class UserService implements UserDetailsService{
 			
 			if(otp!=null)
 			{
-				ob.setOtpNumber(ot);
-				
-				otprepo.save(ob);
+				otp.setOtpNumber(ot);
+				otprepo.save(otp);
 				status = true;
 				mailService.verificationMail(email, ot);
-			
+				System.out.println("otp set");
+				System.out.println(user);
 				response = new ApiResponse(true, "otp set !");
 			}
 			else
@@ -107,11 +107,14 @@ public class UserService implements UserDetailsService{
 				status = true;
 				mailService.verificationMail(email, ot);
 				response= new ApiResponse(true,"otp saved") ;
-				
+				System.out.println("otp saved");
 			}
 			
 		}
 		catch(Exception ex){	
+			System.out.println(" error");
+			System.out.println(user);
+			System.out.println(ex.getMessage());
 			response = new ApiResponse(false, "otp was not sent !", ex.getMessage());
 		}
 		return response;	
