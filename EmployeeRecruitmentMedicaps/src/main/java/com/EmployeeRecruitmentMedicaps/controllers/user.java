@@ -38,10 +38,18 @@ public class user {
 		
 	}
 	
+	@RequestMapping(value ="/vacanciespage")
+	public String vacancyPage()
+	{
+		return "vacancies";
+		
+	}
+	
 	@RequestMapping(value ="/apply")
 	public String apply(@RequestParam("vacancyId") int vacancyId,Model model)
 	{
 		vid = vacancyId;
+		System.out.println(vid);
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user = (User)principal;
 		
@@ -55,7 +63,7 @@ public class user {
         	 res = new ApiResponse(false, "data not present");
         }
         model.addAttribute("res", res);
-		return "dummy";
+		return "vacancies";
 		
 	}
 	

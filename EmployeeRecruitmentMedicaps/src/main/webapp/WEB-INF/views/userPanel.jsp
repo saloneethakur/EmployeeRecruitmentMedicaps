@@ -11,5 +11,8 @@
 <form action="/user/Personal">
 <button type="submit" >hello</button>
 </form>
+<form action="/medicaps/vacancies">
+<button type="submit" >vacancy</button>
+</form>
 </body>
 </html>

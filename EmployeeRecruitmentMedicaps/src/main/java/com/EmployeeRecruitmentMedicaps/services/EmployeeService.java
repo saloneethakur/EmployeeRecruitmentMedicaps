@@ -20,60 +20,69 @@ public class EmployeeService {
 
 	@Autowired
     public PersonalRepo personalRepo;
-	public void savePersonal(PersonalDetailsModel model) {  
+	
+	ApiResponse res =null;
+	public ApiResponse savePersonal(PersonalDetailsModel model) { 
+		
 		try {
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			User user = (User)principal;
 			
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-			Date dob = sdf.parse(model.getDob());
 			
-			PersonalInformation pi;
-            if (model.getExamQualified() != null) {
-                pi = new PersonalInformation(
-                    model.getAlternatePhoneNumber(),
-                    dob,
-                    model.getGender(),
-                    model.getCaste(),
-                    model.getAddress(),
-                    model.getPincode(),
-                    model.getDistrict(),
-                    model.getState(),
-                    model.getCountry(),
-                    model.getExamQualified()
-                );
-            } else {
-                pi = new PersonalInformation(
-                    model.getAlternatePhoneNumber(),
-                    dob,
-                    model.getGender(),
-                    model.getCaste(),
-                    model.getAddress(),
-                    model.getPincode(),
-                    model.getDistrict(),
-                    model.getState(),
-                    model.getCountry()
-                );
+               
+            
+        
+            
+            	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    			Date dob = sdf.parse(model.getDob());
+    			
+    			PersonalInformation pi;
+                if (model.getExamQualified() != null) {
+                    pi = new PersonalInformation(
+                        model.getAlternatePhoneNumber(),
+                        dob,
+                        model.getGender(),
+                        model.getCaste(),
+                        model.getAddress(),
+                        model.getPincode(),
+                        model.getDistrict(),
+                        model.getState(),
+                        model.getCountry(),
+                        model.getExamQualified()
+                    );
+                } else {
+                    pi = new PersonalInformation(
+                        model.getAlternatePhoneNumber(),
+                        dob,
+                        model.getGender(),
+                        model.getCaste(),
+                        model.getAddress(),
+                        model.getPincode(),
+                        model.getDistrict(),
+                        model.getState(),
+                        model.getCountry()
+                    );
+                }
+                
+               
+                
+                // Associate the user with the PersonalInformation
+                pi.setUser(user);
+                
+                personalRepo.save(pi);
+                
+                res = new ApiResponse(true, "data Saved",pi);
             }
+			
+			
+			
             
-           
-            
-            // Associate the user with the PersonalInformation
-            pi.setUser(user);
-            
-            personalRepo.save(pi);
-            
-            
-		}
 		catch(Exception e) {
 			System.err.println(e.getMessage());
+			res = new ApiResponse(false, "data not Saved");
 			
 		}
-		
-		
-		
-		
-		
+		return res;	
 	}
 	
 	public void saveResearcherDataForUser(OptionalPersonal model) {  

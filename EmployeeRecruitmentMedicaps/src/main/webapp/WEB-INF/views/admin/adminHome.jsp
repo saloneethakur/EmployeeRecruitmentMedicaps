@@ -10,5 +10,8 @@
 <form action="/admin/vacancy">
 <button type="submit" >hello</button>
 </form>
+<form action="/user/vacanciespage">
+<button type="submit" >vacancy</button>
+</form>
 </body>
 </html>

@@ -70,7 +70,11 @@
                               </div>
                               <div class="card-popup">
                                 <button class="eligibility-button">ELIGIBILITY</button>
-                                <button class="apply-button">APPLY</button>
+                                <form action="/user/apply">
+                                 <input type="hidden" name="vacancyId" value="${vacancy.id}"/>
+                                <button class="apply-button" >APPLY</button>
+                                </form>
+                                
                               </div>
                             </div>
               
