@@ -29,7 +29,7 @@ public class AdminController {
 		
 		System.out.println(res.getStatus());
 		if (res.getStatus())
-			return "loginSuccessful";
+			return "vacancyDemo";
 		else
 			return "dummy";
 		

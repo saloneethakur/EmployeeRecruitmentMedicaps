@@ -33,7 +33,7 @@ public class AdminService {
 			
 			Date Vlast = sdf.parse(model.getVlast());
 			
-			Vacancy v=new Vacancy(model.getFaculty(),model.getDepartment(),model.getPostAppliedFor(),Vstart,Vlast,user);
+			Vacancy v=new Vacancy(model.getType(),model.getFaculty(),model.getDepartment(),model.getPostAppliedFor(),Vstart,Vlast,user);
 			System.out.println("data saved in object");
 			System.out.println(v);
 			if(v != null) {

@@ -1,6 +1,8 @@
 package com.EmployeeRecruitmentMedicaps.entities;
 
 
+import java.util.Date;
+
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
@@ -24,7 +26,7 @@ public class Education {
     private String educationClass;
 
     @Column(nullable = false)
-    private Integer completionYear;
+    private Date completionYear;
 
     @Column(nullable = false)
     private String percentage;
@@ -38,5 +40,5 @@ public class Education {
     
     @ManyToOne
     @JoinColumn(name = "PersonalInformation_id", nullable = false)
-    private PersonalInformation PersonalInformation;
+    private PersonalInformation personalInformation;
 }

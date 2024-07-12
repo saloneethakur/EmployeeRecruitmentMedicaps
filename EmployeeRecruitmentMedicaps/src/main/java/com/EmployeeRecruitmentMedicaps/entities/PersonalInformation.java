@@ -1,6 +1,7 @@
 package com.EmployeeRecruitmentMedicaps.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -61,6 +62,15 @@ public class PersonalInformation {
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+    
+    @OneToMany(mappedBy = "personalInformation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Experience> experiences;
+
+    @OneToMany(mappedBy = "personalInformation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Journal> journals;
+
+    @OneToMany(mappedBy = "personalInformation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Education> educations;
 
 	public PersonalInformation(String alternatePhoneNumber, Date dob, String gender, String caste, String address,
 			String pincode, String district, String state, String country) {

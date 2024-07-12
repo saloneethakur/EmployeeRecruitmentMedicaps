@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class VacancyModel {
 
-    
+    private String type;
     private String faculty;
     private String department;
     private String postAppliedFor;

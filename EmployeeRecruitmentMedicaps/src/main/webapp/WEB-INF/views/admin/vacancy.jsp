@@ -13,6 +13,13 @@
         <h2>UPDATE VACANCY</h2>
         <form action="/admin/addVacancy" method="post" id="vacancyForm">
           <div class="vacancy-section" id="vacancy1">
+           <div class="form-group">
+                <label for="type1">Type:</label>
+                <select id="type1" class="type-dropdown" name="type">
+                    <option value="">Select Type</option>
+                    <option value="Teaching">Teaching</option>
+                    <option value="Non-Teaching">Non-Teaching</option>
+                </select>
             <div class="form-group">
               <label for="faculty1">Faculty:</label>
               <select

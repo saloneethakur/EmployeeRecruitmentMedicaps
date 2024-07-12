@@ -33,20 +33,36 @@ public class Experience {
     @Column(name = "institute_name", nullable = false)
     private String instituteName;
 
-    @Column(name = "year", nullable = false)
-    private Integer year;
-
-   
-
     @Column(name = "start_date", nullable = false)
     private Date startDate;
 
-    @Column(name = "end_date", nullable = false)
+    @Column(name = "end_date", nullable = true)
     private Date endDate;
     
     @ManyToOne
     @JoinColumn(name = "PersonalInformation_id", nullable = false)
-    private PersonalInformation PersonalInformation;
+    private PersonalInformation personalInformation;
+
+	public Experience(String jobTitle, String instituteName, Date startDate, Date endDate,
+			PersonalInformation personalInformation) {
+		super();
+		this.jobTitle = jobTitle;
+		this.instituteName = instituteName;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.personalInformation = personalInformation;
+	}
+
+	public Experience(String jobTitle, String instituteName, Date startDate, PersonalInformation personalInformation) {
+		super();
+		this.jobTitle = jobTitle;
+		this.instituteName = instituteName;
+		this.startDate = startDate;
+		this.personalInformation = personalInformation;
+	}
+
+	
+    
 
     
 }

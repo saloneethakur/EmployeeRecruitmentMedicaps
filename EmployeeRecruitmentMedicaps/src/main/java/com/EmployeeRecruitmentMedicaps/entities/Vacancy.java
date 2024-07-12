@@ -18,6 +18,8 @@ public class Vacancy {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
+    @Column(nullable = false)
+    private String type;
 
     @Column(nullable = false)
     private String faculty;
@@ -41,16 +43,20 @@ public class Vacancy {
     @JoinColumn(name = "user_id")
     private User user;
 
-	public Vacancy(String faculty, String department, String postAppliedFor, Date vstart, Date vlast, User user) {
+
+	public Vacancy(String type, String faculty, String department, String postAppliedFor, Date vstart, Date vlast,
+			User user) {
 		super();
+		this.type = type;
 		this.faculty = faculty;
 		this.department = department;
 		this.postAppliedFor = postAppliedFor;
 		this.vstart = vstart;
 		this.vlast = vlast;
 		this.user = user;
-		
 	}
+
+	
     
     
 }
