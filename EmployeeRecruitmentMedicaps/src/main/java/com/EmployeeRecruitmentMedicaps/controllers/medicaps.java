@@ -61,7 +61,7 @@ public class medicaps {
 				{
 					status = res.getStatus();
 					m.addAttribute("status", status);
-					return "registration";
+					return "successful";
 				}
 					
 				else
@@ -87,7 +87,7 @@ public class medicaps {
 		// res= otpService.checkUser(model);
 		 System.out.println(res.getStatus());
 		 if(res.getStatus())
-			 return "login";
+			 return "userPanel";
 		 else
 		 {
 			 m.addAttribute("verify", res.getMessage());
@@ -125,7 +125,7 @@ public class medicaps {
 		if (logout != null)
 			model.addAttribute("msg", "You have been logged out successfully.");
 
-		return "login";
+		return "logins";
 	}
 	
 	/*@RequestMapping(value = "/home")	
