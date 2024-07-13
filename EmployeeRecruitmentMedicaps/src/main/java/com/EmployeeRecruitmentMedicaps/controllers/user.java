@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EmployeeRecruitmentMedicaps.Utils.ApiResponse;
+import com.EmployeeRecruitmentMedicaps.entities.Education;
 import com.EmployeeRecruitmentMedicaps.entities.Experience;
 import com.EmployeeRecruitmentMedicaps.entities.PersonalInformation;
 import com.EmployeeRecruitmentMedicaps.entities.User;
+import com.EmployeeRecruitmentMedicaps.models.EducationDetailsModel;
 import com.EmployeeRecruitmentMedicaps.models.ExperienceModel;
 import com.EmployeeRecruitmentMedicaps.models.OptionalPersonal;
 import com.EmployeeRecruitmentMedicaps.models.PersonalDetailsModel;
@@ -90,6 +92,28 @@ public class user {
 		ApiResponse res = empService.updatePersonalDetails(model);
 		
 	}
+	 @RequestMapping(value="/checkEducation")
+	   
+	 public String checkeducation(Model m)
+	    {
+	         res = empService.fetchEducationsByPersonalInformationId(personalid); 
+	         m.addAttribute("res", res);
+
+	         if (res.getStatus() == true)
+	         {
+	             List<Education> educations = (List<Education>) res.getData();
+	             m.addAttribute("educations", educations);
+	         }
+	         return "/user/education";
+	    }
+
+	    @RequestMapping(value="/saveEducation")
+	    public void education(EducationDetailsModel model)
+	    {
+	        ApiResponse res = empService.saveEducation(model);
+	    }
+	    
+	    
 	@RequestMapping(value="/saveResearch")
 	public void optionalPersonal(OptionalPersonal model)
 	{
