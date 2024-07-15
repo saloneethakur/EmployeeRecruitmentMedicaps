@@ -54,8 +54,8 @@ public class User implements UserDetails
 	@Column(name="active_status")
 	private Boolean activeStatus;
 	
-	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    private PersonalInformation personalInformation;
+	//@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+   // private PersonalInformation personalInformation;
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() 

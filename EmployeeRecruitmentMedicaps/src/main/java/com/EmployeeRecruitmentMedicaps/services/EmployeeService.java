@@ -28,6 +28,7 @@ import com.EmployeeRecruitmentMedicaps.repositories.ExperienceRepository;
 import com.EmployeeRecruitmentMedicaps.repositories.JournalRepository;
 import com.EmployeeRecruitmentMedicaps.repositories.PHDRepository;
 import com.EmployeeRecruitmentMedicaps.repositories.PersonalRepo;
+import com.EmployeeRecruitmentMedicaps.repositories.UserRepository;
 
 @Service
 public class EmployeeService {
@@ -45,6 +46,9 @@ public class EmployeeService {
 	@Autowired
     private ExperienceRepository experienceRepository;
 	
+	@Autowired
+    private UserRepository userRepo;
+	
 	
 	ApiResponse res =null;
 	public ApiResponse savePersonal(PersonalDetailsModel model) { 
@@ -52,6 +56,9 @@ public class EmployeeService {
 		try {
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 			User user = (User)principal;
+			user.setName(model.getName());
+			user.setNumber(model.getPhone());
+			userRepo.save(user);
 			
             	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     			Date dob = sdf.parse(model.getDob());
@@ -114,6 +121,9 @@ public class EmployeeService {
             // Get the authenticated user
             Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             User user = (User) principal;
+            user.setName(model.getName());
+			user.setNumber(model.getPhone());
+			userRepo.save(user);
 
             Optional<PersonalInformation> op = personalRepo.findByUser(user);
             if (op.isPresent()) {
@@ -150,9 +160,9 @@ public class EmployeeService {
                     }
                     
 
+                    pi.setUser(user);
                     // Save the updated personal information
                     personalRepo.save(pi);
-
                     res = new ApiResponse(true, "Data updated successfully", pi);
                 } else {
                     res = new ApiResponse(false, "Personal information not found for the user");
@@ -371,16 +381,11 @@ Education  education = new Education(model.getSchool_name(),model.getBoard_name(
                 SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
                 Date e = sdf1.parse(model.getJoiningYear());
                 
-                
-                
                 if(model.getPhDSummary() !=null)
                 {
-
-                
                 PhdEducation phd=new PhdEducation(model.getPhDInstitution_name(), model.getPhD_Thesis_topic(), model.getPercentage(), model.getPhD_Field_name(), s, e, model.getPhD_Supervisor_name(),  model.getPhDSummary(), personalInformation);
                 phdRepo.save(phd);
-                personalInformation.getPhd().add(phd);
-                
+                personalInformation.getPhd().add(phd); 
                 }
                 else {
                 PhdEducation phd1= new PhdEducation(model.getPhDInstitution_name(), model.getPhD_Thesis_topic(), model.getPercentage(), model.getPhD_Field_name(),s ,e , model.getPhD_Supervisor_name(), personalInformation);

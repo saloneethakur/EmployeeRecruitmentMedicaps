@@ -46,7 +46,7 @@ public class PhdEducation {
 
     @ManyToOne
     @JoinColumn(name = "PersonalInformation_id", nullable = false)
-    private PersonalInformation PersonalInformation;
+    private PersonalInformation personalInformation;
 
 	public PhdEducation(String institutionName, String thesis, String percentage, String fieldOfStudy, Date joiningYear,
 			Date completionYear, String supervisorOrAdvisor, String researchSummary,
@@ -60,7 +60,7 @@ public class PhdEducation {
 		this.completionYear = completionYear;
 		this.supervisorOrAdvisor = supervisorOrAdvisor;
 		this.researchSummary = researchSummary;
-		PersonalInformation = personalInformation;
+		personalInformation = personalInformation;
 	}
 
 	public PhdEducation(String institutionName, String thesis, String percentage, String fieldOfStudy, Date joiningYear,
@@ -74,7 +74,7 @@ public class PhdEducation {
 		this.joiningYear = joiningYear;
 		this.completionYear = completionYear;
 		this.supervisorOrAdvisor = supervisorOrAdvisor;
-		PersonalInformation = personalInformation;
+		personalInformation = personalInformation;
 	}
 
 	    

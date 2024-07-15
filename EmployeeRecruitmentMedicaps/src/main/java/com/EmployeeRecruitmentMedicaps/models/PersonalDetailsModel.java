@@ -10,6 +10,9 @@ import lombok.NoArgsConstructor;
 
 public class PersonalDetailsModel {
 	 
+	    private String name;
+	    private String email;
+	    private String phone;
 	    private String alternatePhoneNumber;
 	    private String dob;  // Date stored as String
 	    private String gender;
@@ -23,9 +26,13 @@ public class PersonalDetailsModel {
 	    private String scopusId;
 	    private String orcid;
 	    private String examQualified;
-		public PersonalDetailsModel(String alternatePhoneNumber, String dob, String gender, String caste,
-				String address, String pincode, String district, String state, String country) {
+		public PersonalDetailsModel(String name, String email, String phone, String alternatePhoneNumber, String dob,
+				String gender, String caste, String address, String pincode, String district, String state,
+				String country) {
 			super();
+			this.name = name;
+			this.email = email;
+			this.phone = phone;
 			this.alternatePhoneNumber = alternatePhoneNumber;
 			this.dob = dob;
 			this.gender = gender;
@@ -35,10 +42,14 @@ public class PersonalDetailsModel {
 			this.district = district;
 			this.state = state;
 			this.country = country;
-			}
-		public PersonalDetailsModel(String alternatePhoneNumber, String dob, String gender, String caste,
-				String address, String pincode, String district, String state, String country, String examQualified) {
+		}
+		public PersonalDetailsModel(String name, String email, String phone, String alternatePhoneNumber, String dob,
+				String gender, String caste, String address, String pincode, String district, String state,
+				String country, String examQualified) {
 			super();
+			this.name = name;
+			this.email = email;
+			this.phone = phone;
 			this.alternatePhoneNumber = alternatePhoneNumber;
 			this.dob = dob;
 			this.gender = gender;
@@ -50,6 +61,8 @@ public class PersonalDetailsModel {
 			this.country = country;
 			this.examQualified = examQualified;
 		}
+		
+	    
 		
 }
 

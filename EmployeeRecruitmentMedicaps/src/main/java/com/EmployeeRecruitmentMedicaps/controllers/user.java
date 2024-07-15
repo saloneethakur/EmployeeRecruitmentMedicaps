@@ -18,6 +18,7 @@ import com.EmployeeRecruitmentMedicaps.entities.Journal;
 import com.EmployeeRecruitmentMedicaps.entities.PersonalInformation;
 import com.EmployeeRecruitmentMedicaps.entities.PhdEducation;
 import com.EmployeeRecruitmentMedicaps.entities.User;
+import com.EmployeeRecruitmentMedicaps.entities.Vacancy;
 import com.EmployeeRecruitmentMedicaps.models.EducationDetailsModel;
 import com.EmployeeRecruitmentMedicaps.models.ExperienceModel;
 import com.EmployeeRecruitmentMedicaps.models.JournalDetailsModel;
@@ -25,6 +26,7 @@ import com.EmployeeRecruitmentMedicaps.models.OptionalPersonal;
 import com.EmployeeRecruitmentMedicaps.models.PHDdetailsModel;
 import com.EmployeeRecruitmentMedicaps.models.PersonalDetailsModel;
 import com.EmployeeRecruitmentMedicaps.repositories.PersonalRepo;
+import com.EmployeeRecruitmentMedicaps.repositories.VacancyRepository;
 import com.EmployeeRecruitmentMedicaps.services.EmployeeService;
 import com.EmployeeRecruitmentMedicaps.services.UserService;
 
@@ -37,7 +39,10 @@ public class user {
 	@Autowired
 	public PersonalRepo personalRepo;
 	
-	int vid;
+	@Autowired
+	public VacancyRepository vacancyRepo;
+	
+	Integer vid;
 	int personalid;
 	
 	ApiResponse res = null;
@@ -57,12 +62,23 @@ public class user {
 	}
 	
 	@RequestMapping(value ="/apply")
-	public String apply(@RequestParam("vacancyId") int vacancyId,Model model)
+	public String apply(@RequestParam("vacancyId") Integer vacancyId,Model model)
 	{
 		vid = vacancyId;
+		Optional<Vacancy> vacancy = vacancyRepo.findById(vid);
+		 if (vacancy != null) 
+		 {
+	            model.addAttribute("vacancy", vacancy);
+		 }
+		
 		System.out.println(vid);
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user = (User)principal;
+		if (user != null)
+		{
+            model.addAttribute("user", user);
+	    }
+		
 		
 		Optional<PersonalInformation> op = personalRepo.findByUser(user);
         if (op.isPresent()) {
@@ -102,13 +118,18 @@ public class user {
 	    {
 	         res = empService.fetchEducationsByPersonalInformationId(personalid); 
 	         m.addAttribute("res", res);
-	         
-	         
-
 	         if (res.getStatus() == true)
 	         {
 	             List<Education> educations = (List<Education>) res.getData();
 	             m.addAttribute("educations", educations);
+	         }
+	         ApiResponse phdres;
+	         phdres = empService.fetchPHDByPersonalInformationId(personalid); 
+	         m.addAttribute("phdres", phdres);
+	        if (phdres.getStatus() == true)
+	         {
+	             List<PhdEducation> phdEducation = (List<PhdEducation>) res.getData();
+	             m.addAttribute("phdEducation", phdEducation);
 	         }
 	         return "/user/education";
 	    }
