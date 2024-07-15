@@ -105,8 +105,28 @@ public class PersonalInformation {
 		this.country = country;
 		this.examQualified = examQualified;
 	}
-    
-    
+
+	public PersonalInformation(String alternatePhoneNumber, Date dob, String gender, String caste, String address,
+			String pincode, String district, String state, String country, String examQualified, String researcherId,
+			String scopusId, String orcid, User user) {
+		super();
+		this.alternatePhoneNumber = alternatePhoneNumber;
+		this.dob = dob;
+		this.gender = gender;
+		this.caste = caste;
+		this.address = address;
+		this.pincode = pincode;
+		this.district = district;
+		this.state = state;
+		this.country = country;
+		this.examQualified = examQualified;
+		this.researcherId = researcherId;
+		this.scopusId = scopusId;
+		this.orcid = orcid;
+		this.user = user;
+	}
+
+	    
     
     
     

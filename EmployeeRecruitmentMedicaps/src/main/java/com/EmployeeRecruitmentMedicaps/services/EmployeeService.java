@@ -66,8 +66,8 @@ public class EmployeeService {
             	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     			Date dob = sdf.parse(model.getDob());
     			
-    			PersonalInformation pi;
-                if (model.getExamQualified() != null) {
+    			PersonalInformation pi = new PersonalInformation();
+             /*   if (model.getExamQualified() != null) {
                     pi = new PersonalInformation(
                         model.getAlternatePhoneNumber(),
                         dob,
@@ -92,8 +92,40 @@ public class EmployeeService {
                         model.getState(),
                         model.getCountry()
                     );
-                }
-                
+                }*/
+    			pi.setAddress(model.getAddress());
+    			pi.setAlternatePhoneNumber(model.getAlternatePhoneNumber());
+    			pi.setCaste(model.getCaste());
+    			pi.setCountry(model.getCountry());
+    			pi.setDistrict(model.getDistrict());
+    			pi.setDob(dob);
+    			pi.setGender(model.getGender());
+    			pi.setPincode(model.getPincode());
+    			pi.setState(model.getState());
+    			if ("null".equals(model.getExamQualified())) {
+    			    pi.setExamQualified(null);
+    			} else {
+    			    pi.setExamQualified(model.getExamQualified());
+    			}
+
+    			if ("null".equals(model.getOrcid())) {
+    			    pi.setOrcid(null);
+    			} else {
+    			    pi.setOrcid(model.getOrcid());
+    			}
+
+    			if ("null".equals(model.getResearcherId())) {
+    			    pi.setResearcherId(null);
+    			} else {
+    			    pi.setResearcherId(model.getResearcherId());
+    			}
+
+    			if ("null".equals(model.getScopusId())) {
+    			    pi.setScopusId(null);
+    			} else {
+    			    pi.setScopusId(model.getScopusId());
+    			}
+    			
                
                 
                 // Associate the user with the PersonalInformation
@@ -136,7 +168,7 @@ public class EmployeeService {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     Date dob = sdf.parse(model.getDob());
 
-                    if (model.getExamQualified() != null)
+                  /*  if (model.getExamQualified() != null)
                     {
                     	pi.setAlternatePhoneNumber(model.getAlternatePhoneNumber());
                         pi.setDob(dob);
@@ -161,7 +193,40 @@ public class EmployeeService {
                         pi.setState(model.getState());
                         pi.setCountry(model.getCountry());
                     }
-                    
+                    */
+                    pi.setAddress(model.getAddress());
+        			pi.setAlternatePhoneNumber(model.getAlternatePhoneNumber());
+        			pi.setCaste(model.getCaste());
+        			pi.setCountry(model.getCountry());
+        			pi.setDistrict(model.getDistrict());
+        			pi.setDob(dob);
+        			pi.setGender(model.getGender());
+        			pi.setPincode(model.getPincode());
+        			pi.setState(model.getState());
+        			if ("null".equals(model.getExamQualified())) {
+        			    pi.setExamQualified(null);
+        			} else {
+        			    pi.setExamQualified(model.getExamQualified());
+        			}
+
+        			if ("null".equals(model.getOrcid())) {
+        			    pi.setOrcid(null);
+        			} else {
+        			    pi.setOrcid(model.getOrcid());
+        			}
+
+        			if ("null".equals(model.getResearcherId())) {
+        			    pi.setResearcherId(null);
+        			} else {
+        			    pi.setResearcherId(model.getResearcherId());
+        			}
+
+        			if ("null".equals(model.getScopusId())) {
+        			    pi.setScopusId(null);
+        			} else {
+        			    pi.setScopusId(model.getScopusId());
+        			}
+        			
 
                     pi.setUser(user);
                     // Save the updated personal information

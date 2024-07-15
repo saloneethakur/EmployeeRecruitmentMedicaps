@@ -26,7 +26,7 @@ public class PersonalDetailsModel {
 	    private String scopusId;
 	    private String orcid;
 	    private String examQualified;
-		public PersonalDetailsModel(String name, String email, String phone, String alternatePhoneNumber, String dob,
+	/*	public PersonalDetailsModel(String name, String email, String phone, String alternatePhoneNumber, String dob,
 				String gender, String caste, String address, String pincode, String district, String state,
 				String country) {
 			super();
@@ -61,7 +61,7 @@ public class PersonalDetailsModel {
 			this.country = country;
 			this.examQualified = examQualified;
 		}
-		
+		*/
 	    
 		
 }

@@ -69,7 +69,7 @@ public class user {
 		 if (vacancy != null) 
 		 {
 			 Vacancy v = vacancy.get();
-	            model.addAttribute("vacancy", vacancy);
+	            model.addAttribute("vacancy", v);
 		 }
 		
 		System.out.println(vid);
