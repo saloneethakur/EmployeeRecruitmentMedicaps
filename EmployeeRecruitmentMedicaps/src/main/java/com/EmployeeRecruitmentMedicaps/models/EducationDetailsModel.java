@@ -24,15 +24,15 @@ public class EducationDetailsModel {
 	public EducationDetailsModel(String school_name, String board_name, String passing_year, String percentage,
 			String courseType) {
 		super();
-		School_name = school_name;
-		Board_name = board_name;
-		Passing_year = passing_year;
-		Percentage = percentage;
+		this.School_name = school_name;
+		this.Board_name = board_name;
+		this.Passing_year = passing_year;
+		this.Percentage = percentage;
 		this.courseType = courseType;
 	}
-    
+
 	
-    
-    
+	
+	
 }
 

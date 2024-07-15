@@ -12,7 +12,4 @@ import com.EmployeeRecruitmentMedicaps.entities.User;
 @Repository
 public interface PHDRepository extends JpaRepository<PhdEducation, Integer>{
 	List<PhdEducation> findByPersonalInformationId(Integer personalInformationId);
-	
-	
-
 }

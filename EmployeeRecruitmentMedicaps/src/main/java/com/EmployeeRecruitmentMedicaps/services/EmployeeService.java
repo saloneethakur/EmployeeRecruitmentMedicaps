@@ -9,6 +9,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EmployeeRecruitmentMedicaps.Utils.ApiResponse;
 import com.EmployeeRecruitmentMedicaps.entities.Education;
@@ -17,6 +19,7 @@ import com.EmployeeRecruitmentMedicaps.entities.Journal;
 import com.EmployeeRecruitmentMedicaps.entities.PersonalInformation;
 import com.EmployeeRecruitmentMedicaps.entities.PhdEducation;
 import com.EmployeeRecruitmentMedicaps.entities.User;
+import com.EmployeeRecruitmentMedicaps.entities.Vacancy;
 import com.EmployeeRecruitmentMedicaps.models.EducationDetailsModel;
 import com.EmployeeRecruitmentMedicaps.models.ExperienceModel;
 import com.EmployeeRecruitmentMedicaps.models.JournalDetailsModel;
@@ -181,7 +184,55 @@ public class EmployeeService {
 
         return res;
     }
-	
+    
+    public ApiResponse updateEducation(@RequestParam("educationId") Integer eId,EducationDetailsModel emodel,Model model) {
+    	try
+    	{
+    		Optional<Education> edu = educationRepo.findById(eId);
+    		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    		Date c = sdf.parse(emodel.getPassing_year());
+    		 if (edu != null) 
+    		 {
+    			 Education e = edu.get();
+    			 if(emodel.getField_of_study()!=null)
+    			 {
+    				 e.setInstitutionName(emodel.getSchool_name());
+    		          e.setCompletionYear(c);
+    		          e.setCourseType(emodel.getCourseType());
+    		          e.setEducationClass(emodel.getBoard_name());
+    		          e.setFieldOfStudy(emodel.getField_of_study());
+    		          
+    				 
+    			 }
+    			 else
+    			 {
+    				 e.setInstitutionName(emodel.getSchool_name());
+    		          e.setCompletionYear(c);
+    		          e.setCourseType(emodel.getCourseType());
+    		          e.setEducationClass(emodel.getBoard_name());
+    				 
+    			 }
+    	          educationRepo.save(e);
+    	          res = new ApiResponse(true, "Education Data updated successfully");
+    	          }
+    		 else
+    		 {
+    			 res = new ApiResponse(true, "Education Data not found");
+    		 }
+    	}
+    	
+    		 catch(Exception e) {
+    	            System.err.println(e.getMessage());
+    	            res = new ApiResponse(false, "Data not updated");
+    	        }
+    	return res;
+    }
+		
+	          
+	         
+	         
+		 
+        
 	public void saveResearcherDataForUser(OptionalPersonal model) {  
 		
 		try {

@@ -68,6 +68,7 @@ public class user {
 		Optional<Vacancy> vacancy = vacancyRepo.findById(vid);
 		 if (vacancy != null) 
 		 {
+			 Vacancy v = vacancy.get();
 	            model.addAttribute("vacancy", vacancy);
 		 }
 		
