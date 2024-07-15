@@ -14,11 +14,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.EmployeeRecruitmentMedicaps.Utils.ApiResponse;
 import com.EmployeeRecruitmentMedicaps.entities.Education;
 import com.EmployeeRecruitmentMedicaps.entities.Experience;
+import com.EmployeeRecruitmentMedicaps.entities.Journal;
 import com.EmployeeRecruitmentMedicaps.entities.PersonalInformation;
+import com.EmployeeRecruitmentMedicaps.entities.PhdEducation;
 import com.EmployeeRecruitmentMedicaps.entities.User;
 import com.EmployeeRecruitmentMedicaps.models.EducationDetailsModel;
 import com.EmployeeRecruitmentMedicaps.models.ExperienceModel;
+import com.EmployeeRecruitmentMedicaps.models.JournalDetailsModel;
 import com.EmployeeRecruitmentMedicaps.models.OptionalPersonal;
+import com.EmployeeRecruitmentMedicaps.models.PHDdetailsModel;
 import com.EmployeeRecruitmentMedicaps.models.PersonalDetailsModel;
 import com.EmployeeRecruitmentMedicaps.repositories.PersonalRepo;
 import com.EmployeeRecruitmentMedicaps.services.EmployeeService;
@@ -98,6 +102,8 @@ public class user {
 	    {
 	         res = empService.fetchEducationsByPersonalInformationId(personalid); 
 	         m.addAttribute("res", res);
+	         
+	         
 
 	         if (res.getStatus() == true)
 	         {
@@ -112,6 +118,8 @@ public class user {
 	    {
 	        ApiResponse res = empService.saveEducation(model);
 	    }
+	    
+	    
 	    
 	    
 	@RequestMapping(value="/saveResearch")
@@ -151,6 +159,53 @@ public class user {
 		ApiResponse res = empService.saveExperience(model);
 	
 	}
+	
+	 @RequestMapping(value="/checkPHD")
+	   
+	 public String checkPHD(Model m)
+	    {
+	         res = empService.fetchPHDByPersonalInformationId(personalid); 
+	         m.addAttribute("res", res);
+	         
+	         
+
+	         if (res.getStatus() == true)
+	         {
+	             List<PhdEducation> phdEducation = (List<PhdEducation>) res.getData();
+	             m.addAttribute("phdEducation", phdEducation);
+	         }
+	         return "/user/phdEducation";
+	    }
+
+	    @RequestMapping(value="/savePHDeducation")
+	    public void PHDeducation(PHDdetailsModel model)
+	    {
+	        ApiResponse res = empService.savePHDeducation(model);
+	    }
+	    
+	    
+	    
+	    @RequestMapping(value="/checkJournal")
+		public String checkJournal(Model m)
+		    {
+		         res = empService.fetchJournalsByPersonalInformationId(personalid); 
+		         m.addAttribute("res", res);
+		         
+		         
+
+		         if (res.getStatus() == true)
+		         {
+		             List<Journal> journals = (List<Journal>) res.getData();
+		             m.addAttribute("journal", journals);
+		         }
+		         return "/user/journals";
+		    }
+
+		    @RequestMapping(value="/saveJournal")
+		    public void journal(JournalDetailsModel model)
+		    {
+		        ApiResponse res = empService.saveJournal(model);
+		    }
 
 	
 }

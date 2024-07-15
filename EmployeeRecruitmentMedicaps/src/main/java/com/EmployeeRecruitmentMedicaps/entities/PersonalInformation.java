@@ -71,6 +71,11 @@ public class PersonalInformation {
 
     @OneToMany(mappedBy = "personalInformation", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Education> educations;
+    
+    @OneToMany(mappedBy = "personalInformation", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PhdEducation> phd;
+    
+    
 
 	public PersonalInformation(String alternatePhoneNumber, Date dob, String gender, String caste, String address,
 			String pincode, String district, String state, String country) {

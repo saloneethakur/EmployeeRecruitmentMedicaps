@@ -38,4 +38,18 @@ public class Journal {
     @ManyToOne
     @JoinColumn(name = "personal_information_id", nullable = false)
     private PersonalInformation personalInformation;
+
+	public Journal(String publicationTitle, String journalName, String volume, String indexing, Date year,
+			PersonalInformation personalInformation) {
+		super();
+		this.publicationTitle = publicationTitle;
+		this.journalName = journalName;
+		this.volume = volume;
+		this.indexing = indexing;
+		this.year = year;
+		this.personalInformation = personalInformation;
+	}
+    
+    
+    
 }

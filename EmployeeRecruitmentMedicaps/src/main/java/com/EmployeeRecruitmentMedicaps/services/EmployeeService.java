@@ -13,22 +13,34 @@ import org.springframework.stereotype.Service;
 import com.EmployeeRecruitmentMedicaps.Utils.ApiResponse;
 import com.EmployeeRecruitmentMedicaps.entities.Education;
 import com.EmployeeRecruitmentMedicaps.entities.Experience;
+import com.EmployeeRecruitmentMedicaps.entities.Journal;
 import com.EmployeeRecruitmentMedicaps.entities.PersonalInformation;
+import com.EmployeeRecruitmentMedicaps.entities.PhdEducation;
 import com.EmployeeRecruitmentMedicaps.entities.User;
 import com.EmployeeRecruitmentMedicaps.models.EducationDetailsModel;
 import com.EmployeeRecruitmentMedicaps.models.ExperienceModel;
+import com.EmployeeRecruitmentMedicaps.models.JournalDetailsModel;
 import com.EmployeeRecruitmentMedicaps.models.OptionalPersonal;
+import com.EmployeeRecruitmentMedicaps.models.PHDdetailsModel;
 import com.EmployeeRecruitmentMedicaps.models.PersonalDetailsModel;
 import com.EmployeeRecruitmentMedicaps.repositories.EducationRepository;
 import com.EmployeeRecruitmentMedicaps.repositories.ExperienceRepository;
+import com.EmployeeRecruitmentMedicaps.repositories.JournalRepository;
+import com.EmployeeRecruitmentMedicaps.repositories.PHDRepository;
 import com.EmployeeRecruitmentMedicaps.repositories.PersonalRepo;
 
 @Service
 public class EmployeeService {
-
+	@Autowired
 	public EducationRepository educationRepo;
+	
+	@Autowired
+	public PHDRepository phdRepo;
 	@Autowired
     public PersonalRepo personalRepo;
+	
+	@Autowired
+	public JournalRepository journalRepo;
 	
 	@Autowired
     private ExperienceRepository experienceRepository;
@@ -265,11 +277,11 @@ public class EmployeeService {
 	        
 	        if(status==true)
 	        {
-	        	return res = new ApiResponse(true, "experience present", education);
+	        	return res = new ApiResponse(true, "Education present", education);
 	        }
 	        else
 	        {
-	        	return res = new ApiResponse(false, "experience not present");
+	        	return res = new ApiResponse(false, "Education not present");
 	        }
 	}
 	public ApiResponse saveEducation(EducationDetailsModel model) {
@@ -284,40 +296,26 @@ public class EmployeeService {
             if (op.isPresent())
             {
                 PersonalInformation personalInformation = op.get();
-                Education education;
-                Education education10 = new Education(model.getSchool_name10(),model.getBoard_name10(), convertStringToDate(model.getPassing_year10()), model.getPercentage10(), "School", personalInformation);
-                educationRepo.save(education10);
-
-                // Save 12th details
-                Education education12 = new Education(model.getSchool_name12(),model.getBoard_name12(), convertStringToDate(model.getPassing_year12()), model.getPercentage12(), model.getField_of_study12(), "School", personalInformation);
-                educationRepo.save(education12);
-
-                // Save Diploma details (if provided)
-                if (model.getDiplomaInstitutionName() != null) {
-                    Education diploma = new Education(model.getDiplomaInstitutionName(),model.getDiploma_name(), convertStringToDate(model.getDiplomaCompletionYear()), model.getDiplomaPercentage(), model.getDiplomaFieldOfStudy(), "Diploma", personalInformation);
-                    educationRepo.save(diploma);
-                }
-
-                // Save UG details
-                Education educationUG = new Education(model.getUGInstitution_name(), model.getUGDegree_name(), convertStringToDate(model.getPassing_yearUG()), model.getPercentage_UG(), model.getUGField_name(), "UG", personalInformation);
-                educationRepo.save(educationUG);
-
-                // Save PG details
-                Education educationPG = new Education(model.getPGInstitution_name(), model.getPGDegree_name(), convertStringToDate(model.getPassing_yearPG()), model.getPercentage_PG(), model.getPGField_name(), "PG", personalInformation);
-                educationRepo.save(educationPG);
-
-                // Save second PG details (if provided)
-                if (model.getSecondPGInstitution_name() != null) {
-                    Education secondPG = new Education(model.getSecondPGInstitution_name(), model.getSecondPGDegree_name(), convertStringToDate(model.getPassing_yearSecondPG()), model.getPercentage_SecondPG(), model.getSecondPGField_name(), "PG2", personalInformation);
-                    educationRepo.save(secondPG);
-                }
-
-                // Save PhD details (if provided)
-                if (model.getPhDInstitution_name() != null) {
-                    Education phd = new Education(model.getPhDInstitution_name(), "PhD", convertStringToDate(model.getPhD_year_of_passing()), "", model.getPhD_Field_name(), "PhD", personalInformation);
-                    educationRepo.save(phd);
-                }
+               
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date p = sdf.parse(model.getPassing_year());
                 
+                if(model.getField_of_study() !=null)
+                {
+Education  education = new Education(model.getSchool_name(),model.getBoard_name(),p, model.getPercentage(), model.getCourseType(), personalInformation);
+                educationRepo.save(education);
+                personalInformation.getEducations().add(education);
+                
+                }
+                else {
+                Education	educatio= new Education(model.getSchool_name(), model.getBoard_name(),p, model.getPercentage(),  model.getField_of_study(),model.getCourseType(), personalInformation);
+                	educationRepo.save(educatio);
+                	  personalInformation.getEducations().add(educatio);
+                      
+                    
+                }
+              
+                                
                 personalRepo.save(personalInformation);
                 res= new ApiResponse(true, "Education details saved successfully");
     }
@@ -335,6 +333,144 @@ public class EmployeeService {
 
         return res;
 	}
+
+
+
+	
+	public ApiResponse fetchPHDByPersonalInformationId(Integer personalid) {
+		List<PhdEducation> PHDeducation = phdRepo.findByPersonalInformationId(personalid);
+        boolean status = !PHDeducation.isEmpty();
+        
+        if(status==true)
+        {
+        	return res = new ApiResponse(true, "PHD is Present", PHDeducation);
+        }
+        else
+        {
+        	return res = new ApiResponse(false, "experience not present");
+        }
+	}
+
+
+	public ApiResponse savePHDeducation(PHDdetailsModel model) {
+		try {
+            // Get the authenticated user
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = (User) principal;
+
+            Optional<PersonalInformation> op = personalRepo.findByUser(user);
+
+            
+            if (op.isPresent())
+            {
+                PersonalInformation personalInformation = op.get();
+               
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date s = sdf.parse(model.getPhD_year_of_passing());
+                
+                SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+                Date e = sdf1.parse(model.getJoiningYear());
+                
+                
+                
+                if(model.getPhDSummary() !=null)
+                {
+
+                
+                PhdEducation phd=new PhdEducation(model.getPhDInstitution_name(), model.getPhD_Thesis_topic(), model.getPercentage(), model.getPhD_Field_name(), s, e, model.getPhD_Supervisor_name(),  model.getPhDSummary(), personalInformation);
+                phdRepo.save(phd);
+                personalInformation.getPhd().add(phd);
+                
+                }
+                else {
+                PhdEducation phd1= new PhdEducation(model.getPhDInstitution_name(), model.getPhD_Thesis_topic(), model.getPercentage(), model.getPhD_Field_name(),s ,e , model.getPhD_Supervisor_name(), personalInformation);
+                
+                		phdRepo.save(phd1);
+                	  personalInformation.getPhd().add(phd1);
+                      
+                    
+                }
+              
+                                
+                personalRepo.save(personalInformation);
+                res= new ApiResponse(true, "PHD details saved successfully");
+    }
+                else 
+                {
+                    res = new ApiResponse(false, "Personal information of user not found ");
+                }
+               
+            
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            res = new ApiResponse(false, "Data not updated");
+        }
+
+        return res;
+
+	}
+
+
+
+	public ApiResponse fetchJournalsByPersonalInformationId(Integer personalid) {
+		List<Journal> journal = journalRepo.findByPersonalInformationId(personalid);
+        boolean status = !journal.isEmpty();
+        
+        if(status==true)
+        {
+        	return res = new ApiResponse(true, "PHD is Present", journal);
+        }
+        else
+        {
+        	return res = new ApiResponse(false, "experience not present");
+        }
+	}
+
+
+
+	public ApiResponse saveJournal(JournalDetailsModel model) {
+		try {
+            // Get the authenticated user
+            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = (User) principal;
+
+            Optional<PersonalInformation> op = personalRepo.findByUser(user);
+
+            
+            if (op.isPresent())
+            {
+                PersonalInformation personalInformation = op.get();
+               
+                SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd");
+                Date f = sdf3.parse(model.getYear());
+                
+                Journal journal= new Journal(model.getPublicationTitle(),model.getJournalName(), model.getVolume(), model.getIndexing(), f, personalInformation);
+                journalRepo.save(journal);
+                personalInformation.getJournals().add(journal);
+                               
+                personalRepo.save(personalInformation);
+                res= new ApiResponse(true, "Journal details saved successfully");
+    }
+                else 
+                {
+                    res = new ApiResponse(false, "Journal information of user not found ");
+                }
+               
+            
+
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            res = new ApiResponse(false, "Data not updated");
+        }
+
+        return res;
+
+	}
+
+
+
+	
 
 
 

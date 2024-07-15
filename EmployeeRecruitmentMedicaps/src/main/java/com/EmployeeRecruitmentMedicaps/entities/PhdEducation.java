@@ -38,7 +38,7 @@ public class PhdEducation {
 	private Date completionYear;
     
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private String supervisorOrAdvisor;
 
     @Column(nullable = true)
@@ -47,4 +47,39 @@ public class PhdEducation {
     @ManyToOne
     @JoinColumn(name = "PersonalInformation_id", nullable = false)
     private PersonalInformation PersonalInformation;
+
+	public PhdEducation(String institutionName, String thesis, String percentage, String fieldOfStudy, Date joiningYear,
+			Date completionYear, String supervisorOrAdvisor, String researchSummary,
+			com.EmployeeRecruitmentMedicaps.entities.PersonalInformation personalInformation) {
+		super();
+		this.institutionName = institutionName;
+		this.thesis = thesis;
+		this.percentage = percentage;
+		this.fieldOfStudy = fieldOfStudy;
+		this.joiningYear = joiningYear;
+		this.completionYear = completionYear;
+		this.supervisorOrAdvisor = supervisorOrAdvisor;
+		this.researchSummary = researchSummary;
+		PersonalInformation = personalInformation;
+	}
+
+	public PhdEducation(String institutionName, String thesis, String percentage, String fieldOfStudy, Date joiningYear,
+			Date completionYear, String supervisorOrAdvisor,
+			com.EmployeeRecruitmentMedicaps.entities.PersonalInformation personalInformation) {
+		super();
+		this.institutionName = institutionName;
+		this.thesis = thesis;
+		this.percentage = percentage;
+		this.fieldOfStudy = fieldOfStudy;
+		this.joiningYear = joiningYear;
+		this.completionYear = completionYear;
+		this.supervisorOrAdvisor = supervisorOrAdvisor;
+		PersonalInformation = personalInformation;
+	}
+
+	    
+    
+    
+    
+    
 }
