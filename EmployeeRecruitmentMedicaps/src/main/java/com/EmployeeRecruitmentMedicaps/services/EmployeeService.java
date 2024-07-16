@@ -250,7 +250,7 @@ public class EmployeeService {
         return res;
     }
     
-    public ApiResponse updateEducation(@RequestParam("educationId") Integer eId,EducationDetailsModel emodel,Model model) {
+    public ApiResponse updateEducation(Integer eId,EducationDetailsModel emodel) {
     	try
     	{
     		Optional<Education> edu = educationRepo.findById(eId);
@@ -588,6 +588,138 @@ Education  education = new Education(model.getSchool_name(),model.getBoard_name(
         return res;
 
 	}
+
+
+
+	public ApiResponse updateExperience(Integer expID, ExperienceModel model) {
+		try {
+			Optional<Experience> exp=experienceRepository.findById(expID);
+			
+			if(exp!=null)
+			{
+				Experience j=exp.get();
+				if(model.getInstituteName()!=null)
+				{
+					j.setJobTitle(model.getJobTitle());
+					j.setInstituteName(model.getInstituteName());
+					j.setStartDate(model.getStartDate());
+					j.setEndDate(model.getEndDate());
+				}
+				else {
+					j.setJobTitle(model.getJobTitle());
+					j.setInstituteName(model.getInstituteName());
+					j.setStartDate(model.getStartDate());
+					j.setEndDate(model.getEndDate());
+				}
+				experienceRepository.save(j);
+				res= new ApiResponse(true,"Experience data uploaded successfully");
+				
+			}
+			else {
+				res=new ApiResponse(true,"Experience data not found");
+			}
+			
+			
+		}
+		catch(Exception e){
+			System.err.println(e.getMessage());
+			res=new ApiResponse(false, "Data not uploaded");
+			
+		}
+		return res;
+	}
+
+
+
+	public ApiResponse updatePHD(Integer phdId, PHDdetailsModel model) {
+		try {
+			Optional<PhdEducation> phd=phdRepo.findById(phdId);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date f = sdf.parse(model.getJoiningYear());
+            Date g=sdf.parse(model.getPhD_year_of_passing());
+			
+			if(phd!=null)
+			{
+				PhdEducation p=phd.get();
+				if(model.getPhDSummary()!=null)
+				{
+					p.setInstitutionName(model.getPhDInstitution_name());
+					p.setThesis(model.getPhD_Thesis_topic());
+					p.setPercentage(model.getPercentage());
+					p.setFieldOfStudy(model.getPhD_Field_name());
+					p.setJoiningYear(f);
+					p.setCompletionYear(g);
+					p.setSupervisorOrAdvisor(model.getPhD_Supervisor_name());
+					p.setResearchSummary(model.getPhDSummary());
+				}
+				else {
+					p.setInstitutionName(model.getPhDInstitution_name());
+					p.setThesis(model.getPhD_Thesis_topic());
+					p.setPercentage(model.getPercentage());
+					p.setFieldOfStudy(model.getPhD_Field_name());
+					p.setJoiningYear(f);
+					p.setCompletionYear(g);
+					p.setSupervisorOrAdvisor(model.getPhD_Supervisor_name());
+				}
+				phdRepo.save(p);
+				res= new ApiResponse(true,"PHD data uploaded successfully");
+				
+			}
+			else {
+				res=new ApiResponse(true,"PHD data not found");
+			}
+			
+			
+		}
+		catch(Exception e){
+			System.err.println(e.getMessage());
+			res=new ApiResponse(false, "Data not uploaded");
+			
+		}
+		return res;
+		
+		
+	}
+
+
+
+	public ApiResponse updateJournal(Integer jourId, JournalDetailsModel model) {
+		try {
+			Optional<Journal> jour=journalRepo.findById(jourId);
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            Date i=sdf.parse(model.getYear());
+			
+			if(jour!=null)
+			{
+				Journal j=jour.get();
+				j.setPublicationTitle(model.getPublicationTitle());
+				j.setJournalName(model.getJournalName());
+				j.setVolume(model.getVolume());
+				j.setIndexing(model.getIndexing());
+				j.setYear(i);
+				
+				
+				journalRepo.save(j);
+				res= new ApiResponse(true,"Journal data uploaded successfully");
+				
+			}
+			else {
+				res=new ApiResponse(true,"Journal data not found");
+			}
+			
+			
+		}
+		catch(Exception e){
+			System.err.println(e.getMessage());
+			res=new ApiResponse(false, "Data not uploaded");
+			
+		}
+		return res;
+	}
+
+
+
+	
 
 
 

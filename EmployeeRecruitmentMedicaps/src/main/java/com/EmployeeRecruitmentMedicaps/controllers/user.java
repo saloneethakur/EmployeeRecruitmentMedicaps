@@ -113,6 +113,8 @@ public class user {
 		ApiResponse res = empService.updatePersonalDetails(model);
 		
 	}
+	
+	
 	 @RequestMapping(value="/checkEducation")
 	   
 	 public String checkeducation(Model m)
@@ -141,6 +143,12 @@ public class user {
 	        ApiResponse res = empService.saveEducation(model);
 	    }
 	    
+	    @RequestMapping(value="/updateEducation")
+	    public void updateEducation(@RequestParam("educationId") Integer eId,EducationDetailsModel model)
+	    {
+	    	ApiResponse res=empService.updateEducation(eId,model);
+	    }
+	    
 	    
 	    
 	    
@@ -150,6 +158,7 @@ public class user {
 		 empService.saveResearcherDataForUser(model);
 	
 	}
+	
 	
 	@RequestMapping(value="/checkExperience")
 	public String checkexperience(Model m)
@@ -182,6 +191,12 @@ public class user {
 	
 	}
 	
+	@RequestMapping(value = "/updateExperience")
+	public void updateExperience(@RequestParam("experience_id") Integer expID,ExperienceModel model )
+	{
+		ApiResponse res=empService.updateExperience(expID,model);
+	}
+	
 	 @RequestMapping(value="/checkPHD")
 	   
 	 public String checkPHD(Model m)
@@ -203,6 +218,12 @@ public class user {
 	    public void PHDeducation(PHDdetailsModel model)
 	    {
 	        ApiResponse res = empService.savePHDeducation(model);
+	    }
+	    
+	    @RequestMapping(value = "/updatePHD")
+	    public void updatePHD(@RequestParam("id") Integer phdId,PHDdetailsModel model)
+	    {
+	    	ApiResponse res=empService.updatePHD(phdId,model);
 	    }
 	    
 	    
@@ -227,6 +248,12 @@ public class user {
 		    public void journal(JournalDetailsModel model)
 		    {
 		        ApiResponse res = empService.saveJournal(model);
+		    }
+		    
+		    @RequestMapping(value = "/updateJournal")
+		    public void updatePHD(@RequestParam("journal_id") Integer jourId, JournalDetailsModel model)
+		    {
+		    	ApiResponse res =empService.updateJournal(jourId,model);
 		    }
 
 	
