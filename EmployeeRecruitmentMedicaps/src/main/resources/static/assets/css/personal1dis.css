@@ -10,9 +10,16 @@ body {
 }
 
 .row-span {
-  display: flex;
+  display: inline-block;
   flex-wrap: wrap;
+  width: 100%;
   gap: 20px;
+}
+.row-span select {
+  margin-right: 20px;
+  margin-left: 5px;
+  margin-bottom: 30px;
+  width: 25%;
 }
 
 .container {
@@ -26,7 +33,9 @@ body {
 }
 
 .category-field > select {
-  margin-top: 33px;
+  margin-top: 15px;
+  margin-bottom: 30px;
+  width: 95%;
   display: grid;
 }
 .category-field > label {
@@ -87,7 +96,7 @@ h3 {
   margin-right: 15px;
 }
 .category-field {
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 h3:hover {
@@ -105,9 +114,10 @@ h4:hover {
 }
 
 .row {
+	
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 5px;
 }
 
 .input-group {
@@ -129,6 +139,7 @@ label {
 input,
 select,
 textarea {
+  margin-right: 20px;
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -203,6 +214,7 @@ label > span {
   background-color: #b71c1c;
   color: white;
   border: none;
+  left: 78rem;
   padding: 0.5rem 1rem;
   text-align: center;
   text-decoration: none;
