@@ -10,6 +10,6 @@ import com.EmployeeRecruitmentMedicaps.entities.User;
 import com.EmployeeRecruitmentMedicaps.entities.Vacancy;
 @Repository
 public interface VacancyRepository extends JpaRepository<Vacancy, Integer>{
-	//Optional<Vacancy> findByUser(User user);
+	Optional<Vacancy> findByUser(User user);
 	//Optional<Vacancy> findById(User user);
 }

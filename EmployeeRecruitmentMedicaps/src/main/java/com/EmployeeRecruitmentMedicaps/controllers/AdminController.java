@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EmployeeRecruitmentMedicaps.Utils.ApiResponse;
 import com.EmployeeRecruitmentMedicaps.models.UserRegistrationModel;
@@ -47,6 +48,13 @@ public class AdminController {
 	public String homee() {
 		
 			return "/admin/vacancy";
+		
+	}
+	
+	@RequestMapping(value="/updateVacancy")
+	public void updateVacancy(@RequestParam("id") Integer id ,VacancyModel vmodel)
+	{
+		ApiResponse res = adminService.updateVacancy(id,vmodel);
 		
 	}
 

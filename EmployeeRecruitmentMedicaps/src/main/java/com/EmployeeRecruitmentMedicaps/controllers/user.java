@@ -149,6 +149,12 @@ public class user {
 	    	ApiResponse res=empService.updateEducation(eId,model);
 	    }
 	    
+	    @RequestMapping(value="/deleteEducation")
+	    public void deleteEducation(@RequestParam("educationId") Integer eId)
+	    {
+	    	ApiResponse res=empService.deleteEducation(eId);
+	    }
+	    
 	    
 	    
 	    
@@ -158,6 +164,7 @@ public class user {
 		 empService.saveResearcherDataForUser(model);
 	
 	}
+	
 	
 	
 	@RequestMapping(value="/checkExperience")
@@ -197,6 +204,12 @@ public class user {
 		ApiResponse res=empService.updateExperience(expID,model);
 	}
 	
+	@RequestMapping(value = "/deleteExperience")
+	public void deleteExperience(@RequestParam("experience_id") Integer expId)
+	{
+		ApiResponse res=empService.deleteExperience(expId);
+	}
+	
 	 @RequestMapping(value="/checkPHD")
 	   
 	 public String checkPHD(Model m)
@@ -224,6 +237,12 @@ public class user {
 	    public void updatePHD(@RequestParam("id") Integer phdId,PHDdetailsModel model)
 	    {
 	    	ApiResponse res=empService.updatePHD(phdId,model);
+	    }
+	    
+	    @RequestMapping(value="/deletePHD")
+	    public void deletePHD(@RequestParam("id")Integer pId)
+	    {
+	    	ApiResponse res=empService.deletePHD(pId);
 	    }
 	    
 	    
@@ -254,6 +273,12 @@ public class user {
 		    public void updatePHD(@RequestParam("journal_id") Integer jourId, JournalDetailsModel model)
 		    {
 		    	ApiResponse res =empService.updateJournal(jourId,model);
+		    }
+		    
+		    @RequestMapping(value="/deleteJournal")
+		    public void deleteJournal(@RequestParam("journal_id") Integer rId)
+		    {
+		    	ApiResponse res=empService.deleteJournal(rId);
 		    }
 
 	

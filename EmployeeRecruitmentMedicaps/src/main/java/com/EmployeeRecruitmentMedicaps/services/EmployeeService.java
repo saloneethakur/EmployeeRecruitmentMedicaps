@@ -233,7 +233,7 @@ public class EmployeeService {
                     personalRepo.save(pi);
                     res = new ApiResponse(true, "Data updated successfully", pi);
                 } else {
-                    res = new ApiResponse(false, "Personal information not found for the user");
+                    
                 }
                 //res = new ApiResponse(true, "data present",p);
             }
@@ -716,6 +716,90 @@ Education  education = new Education(model.getSchool_name(),model.getBoard_name(
 		}
 		return res;
 	}
+
+
+
+	public ApiResponse deleteEducation(Integer eId) {
+		try {
+			 if (educationRepo.existsById(eId)) {
+	                educationRepo.deleteById(eId);
+	                 res= new ApiResponse(true,"Data Deleted Successfuly"); 
+	            } else {
+	            	res= new ApiResponse(false,"Data Deleted  not Successfuly"); 
+	            }
+			
+			
+		}catch(Exception e) {
+			System.err.println(e.getMessage());
+			res=new ApiResponse(false, "Data not uploaded",e.getMessage());
+		}
+		
+		return res;
+	}
+
+
+
+	public ApiResponse deleteJournal(Integer jId) {
+		try {
+			 if (journalRepo.existsById(jId)) {
+	                journalRepo.deleteById(jId);
+	                 res= new ApiResponse(true,"Journal Data Deleted Successfuly"); 
+	            } else {
+	            	res= new ApiResponse(false,"Journal Data Deleted  not Successfuly"); 
+	            }
+			
+			
+		}catch(Exception e) {
+			System.err.println(e.getMessage());
+			res=new ApiResponse(false, "Data not uploaded",e.getMessage());
+		}
+		
+		return res;
+	}
+
+
+
+	public ApiResponse deletePHD(Integer pId) {
+		try {
+			 if (phdRepo.existsById(pId)) {
+	                phdRepo.deleteById(pId);
+	                 res= new ApiResponse(true,"PHD Data Deleted Successfuly"); 
+	            } else {
+	            	res= new ApiResponse(false,"PHD Data Deleted  not Successfuly"); 
+	            }
+			
+			
+		}catch(Exception e) {
+			System.err.println(e.getMessage());
+			res=new ApiResponse(false, "Data not uploaded",e.getMessage());
+		}
+		
+		return res;
+	}
+
+
+
+	public ApiResponse deleteExperience(Integer expId) {
+		try {
+			if (experienceRepository.existsById(expId)) {
+                experienceRepository.deleteById(expId);
+                 res= new ApiResponse(true,"Experience Data Deleted Successfuly"); 
+            } else {
+            	res= new ApiResponse(false,"Experience Data Deleted  not Successfuly"); 
+            }
+		
+			
+		}catch(Exception e) {
+			System.err.println(e.getMessage());
+			res=new ApiResponse(false, "Data not uploaded",e.getMessage());
+		}
+		return res;
+		
+	}
+
+
+
+	 
 
 
 

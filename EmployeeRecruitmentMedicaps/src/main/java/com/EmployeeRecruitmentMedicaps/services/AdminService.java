@@ -2,6 +2,7 @@ package com.EmployeeRecruitmentMedicaps.services;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.EmployeeRecruitmentMedicaps.Utils.ApiResponse;
 import com.EmployeeRecruitmentMedicaps.models.VacancyModel;
 import com.EmployeeRecruitmentMedicaps.repositories.VacancyRepository;
+import com.EmployeeRecruitmentMedicaps.entities.PersonalInformation;
 import com.EmployeeRecruitmentMedicaps.entities.User;
 import com.EmployeeRecruitmentMedicaps.entities.Vacancy;
 
@@ -17,6 +19,7 @@ import com.EmployeeRecruitmentMedicaps.entities.Vacancy;
 public class AdminService {
 	@Autowired
 	public VacancyRepository vacancyRepo;
+	ApiResponse res =null;
 
 	public ApiResponse addVacancy(VacancyModel model) {
 		
@@ -48,6 +51,49 @@ public class AdminService {
 			return res;
 		}
 		
+	}
+
+	public ApiResponse updateVacancy(Integer id, VacancyModel vmodel) {
+		try {
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+         User user = (User) principal;
+
+         Optional<Vacancy> op = vacancyRepo.findByUser(user);
+         if(op.isPresent()) {
+        	 Vacancy v=op.get();
+        	 if(op!=null)
+        	 {
+        		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                 Date VstartDate = sdf.parse(vmodel.getVstart());
+                 Date VendDate = sdf.parse(vmodel.getVlast());
+                 
+        		 
+        		 v.setType(vmodel.getType());
+        		 v.setFaculty(vmodel.getFaculty());
+        		 v.setDepartment(vmodel.getDepartment());
+        		 v.setPostAppliedFor(vmodel.getPostAppliedFor());
+        		 v.setVstart(VstartDate);
+        		 v.setVlast(VendDate);
+        		 
+        		 v.setUser(user);
+        		 vacancyRepo.save(v);
+        		 res=new ApiResponse(true,"Data Uploaded Successfully",v);
+        		
+        	 }
+        	 else {
+        		 res = new ApiResponse(false, "Personal information not found for the user");
+             }
+         }
+        
+         
+         
+		}catch (Exception e) {
+            System.err.println(e.getMessage());
+            res = new ApiResponse(false, "Data not updated");
+        }
+		
+		return res;
 	}
 
 }
