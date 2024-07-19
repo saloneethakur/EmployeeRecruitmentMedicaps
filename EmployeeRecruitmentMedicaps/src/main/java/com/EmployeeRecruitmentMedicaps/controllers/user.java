@@ -93,24 +93,63 @@ public class user {
         	 res = new ApiResponse(false, "data not present");
         }
         model.addAttribute("res", res);
-		return "/user/personal";
+		return "/userfolder/personal";
 		
 	}
 	
+	@RequestMapping(value ="/Apply")
+	public String apply(Model model)
+	{
+		
+		Optional<Vacancy> vacancy = vacancyRepo.findById(vid);
+		 if (vacancy != null) 
+		 {
+			 Vacancy v = vacancy.get();
+	            model.addAttribute("vacancy", v);
+		 }
+		
+		System.out.println(vid);
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = (User)principal;
+		if (user != null)
+		{
+            model.addAttribute("user", user);
+	    }
+		
+		
+		Optional<PersonalInformation> op = personalRepo.findByUser(user);
+        if (op.isPresent()) {
+        	
+            PersonalInformation p = op.get();
+            personalid = p.getId();
+            res = new ApiResponse(true, "data present",p);
+        }
+        else
+        {
+        	 res = new ApiResponse(false, "data not present");
+        }
+        model.addAttribute("res", res);
+		return "/userfolder/personal";
+		
+	}
+	
+	
 	@RequestMapping(value="/personalDetails")
-	public void personalDetails(PersonalDetailsModel model)
+	public String personalDetails(PersonalDetailsModel model)
 	{
 		
 		ApiResponse res = empService.savePersonal(model);
+		return "redirect:/user/checkEducation";
 		
 		
 	}
 	
 	@RequestMapping(value="/updatepersonalDetails")
-	public void updatepersonalDetails(PersonalDetailsModel model)
+	public String updatepersonalDetails(PersonalDetailsModel model)
 	{
 		
 		ApiResponse res = empService.updatePersonalDetails(model);
+		 return "redirect:/user/Apply";
 		
 	}
 	
@@ -134,13 +173,15 @@ public class user {
 	             List<PhdEducation> phdEducation = (List<PhdEducation>) res.getData();
 	             m.addAttribute("phdEducation", phdEducation);
 	         }
-	         return "/user/education";
+	         return "/userfolder/education";
 	    }
 
 	    @RequestMapping(value="/saveEducation")
-	    public void education(EducationDetailsModel model)
+	    public String education(EducationDetailsModel model)
 	    {
-	        ApiResponse res = empService.saveEducation(model);
+	        ApiResponse response = empService.saveEducation(model);
+	        return "redirect:/user/checkEducation";
+	        
 	    }
 	    
 	    @RequestMapping(value="/updateEducation")

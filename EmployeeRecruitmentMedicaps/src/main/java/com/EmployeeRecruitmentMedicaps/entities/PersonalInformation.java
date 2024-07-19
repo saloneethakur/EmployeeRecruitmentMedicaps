@@ -58,6 +58,10 @@ public class PersonalInformation {
 
     @Column(nullable = true)
     private String orcid;
+    
+    @Column(name = "resume",nullable = true)
+	private String resume;
+
 
     @OneToOne
     @JoinColumn(name = "user_id")

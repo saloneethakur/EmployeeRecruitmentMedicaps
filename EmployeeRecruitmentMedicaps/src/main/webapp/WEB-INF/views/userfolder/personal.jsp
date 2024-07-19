@@ -363,7 +363,13 @@
         </c:otherwise>
         </c:choose>
         </section>
-            <button onclick="location.href='checkEducation'">next</button>
+        <!-- 
+         <button onclick="location.href='/user/checkEducation'">next</button>
+         -->
+         <form action="/user/checkEducation">
+<button type="submit" >next</button>
+</form>
+           
       
     </div>
     <script defer src="/assets/JS/personal1dis.js"></script>

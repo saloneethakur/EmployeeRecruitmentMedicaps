@@ -18,8 +18,9 @@
       
       <c:choose>
       <c:when test="${res.status == true}">
-      
+     
      <button type="button" id="editBtn">Edit</button>
+      <c:forEach var="education" items="${educations}">
       <form id="educationForm" action="/user/updateEducation" >
        
         <!-- 10th Grade Section -->
@@ -34,10 +35,10 @@
               type="text"
               id="10thSchoolName"
               name="School_name"
-              value="${education.School_name}"
+              value="${education.institutionName}"
               required
             />
-
+            <!-- 
             <label for="10thBoard">Board</label>
             <input type="text" id="10thBoard" name="Board_name" value="${res.education.Board_name}" required />
 
@@ -47,6 +48,8 @@
             <label for="10thGrade">Percentage/Grade</label>
             <input type="text" id="10thGrade" name="Percentage" value="${education.Percentage}" required />
 
+             -->
+
             
             <input type="hidden" name="courseType" value="Tenth" >
             <button type="submit" id="submit-10" class="submit-btn">
@@ -54,8 +57,12 @@
             </button>
           </div>
         </div>
+        </form>
+        </c:forEach>
 
-        <!-- 12th Grade Section -->
+
+
+        <!-- 12th Grade Section
         <div class="education-section" id="section-12th">
           <div class="section-header" data-target="12th-details">
             <h3>12th Grade</h3>
@@ -93,8 +100,8 @@
               Submit
             </button>
           </div>
-        </div>
-        <!--Diploma Section-->
+        </div> -->
+        <!--Diploma Section
         <div class="education-section" id="section-UG">
           <div class="section-header" data-target="diploma-details">
             <h3>Diploma</h3>
@@ -135,9 +142,9 @@
               Submit
             </button>
           </div>
-        </div>
+        </div>-->
 
-        <!-- UG Section -->
+        <!-- UG Section
         <div class="education-section" id="section-UG">
           <div class="section-header" data-target="UG-details">
             <h3>Undergraduate (UG)</h3>
@@ -178,9 +185,9 @@
               Submit
             </button>
           </div>
-        </div>
+        </div> -->
 
-        <!-- PG Section -->
+        <!-- PG Section 
         <div class="education-section" id="section-PG">
           <div class="section-header" data-target="PG-details">
             <h3>Postgraduate (PG)</h3>
@@ -221,9 +228,9 @@
               Submit
             </button>
           </div>
-        </div>
+        </div>-->
 
-        <!-- PhD Section -->
+        <!-- PhD Section 
         <div class="education-section" id="section-PhD">
           <div class="section-header" data-target="PhD-details">
             <h3>PhD</h3>
@@ -272,9 +279,9 @@
               Submit
             </button>
           </div>
-        </div>
+        </div>-->
 
-        <!-- Exams Qualified Section -->
+        <!-- Exams Qualified Section 
         <div class="education-section" id="section-exam">
           <div class="section-header" data-target="exam-details">
             <h3>Exams Qualified</h3>
@@ -313,7 +320,8 @@
             </div>
           </div>
         </div>
-      </form>
+      </form>-->
+       
       </c:when>
       
       
