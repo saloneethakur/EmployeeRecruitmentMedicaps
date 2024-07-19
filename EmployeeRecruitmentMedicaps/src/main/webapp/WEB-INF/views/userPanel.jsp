@@ -8,11 +8,12 @@
 </head>
 <body>
 <h1>User Panel</h1>
-<form action="/user/Personal">
-<button type="submit" >hello</button>
-</form>
+<a href="otp.jsp" >hello</a>
 <form action="/medicaps/vacancies">
 <button type="submit" >vacancy</button>
+</form>
+<form action="/user/checkEducation" >
+<button type="submit" >education</button>
 </form>
 </body>
 </html>

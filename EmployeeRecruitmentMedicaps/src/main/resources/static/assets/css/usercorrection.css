@@ -1,0 +1,480 @@
+/*! Navigation Bar */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #041e42;
+  color: #fff;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+  margin-left: 5rem;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 20px;
+}
+
+.institute-name {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.navbar-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 4rem;
+  /* Shift links to the left */
+}
+
+.navbar-right a {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.navbar-right a:hover {
+  color: #ddd;
+}
+
+.profile-link {
+  display: flex;
+  align-items: center;
+}
+
+.profile-link i {
+  margin-right: 5px;
+}
+
+/* Page content */
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: #041e42;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right a {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+  transition: color 0.3s;
+}
+
+.navbar-right a:hover {
+  color: #ddd;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.section-content {
+  margin-top: 70px; /* Space for fixed navbar */
+  display: flex;
+  padding: 20px;
+  gap: 10px;
+  height: calc(100vh - 70px); /* Full height minus navbar height */
+  overflow-y: auto; /* Allow scrolling */
+}
+
+.section {
+  padding: 20px;
+  background-color: #f4f4f4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Section 1 */
+.section-1 {
+  flex: 1;
+  position: sticky;
+  top: 0px;
+  height: calc(100vh - 120px);
+  overflow-y: auto;
+}
+
+/* Section 2 */
+.section-2 {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 20px; /* Added margin */
+  height: max-content;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 100%;
+  padding: 20px;
+  background-color: #f4f4f4;
+  border-radius: 8px;
+}
+
+.sidebar h1 {
+  background-color: #041e42;
+
+  margin-bottom: 40px;
+  font-size: 34px;
+  font-weight: bold;
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+/* Sidebar Links */
+.sidebar a {
+  display: block;
+  color: black;
+  text-decoration: none;
+  font-size: 18px;
+  padding: 10px;
+  margin-bottom: 25px;
+  background-color: #ddd;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar a:hover {
+  background-color: #333;
+  color: #fff;
+}
+.sidebar a.active {
+  background-color: #041e42;
+}
+/* ! section 2 fixed Profile Header */
+.profile-header {
+  top: 90px; /* Adjusted to account for padding */
+  width: 100%;
+  background-color: #f4f4f4;
+  padding: 0px 10px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 500; /* Ensure it is above other content */
+}
+
+.profile-header h1 {
+  margin: 0;
+  color: #041e42;
+  font-weight: bold;
+}
+/*!section 2 edit button*/
+.profile-header .edit-button {
+  background-color: #041e42;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-header .edit-button:hover {
+  transition: ease-out 1;
+}
+
+/*! Forms */
+.form-section {
+  display: none;
+}
+
+.form-section h2 {
+  margin-top: 0;
+}
+
+/*!personal-form css*/
+
+.personal-container {
+  background-color: whitesmoke;
+  border: 2px solid #041e42;
+  border-radius: 4px;
+}
+
+.personal-input-group > label {
+  margin-top: 1rem;
+}
+.personal-gender-field {
+  margin-bottom: 20px;
+}
+.personal-gender-field {
+  margin-right: 10px;
+}
+.personal-radio-option {
+  margin-right: 15px;
+}
+.personal-category-field > select {
+  margin-top: 15px;
+  margin-bottom: 30px;
+  width: 95%;
+  display: grid;
+}
+.personal-category-field > label {
+  margin-bottom: 50px;
+}
+.personal-category-field {
+  margin-top: 20px;
+}
+
+.personal-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.personal-input-group {
+  flex: 1 1 45%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease;
+}
+
+.personal-input-group:hover {
+  transform: translateY(-3px); /* Subtle lift effect on hover */
+}
+
+.personal-input-group > label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.personal-input-group > input,
+select,
+textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus */
+}
+
+.personal-input-group > input[type='text']:focus,
+input[type='email']:focus,
+input[type='tel']:focus,
+select:focus,
+textarea:focus {
+  border-color: #d32f2f; /* Red color for input focus */
+  box-shadow: 0 0 5px rgba(255, 0, 13, 0.5); /* Red box-shadow for focus */
+  outline: none;
+}
+
+.personal-input-group > input[type='text']:hover,
+input[type='email']:hover,
+input[type='tel']:hover,
+select:hover,
+textarea:hover {
+  border-color: #b71c1c; /* Darker red on hover */
+}
+
+/*!education*/
+.education-section {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+.edu-section-details {
+  padding: 20px;
+}
+
+.edu > label {
+  display: block;
+  margin-bottom: 5px;
+  color: #666;
+}
+
+.edu > input[type='text']:hover {
+  border-color: rgb(219, 13, 48);
+  box-shadow: 0 0 5px rgba(255, 0, 13, 0.5);
+}
+.edu > input[type='date']:hover {
+  border-color: rgb(219, 13, 48);
+  box-shadow: 0 0 5px rgba(255, 0, 13, 0.5);
+}
+.edu > input[type='number']:hover {
+  border-color: rgb(219, 13, 48);
+  box-shadow: 0 0 5px rgba(255, 0, 13, 0.5);
+}
+
+.edu > input[type='text'],
+input[type='number'],
+input[type='date'],
+textarea,
+select {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin: 5px 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.edu > textarea {
+  resize: vertical;
+}
+.edu-row {
+  padding: 20px;
+  display: flex; /* Corrected display property to flex for row layout */
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+/*!work experience*/
+.work-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.work-flex-item {
+  flex: 1 1 200px;
+}
+
+/* Input styles */
+.work-flex-item > input[type='text'],
+input[type='date'],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: border-color 0.3s ease;
+}
+
+.work-flex-item > input[type='text']:focus,
+input[type='date']:focus,
+textarea:focus {
+  outline: none;
+  border-color: #dc3545; /* Red focus color */
+  box-shadow: 0 0 5px #dc3545; /* Red shadow on focus */
+}
+
+/* Button styles */
+button {
+  padding: 12px 24px;
+  margin-top: 15px;
+  background-color: #dc3545; /* Red background */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #c82333; /* Darker red on hover */
+}
+
+/* Alternate row striping */
+.section:nth-child(even) {
+  background-color: #f5f5f5; /* Lighter gray alternate background */
+}
+
+/*!research*/
+.research-section {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+.research-inline-fields {
+  display: flex;
+  gap: 20px; /* Spacing between fields */
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.research-field {
+  width: 100%;
+  margin-bottom: 15px; /* Add margin between input fields and labels */
+}
+
+.research-field > label {
+  /* margin-bottom: 5px; */
+  /* color: #e30922; */
+  margin: 1rem 1rem 0 1rem;
+}
+
+.research-field > input,
+select,
+textarea {
+  width: 100%; /* Full width for inputs */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  margin-top: 0.45rem;
+}
+
+.research-field > input:focus,
+select:focus,
+textarea:focus {
+  border-color: #d32f2f;
+  box-shadow: 0 0 5px rgba(255, 0, 13, 0.5);
+}
+
+.add-section,
+.next-button {
+  background-color: #d32f2f;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.add-section:hover,
+.next-button:hover {
+  background-color: #b71c1c;
+}
