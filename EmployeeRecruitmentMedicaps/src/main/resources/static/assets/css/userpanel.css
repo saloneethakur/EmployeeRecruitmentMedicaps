@@ -1,0 +1,344 @@
+/* Reset default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* Body styles */
+  body {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  /* Header styles */
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+  }
+  
+  span {
+    font-size: 0.9rem;
+    color: #757373;
+  }
+  
+  h6 {
+    font-size: 1.1rem;
+    color: rgb(24, 24, 49);
+  }
+  
+  /* Navigation styles */
+  nav {
+    background-color: #8B0000;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vw 8vw;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  nav img {
+    width: 200px;
+  }
+  
+  nav .navigation ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    left:90rem;
+  }
+  
+  nav .navigation ul li {
+    list-style: none;
+    margin-left: 20px;
+  }
+  
+  nav .navigation ul li a {
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: 1000;
+    transition: 0.3s ease;
+  }
+  
+  nav .navigation ul li a:hover {
+    color: #fdc93b;
+  }
+  
+  /* Add styles for the hamburger menu */
+  .hamburger {
+    display: none; 
+    }
+  
+  .hamburger span {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: 0.4s;
+  }
+  
+  /* Style the navigation menu for mobile devices */
+  @media only screen and (max-width: 768px) {
+    .navigation {
+      display: none;
+    }
+    .hamburger {
+      display: block;
+    }
+    .hamburger.active span {
+      background-color: #fff;
+    }
+    .hamburger.active span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+    .hamburger.active span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+    .navigation.active {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background-color: #8B0000; /* Dark Red */
+    }
+  }
+  
+  /* Background image section styles */
+  .background-image-section {
+    background: url('/assets/img/MEDICAPSPHOTO.jpg') no-repeat center center;
+    background-size: cover;
+    padding: 100px 0;
+    color: #fff;
+    height: 600px;
+    text-align: center;
+    position: relative;
+  }
+  
+  .background-image-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+    z-index: 1;
+  }
+  
+  .background-content {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .view-vacancy-btn {
+    background-color: #8B0000; /* Dark Red */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 2rem;
+    border-radius: 20px; /* Curved border */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px; /* Adjust margin as needed */
+  }
+  
+  .view-vacancy-btn:hover {
+    background-color: #a30000; /* Slightly lighter red for hover effect */
+  }
+  
+  .background-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+  }
+  
+  .background-content p {
+    font-size: 1.5rem;
+  }
+  
+  /* Section container styles */
+  .section__container {
+    max-width: var(--max-width);
+    margin: auto;
+    padding: 5rem 1rem;
+  }
+  
+  .section__header {
+    margin-bottom: 2rem;
+    font-size: 3rem;
+    font-weight: 800;
+    font-family: var(--header-font);
+    text-align: center;
+  }
+  
+  .section__subheader {
+    max-width: 600px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .about__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    align-items: center;
+  }
+  
+  .about__container :is(.section__header, .section__subheader) {
+    text-align: left;
+  }
+  
+  .about__flex {
+    margin: 2rem 0;
+    padding: 2rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    background-color: var(--primary-color-light);
+  }
+  
+  .about__card {
+    flex: 1 1 150px;
+    text-align: center;
+    border-right: 2px solid var(--primary-color);
+  }
+  
+  .about__card:last-child {
+    border: none;
+  }
+  
+  .about__card h4 {
+    margin-bottom: 5px;
+    font-size: 3rem;
+    font-weight: 600;
+    font-family: var(--header-font);
+  }
+  
+  .about__card p {
+    font-size: 0.9rem;
+  }
+  
+  .about__image img {
+    max-width: 450px;
+    margin: auto;
+  }
+  
+  /* Responsive styles for About Us section */
+  @media (max-width: 768px) {
+    .about__container {
+      grid-template-columns: 1fr;
+    }
+    .about__flex {
+      flex-direction: column;
+      align-items: center;
+    }
+    .about__image img {
+      width: 100%;
+    }
+  }
+  
+  /* Footer styles */
+  .medicap-footer {
+    background-color: #8B0000; /* Dark Red */
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+  }
+  
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0;
+  }
+  
+  .footer-box {
+    margin-bottom: 40px;
+  }
+  
+  .footer-box h4 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+  }
+  
+  .footer-box a {
+    display: block;
+    margin-bottom: 5px;
+    color: #fff;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+  }
+  
+  .footer-box a:hover {
+    color: #fdc93b; /* Yellow */
+  }
+  
+  .footer-links ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .footer-links li {
+    margin: 5px 0;
+  }
+  
+  .footer-links a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .footer-links a:hover {
+    text-decoration: underline;
+  }
+  
+  /* Footer social icons */
+  .footer-social {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .footer-social a {
+    color: #ccc; /* Grey color */
+    font-size: 24px; /* Adjust the size as needed */
+    margin: 0 10px; /* Adjust spacing between icons */
+    transition: color 0.3s ease; /* Smooth transition for color change */
+  }
+  
+  .footer-social a:hover {
+    color: #fff; /* Change to white on hover or your desired color */
+  }
+  
+  /* Footer bottom styles */
+  .footer-bottom {
+    margin-top: 20px;
+    font-size: 2rem;
+    font-weight: 100;
+  }
+  
+  .footer-bottom p {
+    color: black; /* Brown */
+  }
+  
+  /* Responsive styles for Footer */
+  @media (max-width: 768px) {
+    .footer-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .footer-box, .footer-links {
+      text-align: center;
+    }
+    .footer-social {
+      flex-direction: row;
+    }
+  }

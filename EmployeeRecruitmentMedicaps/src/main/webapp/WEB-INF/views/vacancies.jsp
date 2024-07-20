@@ -21,13 +21,13 @@
 </head>
 <body>
     <nav>
-        <img src="IMAGES/medicaps logo.png" alt="Medi-Caps Logo" /> <!-- Add the Medi-Caps logo -->
+        <img src="/assets/img/medicaps logo.png" alt="Medi-Caps Logo" /> <!-- Add the Medi-Caps logo -->
         <div class="navigation">
             <ul>
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">View Vacancy</a></li>
                 <li><a href="#academics">Applied Applications</a></li>       
-                <li><a href="registration.html">Sign Up/Login</a></li>
+                <li><a href="/home/registration">Sign Up/Login</a></li>
             </ul>
         </div>
         <div class="hamburger">
@@ -104,7 +104,7 @@
     <footer class="medicap-footer">
         <div class="footer-container">
             <div class="footer-box">
-                <img src="IMAGES/footer-logo.png" alt="logo" class="footer-logo">
+                <img src="/assets/img/footer-logo.png" alt="logo" class="footer-logo">
                 <div class="footer-img-row">
                     <a href="#">
                         <div style="display: flex; align-items: center; margin-bottom: 5px;">

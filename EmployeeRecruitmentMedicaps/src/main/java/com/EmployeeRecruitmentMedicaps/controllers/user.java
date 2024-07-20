@@ -1,15 +1,20 @@
 package com.EmployeeRecruitmentMedicaps.controllers;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.EmployeeRecruitmentMedicaps.Utils.ApiResponse;
 import com.EmployeeRecruitmentMedicaps.entities.Education;
@@ -29,6 +34,8 @@ import com.EmployeeRecruitmentMedicaps.repositories.PersonalRepo;
 import com.EmployeeRecruitmentMedicaps.repositories.VacancyRepository;
 import com.EmployeeRecruitmentMedicaps.services.EmployeeService;
 import com.EmployeeRecruitmentMedicaps.services.UserService;
+import org.springframework.web.bind.annotation.RequestMethod;
+
 
 @Controller
 @RequestMapping("/user")
@@ -229,7 +236,7 @@ public class user {
 
 	         m.addAttribute("totalYears", totalYears);
 	     }
-	     return "/user/experience";
+	     return "/userfolder/experience";
 	
 	}
 	@RequestMapping(value="/saveExperience")
@@ -301,7 +308,7 @@ public class user {
 		             List<Journal> journals = (List<Journal>) res.getData();
 		             m.addAttribute("journal", journals);
 		         }
-		         return "/user/journals";
+		         return "/userfolder/journals";
 		    }
 
 		    @RequestMapping(value="/saveJournal")
@@ -322,5 +329,55 @@ public class user {
 		    	ApiResponse res=empService.deleteJournal(rId);
 		    }
 
+	@RequestMapping(value="/profile")
+	public String goProfile()
+	{
+		return "/userfolder/profile";
+	}
+	
+	@RequestMapping(value="/cv")
+	public String goToCv() {
+		return "/userfolder/cv";
+	}
+	
+	@RequestMapping("/add_resume")
+	public ApiResponse addReport(@RequestParam("file")MultipartFile file, ModelMap map) {
+    	ApiResponse response =null;
+			
+		try {
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            User user = (User) principal;
+           
+
+            Optional<PersonalInformation> op = personalRepo.findByUser(user);
+            
+                PersonalInformation pi = op.get();
+                
+                byte arr[] = file.getBytes();
+        		
+        		String fileName = file.getOriginalFilename();		
+        		String extension = fileName.substring(fileName.lastIndexOf("."));
+        		String uploadFile =  UUID.randomUUID().toString()+extension;	
+        		File fileObj = new File("C:\\Users\\HP\\git\\git\\EmployeeRecruitmentMedicaps\\EmployeeRecruitmentMedicaps\\src\\main\\resources\\static\\assets\\resume", uploadFile);
+        		FileOutputStream fos = new FileOutputStream(fileObj);
+        		fos.write(arr);
+        		fos.flush();
+        		fos.close();		
+        		String filePath =  fileObj.getAbsolutePath();
+        		pi.setResume(filePath);
+				personalRepo.save(pi);
+			
+			
+			return response= new ApiResponse(true, "resume Saved");
+
+		}
+		catch(Exception e) {
+			System.err.println(e.getMessage());
+			return response = new ApiResponse(false, "User resume saved Failed ", e.getMessage());
+		}	
+	}
+	
+	
+		
 	
 }

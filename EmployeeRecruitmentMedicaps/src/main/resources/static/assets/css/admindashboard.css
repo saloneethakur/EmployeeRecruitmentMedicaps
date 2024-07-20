@@ -1,0 +1,408 @@
+:root {
+  --background-color1: #fafaff;
+  --background-color2: #ffffff;
+  --background-color3: #ededed;
+  --background-color4: #cad7fda4;
+  --primary-color: #8B0000;
+  --secondary-color: #8B0000;
+  --border-color: #8B0000;
+  --one-use-color: #8B0000;
+  --two-use-color: #8B0000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: var(--background-color4);
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+header {
+  height: 70px;
+  width: 100%;
+  padding: 0 30px;
+  background-color: var(--background-color1);
+  position: fixed;
+  z-index: 100;
+  box-shadow: 1px 1px 15px rgba(161, 182, 253, 0.825);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo img {
+  width: 200px;
+}
+
+.hamburger {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: block;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.hamburger i {
+  color: #000;
+}
+
+.main-container {
+  display: flex;
+  width: 100%;
+  position: relative;
+  top: 70px;
+  z-index: 1;
+}
+
+.navcontainer {
+  width: 250px;
+  background-color: var(--background-color2);
+  box-shadow: 1px 1px 10px rgba(198, 189, 248, 0.825);
+  overflow-y: auto;
+  position: fixed;
+  top: 70px;
+  right: 0; /* Positioning on the right */
+  transform: translateX(100%); /* Slide in from the right */
+  transition: transform 0.3s ease;
+  z-index: 1000;
+  height: 100vh;
+}
+
+.navcontainer.active {
+  transform: translateX(0);
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding: 30px 10px;
+}
+
+.nav-option {
+  padding: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.nav-option:hover {
+  background-color: #dadada;
+}
+
+.option1 {
+  background-color: var(--border-color);
+  color: white;
+  text-align: center;
+}
+
+.option1:hover {
+  background-color: var(--border-color);
+}
+
+.main {
+  flex: 1;
+  height: calc(100vh - 70px);
+  overflow-y: scroll;
+  padding: 40px 30px;
+  transition: margin-left 0.3s ease;
+  width: 50%;
+}
+
+.main.fullwidth {
+  margin-left: 250px;
+}
+
+.main::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(to bottom, rgb(0, 0, 85), rgb(0, 0, 50));
+}
+
+.main::-webkit-scrollbar {
+  width: 5px;
+}
+
+.main::-webkit-scrollbar-track {
+  background-color: #9e9e9eb2;
+}
+
+.box-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 80%;
+  align-items: center;
+}
+
+.box {
+  flex: 1 1 calc(25% - 20px);
+  padding: 20px;
+  background-color: var(--one-use-color);
+  color: white;
+  border-radius: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+
+}
+
+.box:hover {
+  transform: scale(1.05);
+}
+
+.box:nth-child(2),
+.box:nth-child(4) {
+  background-color: var(--two-use-color);
+  width: 100%;
+}
+
+.report-container {
+  margin-top: 40px;
+  background-color: var(--background-color2);
+  border-radius: 10px;
+  box-shadow: 3px 3px 10px rgb(188, 188, 188);
+  padding: 20px;
+  position: relative;
+}
+
+.report-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--border-color);
+}
+
+.recent-Articles {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--border-color);
+}
+
+.view {
+  height: 35px;
+  padding: 0 20px;
+  border-radius: 8px;
+  background-color: var(--border-color);
+  color: white;
+  font-size: 15px;
+  border: none;
+  cursor: pointer;
+}
+
+.report-body {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+.delete-btn {
+  color: #fff; /* Text color */
+  background-color: #8B0000; /* Red background color */
+  border: none; /* Remove border */
+  padding: 6px 12px; /* Adjust padding as needed */
+  cursor: pointer; /* Pointer cursor */
+  border-radius: 4px; /* Optional: Add some border radius for rounded corners */
+  width: 70px;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+.delete-btn:focus {
+  outline: none; /* Remove focus outline if not needed */
+}
+
+
+/* Filter Popup Styles */
+.filter-popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-popup.show {
+  display: flex;
+}
+
+.filter-content {
+  background-color: var(--background-color2);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+
+.filter-content h3 {
+  margin-bottom: 10px;
+}
+
+.filter-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-content label {
+  margin-bottom: 5px;
+}
+
+.filter-content select,
+.filter-content button {
+  margin-bottom: 10px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.filter-content .filter-btn,
+.filter-content .reset-btn {
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+}
+
+.filter-content .filter-btn:hover,
+.filter-content .reset-btn:hover {
+  background-color: var(--secondary-color);
+}
+
+.filter-content .close-filter {
+  position: relative;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+  color: #888;
+}
+
+.button-group {
+  margin-top: 10px; /* Adjust as needed */
+}
+
+.filter-btn,
+.reset-btn {
+  margin-right: 10px; /* Adjust as needed */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .navcontainer {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  .main-container {
+    display: flex;
+    width: 100vw;
+    position: relative;
+    top: 70px;
+    z-index: 1;
+    transition: margin-left 0.3s ease; /* Add transition for smooth adjustment */
+  }
+}
+
+@media (max-width: 768px) {
+  .navcontainer.active {
+    transform: translateX(0);
+  }
+}
+
+/* Adjust column widths */
+table th:nth-child(1), /* Name column */
+table th:nth-child(3)  /* Mobile No. column */ {
+  min-width: 200px;
+}
+
+/* Ensure the hamburger menu icon is styled properly */
+.hamburger {
+  position: absolute;
+  top: 20px; /* Adjust as needed */
+  right: 20px; /* Adjust as needed */
+  cursor: pointer;
+  font-size: 24px;
+  /* Additional styling as per your design */
+}
+
+.hamburger i {
+  color: #000; /* Adjust the color to match your design */
+}
+
+/* Media query for smaller screens where the navigation collapses */
+
+
+.nav-option.option5 {
+  position: relative;
+}
+
+.nav-option.option5:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: var(--background-color2);
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* Ensure Create Vacancy looks like other options */
+.nav-option.option5 h3 {
+  padding: 10px 0;
+  cursor: pointer;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.nav-option.option5:hover h3 {
+  background-color: #dadada;
+}

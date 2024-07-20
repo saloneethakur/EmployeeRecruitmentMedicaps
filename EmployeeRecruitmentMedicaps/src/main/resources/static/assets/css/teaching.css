@@ -219,7 +219,7 @@ nav .navigation ul li a:hover {
 
 /* Background image section styles */
 .background-image-section {
-  background: url('IMAGES/MEDICAPSPHOTO.jpg') no-repeat center center;
+  background: url('/assets/img/MEDICAPSPHOTO.jpg') no-repeat center center;
   background-size: cover;
   padding: 100px 0;
   color: #fff;

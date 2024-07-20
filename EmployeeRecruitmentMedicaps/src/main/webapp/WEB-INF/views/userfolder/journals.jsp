@@ -16,37 +16,32 @@
     <div class="form-container">
       <h1>Research</h1>
       <button type="button" id="editBtn">edit</button>
-      <form>
+      <form action="/user/saveJournal">
         <div id="research-sections">
           <h2>Journal Publications</h2>
           <div class="section" id="research-1">
             <div class="field">
               <label for="research-title-1">Publication Title</label>
-              <input type="text" id="research-title-1" />
+              <input type="text" id="research-title-1" name="publicationTitle" />
             </div>
             <div class="field">
               <label for="research-name-1">Journal Name</label>
-              <input type="text" id="research-name-1" />
+              <input type="text" id="research-name-1" name="journalName" />
             </div>
             <div class="inline-fields">
               <div class="field" style="flex: 1">
                 <label for="research-volume-1">ISSN , Issue no., Volume</label>
-                <input type="text" id="research-volume-1" />
+                <input type="text" id="research-volume-1" name="volume" />
               </div>
               <div class="field" style="flex: 1">
                 <label for="research-year-1">Year</label>
-                <select id="research-year-1">
-                  <option value="" disabled selected>Select year</option>
-                  <!-- Add more years as needed -->
-                  <option value="2024">2024</option>
-                  <option value="2023">2023</option>
-                  <option value="2022">2022</option>
-                </select>
+                <input type="date" id="research-year-1" name="year">
+                  
               </div>
             </div>
             <div class="field">
               <label for="research-indexing-1">Indexing</label>
-              <select id="research-indexing-1">
+              <select id="research-indexing-1" name="indexing">
                 <option value="">Select</option>
                 <option value="Web Of Science">Web Of Science</option>
                 <option value="Scopus">Scopus</option>
