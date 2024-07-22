@@ -1,13 +1,19 @@
 package com.EmployeeRecruitmentMedicaps.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -335,10 +341,7 @@ public class user {
 		return "/userfolder/profile";
 	}
 	
-	@RequestMapping(value="/cv")
-	public String goToCv() {
-		return "/userfolder/cv";
-	}
+	
 	
 	@RequestMapping("/add_resume")
 	public String addReport(@RequestParam("file")MultipartFile file, ModelMap map) {
@@ -377,7 +380,67 @@ public class user {
 		}	
 	}
 	
-	
+	/*@RequestMapping(value = "/getPdf",method = RequestMethod.GET)
+	public ResponseEntity<InputStreamResource> load(@RequestParam(name = "file")String path) 
+	{					
+		HttpHeaders headers = new HttpHeaders();
+	    headers.add("Content-Disposition", "attachment; filename=stock.pdf");
+		
+		
+			String pic;
+			try {
+				File file = new File(path);
+
+	         	FileInputStream fis = new FileInputStream(file);            
+	            int size = fis.available();
+	            byte arr[] = new byte[size];
+	            
+	            fis.read(arr);
+	            fis.close();
+	            
+	            return ResponseEntity
+                .ok()
+                .headers(headers)
+                .body(new InputStreamResource(new ByteArrayInputStream(arr)));
+	            
+			} catch (IOException e) 
+			{
+				System.out.println(e.getMessage());
+				return null;
+			}
+	}
+	*/
+
+	@RequestMapping(value="/cv")
+	    public String viewResume(ModelMap model) {
+	        try {
+	            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	            User user = (User) principal;
+
+	            Optional<PersonalInformation> op = personalRepo.findByUser(user);
+
+	            if (op.isPresent()) {
+	                PersonalInformation pi = op.get();
+	                String filePath = pi.getResume();
+	                if (filePath != null) {
+	                    // Extract the relative path from the full path
+	                    String relativePath = extractRelativePath(filePath);
+	                    model.addAttribute("resumePath", relativePath);
+	                    
+	                }
+	            }
+
+	            model.addAttribute("error", "Resume not found.");
+	            return "/userfolder/cv";
+	        } catch (Exception e) {
+	            model.addAttribute("error", e.getMessage());
+	            return "error";
+	        }
+	    }
+	private String extractRelativePath(String fullPath) {
+	    // Assuming the relative path always starts after 'static/'
+		return fullPath.substring(fullPath.lastIndexOf("\\") + 1);
+	}
 		
 	
 }
