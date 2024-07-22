@@ -17,6 +17,7 @@
 <c:set var="hasTenth" value="${false}" scope="page"/>
 <c:set var="hasTwelve" value="${false}" scope="page"/>
 <c:set var="hasDiploma" value="${false}" scope="page"/>
+<c:set var="hasUg" value="${false}" scope="page"/>
 <c:set var="hasPg" value="${false}" scope="page"/>
 <c:set var="hasPhd" value="${false}" scope="page"/>
 
@@ -30,6 +31,9 @@
     </c:if>
     <c:if test="${education.courseType == 'Diploma'}">
         <c:set var="hasDiploma" value="${true}" scope="page"/>
+    </c:if>
+    <c:if test="${education.courseType == 'UG'}">
+        <c:set var="hasUg" value="${true}" scope="page"/>
     </c:if>
     <c:if test="${education.courseType == 'PG'}">
         <c:set var="hasPg" value="${true}" scope="page"/>
@@ -105,6 +109,7 @@
         <c:if test="${hasTwelve}">
       <c:forEach var="education" items="${personalInformation.educations}">
        <c:if test="${education.courseType == 'Twelve'}">
+       
      <form id="educationForm" action="/user/updateEducation" >
         <div class="education-section" id="section-12th">
           <div class="section-header" data-target="12th-details">
@@ -116,29 +121,31 @@
             <input
               type="text"
               id="12thSchoolName"
-              name="12thSchoolName"
+              name="School_name"
+              value="${education.institutionName}"
               required
             />
 
             <label for="12thBoard">Board</label>
-            <input type="text" id="12thBoard" name="12thBoard" required />
+            <input type="text" id="12thBoard" name="Board_name" value="${education.educationClass}" required />
 
             <label for="12thYear">Passing Year</label>
-            <input type="date" id="12th-date" name="12th-date" required />
+            <input type="date" id="12th-date" name="Passing_year" value="<fmt:formatDate value='${education.completionYear}' pattern='yyyy-MM-dd'/>" required />
 
             <label for="12thGrade">Percentage/Grade</label>
-            <input type="text" id="12thGrade" name="12thGrade" required />
+            <input type="text" id="12thGrade" name="Percentage" value="${education.percentage}" required />
 
             <label for="12thField">Subject</label>
-            <select id="12thField" name="12thField" required>
+            <select id="12thField" name="fieldOfStudy" required>
               <option value="">Select Subject</option>
-              <option value="PCM">PCM</option>
-              <option value="PCB">PCB</option>
-              <option value="PCMB">PCMB</option>
-              <option value="Commerce">Commerce</option>
-              <option value="CommerceMaths">Commerce + Maths</option>
-              <option value="Others">Others</option>
+              <option value="PCM" ${education.fieldOfStudy == 'PCM' ? 'selected' : ''} >PCM</option>
+              <option value="PCB" ${education.fieldOfStudy == 'PCB' ? 'selected' : ''}>PCB</option>
+              <option value="PCMB" ${education.fieldOfStudy == 'PCMB' ? 'selected' : ''}>PCMB</option>
+              <option value="Commerce" ${education.fieldOfStudy == 'Commerce' ? 'selected' : ''}>Commerce</option>
+              <option value="CommerceMaths" ${education.fieldOfStudy == 'CommerceMaths' ? 'selected' : ''} >Commerce + Maths</option>
+              <option value="Others" ${education.fieldOfStudy == 'Others' ? 'selected' : ''} >Others</option>
             </select>
+            <input type="hidden" id="10thGrade" name="id" value="${education.educationId}" required />
             <button type="submit" id="submit-12" class="submit-btn">
               Submit
             </button>
@@ -149,7 +156,16 @@
         </c:if>
         </c:forEach>
         </c:if>
-        <!--Diploma Section
+        
+        
+       <!--   Diploma Section-->
+       
+         <c:if test="${hasDiploma}">
+      <c:forEach var="education" items="${personalInformation.educations}">
+       <c:if test="${education.courseType == 'Diploma'}">
+       
+       
+       <form id="educationForm" action="/user/updateEducation" >
         <div class="education-section" id="section-UG">
           <div class="section-header" data-target="diploma-details">
             <h3>Diploma</h3>
@@ -157,10 +173,10 @@
           </div>
           <div class="section-details" id="diploma-details">
             <label for="diplomaDegree">Course</label>
-            <select id="diplomaDegree" name="diplomaDegree" required>
+            <select id="diplomaDegree" name="educationClass" required>
               <option value="">Select Degree</option>
-              <option value="Engineering">Engineering</option>
-              <option value="Management">Management</option>
+              <option value="Engineering" ${education.educationClass == 'Engineering' ? 'selected' : ''} >Engineering</option>
+              <option value="Management" ${education.educationClass == 'Management' ? 'selected' : ''} >Management</option>
               <option value="BA">BA</option>
               <option value="BSc">BSc</option>
               <option value="Others">Others</option>
@@ -177,22 +193,36 @@
             <input
               type="text"
               id="diplomaInstitution"
-              name="diplomaInstitution"
+             name="School_name"
+             value="${education.institutionName}"
               required
             />
 
             <label for="diplomaYear">Year of Completion</label>
-            <input type="date" id="diploma-date" name="diploma-date" required />
+            <input type="date" id="diploma-date" name="Passing_year" value="<fmt:formatDate value='${education.completionYear}' pattern='yyyy-MM-dd'/>" required />
 
             <label for="diplomaGrade">Percentage/Grade</label>
-            <input type="text" id="diplomaGrade" name="diplomaGrade" required />
+            <input type="text" id="diplomaGrade" name="Percentage" value="${education.percentage}" required />
+            
+            <input type="hidden" id="10thGrade" name="id" value="${education.educationId}" required />
             <button type="submit" id="submit-diploma" class="submit-btn">
               Submit
             </button>
           </div>
-        </div>-->
+        </div>
+        </form>
+        </c:if>
+        </c:forEach>
+        </c:if>
 
-        <!-- UG Section
+
+
+         <!--  UG Section--> 
+         <c:if test="${hasUg}">
+      <c:forEach var="education" items="${personalInformation.educations}">
+       <c:if test="${education.courseType == 'UG'}">
+       
+        <form id="educationForm" action="/user/updateEducation" >
         <div class="education-section" id="section-UG">
           <div class="section-header" data-target="UG-details">
             <h3>Undergraduate (UG)</h3>
@@ -200,18 +230,18 @@
           </div>
           <div class="section-details" id="UG-details">
             <label for="UGDegree">Degree</label>
-            <select id="UGDegree" name="UGDegree" required>
+            <select id="UGDegree" name="educationClass" required>
               <option value="">Select Degree</option>
-              <option value="Engineering">Engineering</option>
-              <option value="Management">Management</option>
-              <option value="BA">BA</option>
-              <option value="BSc">BSc</option>
-              <option value="Others">Others</option>
+              <option value="Engineering" ${education.educationClass == 'Engineering' ? 'selected' : ''}>Engineering</option>
+              <option value="Management" ${education.educationClass == 'Management' ? 'selected' : ''}>Management</option>
+              <option value="BA" ${education.educationClass == 'BA' ? 'selected' : ''}>BA</option>
+              <option value="BSc" ${education.educationClass == 'BSc' ? 'selected' : ''}>BSc</option>
+              <option value="Others" ${education.educationClass == 'Others' ? 'selected' : ''}>Others</option>
             </select>
 
             <div id="UGFieldContainer">
               <label for="UGField">Specialization</label>
-              <select id="UGField" name="UGField">
+              <select id="UGField" name="fieldOfStudy" value="${education.fieldOfStudy}" >
                 <option value="">Select Field</option>
               </select>
             </div>
@@ -220,40 +250,54 @@
             <input
               type="text"
               id="UGInstitution"
-              name="UGInstitution"
+              name="School_name"
+              value="${education.institutionName}"
               required
             />
 
             <label for="UGYear">Year of Completion</label>
-            <input type="date" id="UG-date" name="UG-date" required />
+            <input type="date" id="UG-date" name="Passing_year" value="<fmt:formatDate value='${education.completionYear}' pattern='yyyy-MM-dd'/>" required />
 
             <label for="UGGrade">Percentage/Grade</label>
-            <input type="text" id="UGGrade" name="UGGrade" required />
+            <input type="text" id="UGGrade" name="Percentage" value="${education.percentage}" required />
+            
+            <input type="hidden" id="10thGrade" name="id" value="${education.educationId}" required />
             <button type="submit" id="submit-ug" class="submit-btn">
               Submit
             </button>
           </div>
-        </div> -->
+        </div> 
+        </form>
+        </c:if>
+        </c:forEach>
+        </c:if>
 
-        <!-- PG Section 
+
+        <!-- PG Section--> 
+        <c:if test="${hasUg}">
+      <c:forEach var="education" items="${personalInformation.educations}">
+       <c:if test="${education.courseType == 'UG'}">
+       
+        <form id="educationForm" action="/user/updateEducation" >
+        
         <div class="education-section" id="section-PG">
           <div class="section-header" data-target="PG-details">
-            <h3>Postgraduate (PG)</h3>
+            <h3>PostGraduation (PG)</h3>
             <button type="button" class="toggle-button">+</button>
           </div>
           <div class="section-details" id="PG-details">
             <label for="PGDegree">Degree</label>
-            <select id="PGDegree" name="PGDegree" required>
+            <select id="PGDegree" name="educationClass" required>
               <option value="">Select Degree</option>
-              <option value="MBA">MBA</option>
-              <option value="MSc">MSc</option>
-              <option value="MTech">MTech</option>
-              <option value="Others">Others</option>
+              <option value="MBA" ${education.educationClass == 'MBA' ? 'selected' : ''} >MBA</option>
+              <option value="MSc" ${education.educationClass == 'MSc' ? 'selected' : ''}>MSc</option>
+              <option value="MTech" ${education.educationClass == 'MTech' ? 'selected' : ''}>MTech</option>
+              <option value="Others" ${education.educationClass == 'Others' ? 'selected' : ''}>Others</option>
             </select>
 
             <div id="PGFieldContainer">
               <label for="PGField">Field of Study</label>
-              <select id="PGField" name="PGField">
+              <select id="PGField" name="fieldOfStudy">
                 <option value="">Select Field</option>
               </select>
             </div>
@@ -262,23 +306,35 @@
             <input
               type="text"
               id="PGInstitution"
-              name="PGInstitution"
+              name="School_name"
+              value="${education.institutionName}"
               required
             />
 
             <label for="PGYear">Year of Completion</label>
-            <input type="date" id="PG-date" name="PG-date" required />
+            <input type="date" id="PG-date" name="Passing_year" value="<fmt:formatDate value='${education.completionYear}' pattern='yyyy-MM-dd'/>" required />
 
             <label for="PGGrade">Percentage/Grade</label>
-            <input type="text" id="PGGrade" name="PGGrade" required />
-            <button type="button" id="add-PG">Add Postgraduate</button>
+            <input type="text" id="PGGrade" name="Percentage" value="${education.percentage}" required />
+            <button type="button" id="add-PG">Add PostGraduation</button>
+            
+            <input type="hidden" id="10thGrade" name="id" value="${education.educationId}" required />
             <button type="submit" id="submit-pg" class="submit-btn">
               Submit
             </button>
           </div>
-        </div>-->
+        </div>
+        </form>
+        </c:if>
+        </c:forEach>
+        </c:if>
 
-        <!-- PhD Section 
+        <!--   PhD Section -->
+        <c:if test="${hasPhd}">
+      <c:forEach var="education" items="${personalInformation.phd}">
+       
+       
+        <form id="educationForm" action="/user/updatePHD" >
         <div class="education-section" id="section-PhD">
           <div class="section-header" data-target="PhD-details">
             <h3>PhD</h3>
@@ -292,7 +348,8 @@
             <input
               type="text"
               id="PhDInstitution"
-              name="PhDInstitution"
+              name="PhDInstitution_name"
+              value="${phd.institutionName}"
               required
             />
 
@@ -300,7 +357,8 @@
             <input
               type="date"
               id="PhD-joining-date"
-              name="PhD-joining-date"
+              name="joiningYear" 
+              value="<fmt:formatDate value='${phd.joiningYear}' pattern='yyyy-MM-dd'/>"
               required
             />
 
@@ -308,26 +366,33 @@
             <input
               type="date"
               id="PhD-passing-date"
-              name="PhD-passing-date"
+              name="PhD_year_of_passing" 
+              value="<fmt:formatDate value='${phd.completionYear}' pattern='yyyy-MM-dd'/>"
               required
             />
 
             <label for="PhDGrade">Percentage</label>
-            <input type="text" id="PhDGrade" name="PhDGrade" required />
+            <input type="text" id="PhDGrade" name="percentage" value="${phd.percentage}" required />
 
             <label for="PhDSupervisor">Supervisor's Name (optional)</label>
-            <input type="text" id="PhDSupervisor" name="PhDSupervisor" />
+            <input type="text" id="PhDSupervisor" name="PhD_Supervisor_name" value="${phd.supervisorOrAdvisor}" />
 
             <label for="PhDThesis">Thesis Title (optional)</label>
-            <input type="text" id="PhDThesis" name="PhDThesis" />
+            <input type="text" id="PhDThesis" name="PhD_Thesis_topic" value="${phd.thesis}" />
 
             <label for="PhDSummary">Research Summary (optional)</label>
-            <textarea id="PhDSummary" name="PhDSummary" rows="4"></textarea>
+            <textarea id="PhDSummary" name="PhDSummary" value="${phd.researchSummary}" rows="4"></textarea>
+            
+            <input type="hidden" id="10thGrade" name="id" value="${phd.id}" required />
             <button type="submit" id="submit-phd" class="submit-btn">
               Submit
             </button>
           </div>
-        </div>-->
+        </div>
+        </form>
+       
+        </c:forEach>
+        </c:if>
 
         <!-- Exams Qualified Section 
         <div class="education-section" id="section-exam">
@@ -370,12 +435,12 @@
         </div>
       </form>-->
        
-       </c:if>
+       
       
       
   
       <!-- otherwise form if user is applying for the first time -->
-      
+       
       
         <!-- 10th Grade Section -->
          <c:if test="${!hasTenth}">
@@ -504,7 +569,8 @@
         
         
          
-        <!-- UG Section 
+        <!-- UG Section -->
+        <c:if test="${!hasUg}">
         <form id="educationForm" action="/user/saveEducation" >
         <div class="education-section" id="section-UG">
           <div class="section-header" data-target="UG-details">
@@ -542,20 +608,21 @@
 
             <label for="UGGrade">Percentage/Grade</label>
             <input type="text" id="UGGrade" name="Percentage" required />
-            <input type="hidden" name="courseType" value="UGdegree" >
+            <input type="hidden" name="courseType" value="UG" >
             <button type="submit" id="submit-ug" class="submit-btn">
               Submit
             </button>
           </div>
         </div>
         </form>
-        -->
+       </c:if>
          
-        <!-- PG Section 
+        <!--   PG Section -->
+        <c:if test="${!hasPg}">
         <form id="educationForm" action="/user/saveEducation" >
         <div class="education-section" id="section-PG">
           <div class="section-header" data-target="PG-details">
-            <h3>Postgraduate (PG)</h3>
+            <h3>PostGraduation (PG)</h3>
             <button type="button" class="toggle-button">+</button>
           </div>
           <div class="section-details" id="PG-details">
@@ -588,17 +655,19 @@
 
             <label for="PGGrade">Percentage/Grade</label>
             <input type="text" id="PGGrade" name="Percentage" required />
-            <button type="button" id="add-PG">Add Postgraduate</button>
-            <input type="hidden" name="courseType" value="PGdegree" >
+            <button type="button" id="add-PG">Add PostGraduation</button>
+            <input type="hidden" name="courseType" value="PG" >
             <button type="submit" id="submit-pg" class="submit-btn">
               Submit
             </button>
           </div>
         </div>
-        </form>-->
+        </form>
+        </c:if>
         
-        
-        <!-- PhD Section
+        <!-- PhD Section-->
+        <c:if test="${!hasPhd}">
+        <form id="educationForm" action="/user/savePHDeducation" >
         <div class="education-section" id="section-PhD">
           <div class="section-header" data-target="PhD-details">
             <h3>PhD</h3>
@@ -606,13 +675,13 @@
           </div>
           <div class="section-details" id="PhD-details">
             <label for="PhDField">Field of Study</label>
-            <input type="text" id="PhDField" name="PhDField" required />
+            <input type="text" id="PhDField" name="PhD_Field_name" required />
 
             <label for="PhDInstitution">Institution Attended</label>
             <input
               type="text"
               id="PhDInstitution"
-              name="PhDInstitution"
+              name="PhDInstitution_name"
               required
             />
 
@@ -620,7 +689,7 @@
             <input
               type="date"
               id="PhD-joining-date"
-              name="PhD-joining-date"
+              name="joiningYear"
               required
             />
 
@@ -628,27 +697,30 @@
             <input
               type="date"
               id="PhD-passing-date"
-              name="PhD-passing-date"
+              name="PhD_year_of_passing"
               required
             />
 
             <label for="PhDGrade">Percentage</label>
-            <input type="text" id="PhDGrade" name="PhDGrade" required />
+            <input type="text" id="PhDGrade" name="percentage" required />
 
             <label for="PhDSupervisor">Supervisor's Name (optional)</label>
-            <input type="text" id="PhDSupervisor" name="PhDSupervisor" />
+            <input type="text" id="PhDSupervisor" name="PhD_Supervisor_name" />
 
             <label for="PhDThesis">Thesis Title (optional)</label>
-            <input type="text" id="PhDThesis" name="PhDThesis" />
+            <input type="text" id="PhDThesis" name="PhD_Thesis_topic" />
 
             <label for="PhDSummary">Research Summary (optional)</label>
             <textarea id="PhDSummary" name="PhDSummary" rows="4"></textarea>
+            <input type="hidden" id="10thGrade" name="id" value="${phd.id}" required />
             <button type="submit" id="submit-phd" class="submit-btn">
               Submit
             </button>
           </div>
-        </div> -->
-
+        </div>
+        </form>
+        </c:if>
+        
         <!-- Exams Qualified Section 
         <div class="education-section" id="section-exam">
           <div class="section-header" data-target="exam-details">
@@ -689,10 +761,9 @@
           </div>
         </div>
       </form>
-     
+     -->
     </div>
--->
-
+</c:if>
    <form action="/user/checkJournal">
 <button type="submit" >next</button>
 </form>

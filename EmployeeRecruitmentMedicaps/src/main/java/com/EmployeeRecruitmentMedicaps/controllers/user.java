@@ -361,7 +361,7 @@ public class user {
         		String fileName = file.getOriginalFilename();		
         		String extension = fileName.substring(fileName.lastIndexOf("."));
         		String uploadFile =  UUID.randomUUID().toString()+extension;	
-        		File fileObj = new File("C:\\Users\\HP\\git\\git\\EmployeeRecruitmentMedicaps\\EmployeeRecruitmentMedicaps\\src\\main\\resources\\static\\assets\\resume", uploadFile);
+        		File fileObj = new File("E:\\Employe recuitment\\git\\EmployeeRecruitmentMedicaps\\EmployeeRecruitmentMedicaps\\src\\main\\resources\\static\\assets\\resume", uploadFile);
         		FileOutputStream fos = new FileOutputStream(fileObj);
         		fos.write(arr);
         		fos.flush();
