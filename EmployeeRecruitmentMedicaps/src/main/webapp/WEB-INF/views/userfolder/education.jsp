@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
     
 <!DOCTYPE html>
 <html lang="en">
@@ -12,15 +13,48 @@
     <link rel="stylesheet" href="/assets/css/education1.css" />
   </head>
   <body>
+  <!-- Initialize flags for each courseType -->
+<c:set var="hasTenth" value="${false}" scope="page"/>
+<c:set var="hasTwelve" value="${false}" scope="page"/>
+<c:set var="hasDiploma" value="${false}" scope="page"/>
+<c:set var="hasPg" value="${false}" scope="page"/>
+<c:set var="hasPhd" value="${false}" scope="page"/>
+
+<!-- Iterate over education list to set flags -->
+<c:forEach var="education" items="${personalInformation.educations}">
+    <c:if test="${education.courseType == 'Tenth'}">
+        <c:set var="hasTenth" value="${true}" scope="page"/>
+    </c:if>
+    <c:if test="${education.courseType == 'Twelve'}">
+        <c:set var="hasTwelve" value="${true}" scope="page"/>
+    </c:if>
+    <c:if test="${education.courseType == 'Diploma'}">
+        <c:set var="hasDiploma" value="${true}" scope="page"/>
+    </c:if>
+    <c:if test="${education.courseType == 'PG'}">
+        <c:set var="hasPg" value="${true}" scope="page"/>
+    </c:if>
+    <c:if test="${education.courseType == 'PhD'}">
+        <c:set var="hasPhd" value="${true}" scope="page"/>
+    </c:if>
+</c:forEach>
+
+
+   <c:if test="${not empty personalInformation.educations}">
+     
     <div class="form-container">
       <h2>Education Details Form</h2>
       
       
-      <c:choose>
-      <c:when test="${res.status == true}">
+    
+      
      
      <button type="button" id="editBtn">Edit</button>
-      <c:forEach var="education" items="${educations}">
+     
+      <c:if test="${hasTenth}">
+      <c:forEach var="education" items="${personalInformation.educations}">
+       <c:if test="${education.courseType == 'Tenth'}">
+       
       <form id="educationForm" action="/user/updateEducation" >
        
         <!-- 10th Grade Section -->
@@ -38,31 +72,40 @@
               value="${education.institutionName}"
               required
             />
-            <!-- 
+            
             <label for="10thBoard">Board</label>
-            <input type="text" id="10thBoard" name="Board_name" value="${res.education.Board_name}" required />
+            <input type="text" id="10thBoard" name="Board_name" value="${education.educationClass}" required />
 
             <label for="10thYear">Passing Year</label>
-            <input type="date" id="10th-date" name="Passing_year" value="${res.education.Passing_year}" required />
+            <input type="date" id="10th-date" name="Passing_year" value="${education.completionYear}" required />
 
             <label for="10thGrade">Percentage/Grade</label>
-            <input type="text" id="10thGrade" name="Percentage" value="${education.Percentage}" required />
+            <input type="text" id="10thGrade" name="Percentage" value="${education.percentage}" required />
 
-             -->
+             <input type="hidden" id="10thGrade" name="courseType" value="${education.courseType}"  />
+              <input type="hidden" id="10thGrade" name="id" value="${education.educationId}" required />
+            
 
             
-            <input type="hidden" name="courseType" value="Tenth" >
+            
             <button type="submit" id="submit-10" class="submit-btn">
               Submit
             </button>
           </div>
         </div>
         </form>
+        </c:if>
         </c:forEach>
+        </c:if>
+        
 
 
 
-        <!-- 12th Grade Section
+        <!-- 12th Grade Section -->
+        <c:if test="${hasTwelve}">
+      <c:forEach var="education" items="${personalInformation.educations}">
+       <c:if test="${education.courseType == 'Twelve'}">
+     <form id="educationForm" action="/user/updateEducation" >
         <div class="education-section" id="section-12th">
           <div class="section-header" data-target="12th-details">
             <h3>12th Grade</h3>
@@ -100,7 +143,12 @@
               Submit
             </button>
           </div>
-        </div> -->
+        </div> 
+        
+         </form>
+        </c:if>
+        </c:forEach>
+        </c:if>
         <!--Diploma Section
         <div class="education-section" id="section-UG">
           <div class="section-header" data-target="diploma-details">
@@ -322,14 +370,16 @@
         </div>
       </form>-->
        
-      </c:when>
+       </c:if>
       
       
-      <c:otherwise>
+  
       <!-- otherwise form if user is applying for the first time -->
       
-      <form id="educationForm" action="/user/saveEducation" >
+      
         <!-- 10th Grade Section -->
+         <c:if test="${!hasTenth}">
+        <form id="educationForm" action="/user/saveEducation" >
         <div class="education-section" id="section-10th">
           <div class="section-header" data-target="10th-details">
             <h3>10th Grade</h3>
@@ -363,9 +413,12 @@
           </div>
         </div>
         </form>
-
+        </c:if>
+ 
+        
+        <!-- 12th Grade Section-->
+        <c:if test="${!hasTwelve}">
          <form id="educationForm" action="/user/saveEducation" >
-        <!-- 12th Grade Section -->
         <div class="education-section" id="section-12th">
           <div class="section-header" data-target="12th-details">
             <h3>12th Grade</h3>
@@ -399,16 +452,18 @@
               <option value="CommerceMaths">Commerce + Maths</option>
               <option value="Others">Others</option>
             </select>
-            <input type="hidden" name="courseType" value="Twelfth" > 
+            <input type="hidden" name="courseType" value="Twelve" > 
             <button type="submit" id="submit-12" class="submit-btn">
               Submit
             </button>
           </div>
         </div>
         </form>
-        
-         <form id="educationForm" action="/user/saveEducation" >
+        </c:if>
+         
         <!--Diploma Section-->
+        <c:if test="${!hasDiploma}">
+        <form id="educationForm" action="/user/saveEducation" >
         <div class="education-section" id="section-UG">
           <div class="section-header" data-target="diploma-details">
             <h3>Diploma</h3>
@@ -445,9 +500,12 @@
           </div>
         </div>
         </form>
+        </c:if>
         
-         <form id="educationForm" action="/user/saveEducation" >
-        <!-- UG Section -->
+        
+         
+        <!-- UG Section 
+        <form id="educationForm" action="/user/saveEducation" >
         <div class="education-section" id="section-UG">
           <div class="section-header" data-target="UG-details">
             <h3>Undergraduate (UG)</h3>
@@ -491,9 +549,10 @@
           </div>
         </div>
         </form>
-        
-         <form id="educationForm" action="/user/saveEducation" >
-        <!-- PG Section -->
+        -->
+         
+        <!-- PG Section 
+        <form id="educationForm" action="/user/saveEducation" >
         <div class="education-section" id="section-PG">
           <div class="section-header" data-target="PG-details">
             <h3>Postgraduate (PG)</h3>
@@ -536,10 +595,10 @@
             </button>
           </div>
         </div>
-        </form>
+        </form>-->
         
         
-        <!-- PhD Section -->
+        <!-- PhD Section
         <div class="education-section" id="section-PhD">
           <div class="section-header" data-target="PhD-details">
             <h3>PhD</h3>
@@ -588,9 +647,9 @@
               Submit
             </button>
           </div>
-        </div>
+        </div> -->
 
-        <!-- Exams Qualified Section -->
+        <!-- Exams Qualified Section 
         <div class="education-section" id="section-exam">
           <div class="section-header" data-target="exam-details">
             <h3>Exams Qualified</h3>
@@ -630,12 +689,13 @@
           </div>
         </div>
       </form>
-      </c:otherwise>
-      </c:choose>
+     
     </div>
+-->
 
-
-    <button onclick="location.href='checkJournal'">next</button>
+   <form action="/user/checkJournal">
+<button type="submit" >next</button>
+</form>
     <!-- JavaScript File -->
     <script src="/assets/JS/education1.js"></script>
   </body>

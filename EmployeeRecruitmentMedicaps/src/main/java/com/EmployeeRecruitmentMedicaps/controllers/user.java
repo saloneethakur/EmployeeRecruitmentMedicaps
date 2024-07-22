@@ -30,6 +30,7 @@ import com.EmployeeRecruitmentMedicaps.models.JournalDetailsModel;
 import com.EmployeeRecruitmentMedicaps.models.OptionalPersonal;
 import com.EmployeeRecruitmentMedicaps.models.PHDdetailsModel;
 import com.EmployeeRecruitmentMedicaps.models.PersonalDetailsModel;
+import com.EmployeeRecruitmentMedicaps.repositories.EducationRepository;
 import com.EmployeeRecruitmentMedicaps.repositories.PersonalRepo;
 import com.EmployeeRecruitmentMedicaps.repositories.VacancyRepository;
 import com.EmployeeRecruitmentMedicaps.services.EmployeeService;
@@ -49,8 +50,11 @@ public class user {
 	@Autowired
 	public VacancyRepository vacancyRepo;
 	
+	@Autowired
+	public EducationRepository educationRepo;
+	
 	Integer vid;
-	int personalid;
+	Integer personalid;
 	
 	ApiResponse res = null;
 	
@@ -165,21 +169,16 @@ public class user {
 	   
 	 public String checkeducation(Model m)
 	    {
-	         res = empService.fetchEducationsByPersonalInformationId(personalid); 
-	         m.addAttribute("res", res);
-	         if (res.getStatus() == true)
-	         {
-	             List<Education> educations = (List<Education>) res.getData();
-	             m.addAttribute("educations", educations);
-	         }
-	         ApiResponse phdres;
-	         phdres = empService.fetchPHDByPersonalInformationId(personalid); 
-	         m.addAttribute("phdres", phdres);
-	        if (phdres.getStatus() == true)
-	         {
-	             List<PhdEducation> phdEducation = (List<PhdEducation>) res.getData();
-	             m.addAttribute("phdEducation", phdEducation);
-	         }
+		 Optional<PersonalInformation> pi = personalRepo.findById(personalid);
+		 if(pi.isPresent())
+		 {
+			 PersonalInformation personal = pi.get();
+			 m.addAttribute("personalInformation", personal);
+			 
+		 }
+		 
+		 
+	         
 	         return "/userfolder/education";
 	    }
 
@@ -192,9 +191,10 @@ public class user {
 	    }
 	    
 	    @RequestMapping(value="/updateEducation")
-	    public void updateEducation(@RequestParam("educationId") Integer eId,EducationDetailsModel model)
+	    public String updateEducation(@RequestParam("id") Integer eId,EducationDetailsModel model)
 	    {
 	    	ApiResponse res=empService.updateEducation(eId,model);
+	    	return "redirect:/user/checkEducation";
 	    }
 	    
 	    @RequestMapping(value="/deleteEducation")
@@ -212,6 +212,8 @@ public class user {
 		 empService.saveResearcherDataForUser(model);
 	
 	}
+	
+	
 	
 	
 	
@@ -298,23 +300,21 @@ public class user {
 	    @RequestMapping(value="/checkJournal")
 		public String checkJournal(Model m)
 		    {
-		         res = empService.fetchJournalsByPersonalInformationId(personalid); 
-		         m.addAttribute("res", res);
-		         
-		         
-
-		         if (res.getStatus() == true)
-		         {
-		             List<Journal> journals = (List<Journal>) res.getData();
-		             m.addAttribute("journal", journals);
-		         }
+	    	 Optional<PersonalInformation> pi = personalRepo.findById(personalid);
+			 if(pi.isPresent())
+			 {
+				 PersonalInformation personal = pi.get();
+				 m.addAttribute("personalInformation", personal);
+				 
+			 }
 		         return "/userfolder/journals";
 		    }
 
 		    @RequestMapping(value="/saveJournal")
-		    public void journal(JournalDetailsModel model)
+		    public String journal(JournalDetailsModel model)
 		    {
 		        ApiResponse res = empService.saveJournal(model);
+		        return "redirect:/user/checkJournal";
 		    }
 		    
 		    @RequestMapping(value = "/updateJournal")
@@ -341,7 +341,7 @@ public class user {
 	}
 	
 	@RequestMapping("/add_resume")
-	public ApiResponse addReport(@RequestParam("file")MultipartFile file, ModelMap map) {
+	public String addReport(@RequestParam("file")MultipartFile file, ModelMap map) {
     	ApiResponse response =null;
 			
 		try {
@@ -368,12 +368,12 @@ public class user {
 				personalRepo.save(pi);
 			
 			
-			return response= new ApiResponse(true, "resume Saved");
+			return "home";
 
 		}
 		catch(Exception e) {
 			System.err.println(e.getMessage());
-			return response = new ApiResponse(false, "User resume saved Failed ", e.getMessage());
+			return "home";
 		}	
 	}
 	

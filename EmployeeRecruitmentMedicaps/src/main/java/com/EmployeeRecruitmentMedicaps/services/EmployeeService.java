@@ -403,7 +403,7 @@ public class EmployeeService {
 	        
 	        if(status==true)
 	        {
-	        	return res = new ApiResponse(true, "Education present");
+	        	return res = new ApiResponse(true, "Education present",education);
 	        }
 	        else
 	        {

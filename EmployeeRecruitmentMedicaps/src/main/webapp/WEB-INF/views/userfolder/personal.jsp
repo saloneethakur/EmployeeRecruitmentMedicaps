@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="/assets/css/personal1dis.css" />
   </head>
   <body>
+  <form action="/user/checkEducation">
+<button>education</button>
+</form>
     <div class="container">
       <h2>Application Form</h2>
       

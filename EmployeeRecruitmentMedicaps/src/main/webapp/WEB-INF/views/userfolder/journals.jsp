@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     
     
     
@@ -13,6 +13,17 @@
     <link rel="stylesheet" href="/assets/css/research1.css" />
   </head>
   <body>
+  
+ <!-- Initialize a flag to check for existing journals -->
+<c:set var="hasJournals" value="${false}" scope="page"/>
+
+<!-- Check if there are any journals -->
+<c:forEach var="journal" items="${personalInformation.journals}">
+    <c:set var="hasJournals" value="${true}" scope="page"/>
+</c:forEach>
+
+
+    
     <div class="form-container">
       <h1>Research</h1>
       <button type="button" id="editBtn">edit</button>

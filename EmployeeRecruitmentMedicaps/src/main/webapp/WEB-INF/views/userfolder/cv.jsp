@@ -15,15 +15,12 @@
     <div class="container">
       <h1>Upload Your CV</h1>
       <button type="button" id="editBtn">Edit</button>
-      <form action="/upload" method="post" enctype="multipart/form-data">
+      <form action="/user/add_resume" method="post" enctype="multipart/form-data">
         <div class="form-group">
-          <label for="cv">Upload Resume:</label>
-          <input type="file" id="cv" name="cv" required />
+          <label for="file">Upload Resume:</label>
+          <input type="file" id="cv" name="file" required />
         </div>
-        <div class="form-group">
-          <label for="coverLetter">Upload Cover Letter:</label>
-          <input type="file" id="coverLetter" name="coverLetter" required />
-        </div>
+        
         <div>
           <!-- <id = "myForm" onsubmit="validateForm(event)">
          -->
