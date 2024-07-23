@@ -46,6 +46,8 @@
       </form>
     </div>
     </c:if>
+    
+     <button onclick="location.href='/user/saveApplication'">save</button>
         <!-- JavaScript File -->
         <script src="/assets/JS/cvt.js"></script>
   </body>

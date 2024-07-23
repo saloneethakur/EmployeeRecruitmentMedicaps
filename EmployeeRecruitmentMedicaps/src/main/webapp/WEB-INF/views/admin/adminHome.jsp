@@ -62,6 +62,8 @@
                         <div class="dropdown-content">
                             <a onclick="location.href='/admin/vacancy'">Academic</a>
                             <a onclick="location.href='/admin/vacancy'">Non-Academic</a>
+                            <a onclick="location.href='/admin/viewAllApplication'">View-All-Application</a>
+                            
                         </div>
                     </div>
 
@@ -244,9 +246,10 @@
                 </div>
             </form>
         </div>
+ 
     </div>
 
-    <script src="/assets/JS/admindashboard.js"></script>
+<script src="/assets/JS/admindashboard.js"></script>
     
 </body>
 
