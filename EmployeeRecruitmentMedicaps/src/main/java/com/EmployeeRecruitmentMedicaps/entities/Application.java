@@ -19,8 +19,8 @@ public class Application {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "personal_id", nullable = false)
+    private PersonalInformation personalInformation;
 
     @ManyToOne
     @JoinColumn(name = "vacancy_id", nullable = false)
@@ -28,6 +28,15 @@ public class Application {
 
     @Column(nullable = false)
     private Date appliedDate;
+
+	public Application(PersonalInformation personalInformation, Vacancy vacancy, Date appliedDate) {
+		super();
+		this.personalInformation = personalInformation;
+		this.vacancy = vacancy;
+		this.appliedDate = appliedDate;
+	}
+
+	
 
     
 }
