@@ -66,6 +66,7 @@ public class AdminController {
 	@GetMapping("/viewAllApplication")
     public String displayItems(Model model) {
         List<Application> application = adminService.getAllApplication();
+       
         model.addAttribute("application", application);
         return "/admin/viewAllApplication";
     }

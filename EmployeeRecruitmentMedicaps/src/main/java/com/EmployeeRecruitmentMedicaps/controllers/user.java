@@ -433,6 +433,12 @@ public class user {
 	    // Assuming the relative path always starts after 'static/'
 		return fullPath.substring(fullPath.lastIndexOf("\\") + 1);
 	}
+	@RequestMapping(value = "/saveApplication")
+	public void saveApplication(Model m)
+	{
+		ApiResponse res=empService.viewAppication(personalid,vid);
+		m.addAttribute("Application",res);
+	}
 		
 	
 }
