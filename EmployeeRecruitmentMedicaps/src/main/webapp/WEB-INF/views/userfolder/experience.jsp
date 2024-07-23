@@ -58,7 +58,7 @@
                 <label for="endDate1">End Date:</label>
                 <input type="date" id="endDate1" name="endDate" value="${experience.endDate}" required />
                 
-                <input type="hidden" id="10thGrade" name="id" value="${experience.experienceId}" required />
+                <input type="hidden" id="10thGrade" name="experience_id" value="${experience.experienceId}" required />
                 <button type="submit" id="nextbtn">Submit</button>
               
               </div>
@@ -80,7 +80,7 @@
     <div class="container">
       <h2>Work Experience</h2>
       <button type="button" id="editBtn">edit</button>
-      <form id="workExperienceForm" action="/user/updateExperience" method="post" >
+      <form id="workExperienceForm" action="/user/saveExperience" method="post" >
         <h3>Experience (Latest to Oldest)</h3>
         <div id="workExperienceSections">
           <div class="section">
@@ -109,17 +109,19 @@
                 <label for="endDate1">End Date:</label>
                 <input type="date" id="endDate1" name="endDate"  required />
                 
-                 <input type="hidden" name="personalInformationId" value="${personalInformation.id}"/>
+                 
                 <button type="submit" id="nextbtn">Submit</button>
               
               </div>
             </div>
           </div>
         </div>
-        <button type="button" id="addSectionBtn">Add Experience</button>
+        
         <!-- <button type="submit" id="nextbtn">Next</button>-->
       </form>
-      
+      <form action="">
+           <button type="button" id="addSectionBtn" onclick="location.href='/user/saveExperience'" >Add Experience</button>      
+      </form>
       <button onclick="location.href='/user/cv'">Next</button>
     </div>
     </c:if>

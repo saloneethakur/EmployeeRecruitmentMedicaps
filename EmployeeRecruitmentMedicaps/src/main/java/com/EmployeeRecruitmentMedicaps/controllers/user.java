@@ -204,29 +204,22 @@ public class user {
 	    }
 	    
 	    @RequestMapping(value="/deleteEducation")
-	    public void deleteEducation(@RequestParam("educationId") Integer eId)
+	    public String deleteEducation(@RequestParam("educationId") Integer eId)
 	    {
 	    	ApiResponse res=empService.deleteEducation(eId);
+	    	return "redirect:/user/checkEducation";
 	    }
 	    
-	    
-	    
-	    
-	@RequestMapping(value="/saveResearch")
-	public void optionalPersonal(OptionalPersonal model)
-	{
-		 empService.saveResearcherDataForUser(model);
-	
-	}
-	
-	
-	
-	
-	
 	@RequestMapping(value="/checkExperience")
 	public String checkexperience(Model m)
 	{
-		
+		Optional<PersonalInformation> pi = personalRepo.findById(personalid);
+		 if(pi.isPresent())
+		 {
+			 PersonalInformation personal = pi.get();
+			 m.addAttribute("personalInformation", personal);
+			 
+		 }
 	     res =	empService.fetchExperiencesByPersonalInformationId(personalid); 
 	     m.addAttribute("res", res);
 	     
@@ -248,57 +241,51 @@ public class user {
 	
 	}
 	@RequestMapping(value="/saveExperience")
-	public void experience(ExperienceModel model)
+	public String experience(ExperienceModel model)
 	{
 		ApiResponse res = empService.saveExperience(model);
+		return "redirect:/user/checkExperience";
 	
 	}
 	
 	@RequestMapping(value = "/updateExperience")
-	public void updateExperience(@RequestParam("experience_id") Integer expID,ExperienceModel model )
+	public String updateExperience(@RequestParam("experience_id") Integer expID,ExperienceModel model )
 	{
 		ApiResponse res=empService.updateExperience(expID,model);
+		return "redirect:/user/checkExperience";
 	}
 	
 	@RequestMapping(value = "/deleteExperience")
-	public void deleteExperience(@RequestParam("experience_id") Integer expId)
+	public String deleteExperience(@RequestParam("experience_id") Integer expId)
 	{
 		ApiResponse res=empService.deleteExperience(expId);
+		return "redirect:/user/checkExperience";
 	}
 	
-	 @RequestMapping(value="/checkPHD")
+	 
 	   
-	 public String checkPHD(Model m)
-	    {
-	         res = empService.fetchPHDByPersonalInformationId(personalid); 
-	         m.addAttribute("res", res);
-	         
-	         
 
-	         if (res.getStatus() == true)
-	         {
-	             List<PhdEducation> phdEducation = (List<PhdEducation>) res.getData();
-	             m.addAttribute("phdEducation", phdEducation);
-	         }
-	         return "/user/phdEducation";
-	    }
 
 	    @RequestMapping(value="/savePHDeducation")
-	    public void PHDeducation(PHDdetailsModel model)
+	    public String PHDeducation(PHDdetailsModel model)
 	    {
 	        ApiResponse res = empService.savePHDeducation(model);
+	        return "redirect:/user/checkEducation";
+	        
 	    }
 	    
 	    @RequestMapping(value = "/updatePHD")
-	    public void updatePHD(@RequestParam("id") Integer phdId,PHDdetailsModel model)
+	    public String updatePHD(@RequestParam("id") Integer phdId,PHDdetailsModel model)
 	    {
 	    	ApiResponse res=empService.updatePHD(phdId,model);
+	    	return "redirect:/user/checkEducation";
 	    }
 	    
 	    @RequestMapping(value="/deletePHD")
-	    public void deletePHD(@RequestParam("id")Integer pId)
+	    public String deletePHD(@RequestParam("id")Integer pId)
 	    {
 	    	ApiResponse res=empService.deletePHD(pId);
+	    	return "redirect:/user/checkEducation";
 	    }
 	    
 	    
@@ -324,15 +311,17 @@ public class user {
 		    }
 		    
 		    @RequestMapping(value = "/updateJournal")
-		    public void updatePHD(@RequestParam("journal_id") Integer jourId, JournalDetailsModel model)
+		    public String updatePHD(@RequestParam("journal_id") Integer jourId, JournalDetailsModel model)
 		    {
 		    	ApiResponse res =empService.updateJournal(jourId,model);
+		    	return "redirect:/user/checkJournal";
 		    }
 		    
 		    @RequestMapping(value="/deleteJournal")
-		    public void deleteJournal(@RequestParam("journal_id") Integer rId)
+		    public String deleteJournal(@RequestParam("journal_id") Integer rId)
 		    {
 		    	ApiResponse res=empService.deleteJournal(rId);
+		    	return "redirect:/user/checkJournal";
 		    }
 
 	@RequestMapping(value="/profile")
@@ -361,7 +350,7 @@ public class user {
         		String fileName = file.getOriginalFilename();		
         		String extension = fileName.substring(fileName.lastIndexOf("."));
         		String uploadFile =  UUID.randomUUID().toString()+extension;	
-        		File fileObj = new File("E:\\Employe recuitment\\git\\EmployeeRecruitmentMedicaps\\EmployeeRecruitmentMedicaps\\src\\main\\resources\\static\\assets\\resume", uploadFile);
+        		File fileObj = new File("C:\\Users\\HP\\git\\git\\EmployeeRecruitmentMedicaps\\EmployeeRecruitmentMedicaps\\src\\main\\resources\\static\\assets\\resume", uploadFile);
         		FileOutputStream fos = new FileOutputStream(fileObj);
         		fos.write(arr);
         		fos.flush();
@@ -440,6 +429,12 @@ public class user {
 	private String extractRelativePath(String fullPath) {
 	    // Assuming the relative path always starts after 'static/'
 		return fullPath.substring(fullPath.lastIndexOf("\\") + 1);
+	}
+	@RequestMapping(value = "/saveApplication")
+	public void saveApplication(Model m)
+	{
+		ApiResponse res=empService.viewAppication(personalid,vid);
+		m.addAttribute("Application",res);
 	}
 		
 	

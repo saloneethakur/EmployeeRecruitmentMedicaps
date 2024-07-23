@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EmployeeRecruitmentMedicaps.Utils.ApiResponse;
+import com.EmployeeRecruitmentMedicaps.entities.Application;
 import com.EmployeeRecruitmentMedicaps.entities.Education;
 import com.EmployeeRecruitmentMedicaps.entities.Experience;
 import com.EmployeeRecruitmentMedicaps.entities.Journal;
@@ -32,6 +33,7 @@ import com.EmployeeRecruitmentMedicaps.repositories.JournalRepository;
 import com.EmployeeRecruitmentMedicaps.repositories.PHDRepository;
 import com.EmployeeRecruitmentMedicaps.repositories.PersonalRepo;
 import com.EmployeeRecruitmentMedicaps.repositories.UserRepository;
+import com.EmployeeRecruitmentMedicaps.repositories.VacancyRepository;
 
 @Service
 public class EmployeeService {
@@ -51,6 +53,12 @@ public class EmployeeService {
 	
 	@Autowired
     private UserRepository userRepo;
+	
+	@Autowired
+    private VacancyRepository vacancyRepo;
+	
+	@Autowired
+    private Application applicationRepo;
 	
 	
 	ApiResponse res =null;
@@ -358,20 +366,28 @@ public class EmployeeService {
             {
                 PersonalInformation personalInformation = op.get();
                 Experience experience;
+                
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date start = sdf.parse(model.getStartDate());
+                
                 if (model.getEndDate() != null)
                 {
-                    experience = new Experience(model.getJobTitle(), model.getInstituteName(), model.getStartDate(), model.getEndDate(), personalInformation);
+
+                    Date end = sdf.parse(model.getEndDate());
+                    experience = new Experience(model.getJobTitle(), model.getInstituteName(),start, end, personalInformation);
                 }
                 
                 else 
                 {
-                    experience = new Experience(model.getJobTitle(), model.getInstituteName(), model.getStartDate(), personalInformation);
+                	
+                    experience = new Experience(model.getJobTitle(), model.getInstituteName(), start, personalInformation);
                 }
                 personalInformation.getExperiences().add(experience);
                 // Save the experience entity
+                personalRepo.save(personalInformation);
                 experienceRepository.save(experience);
                 // Save the personal information entity (if needed to persist the list change)
-                personalRepo.save(personalInformation);
+                
                 
                 res = new ApiResponse(true, "Data updated successfully");
 
@@ -597,19 +613,22 @@ Education  education = new Education(model.getSchool_name(),model.getBoard_name(
 			
 			if(exp!=null)
 			{
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                Date start = sdf.parse(model.getStartDate());
+                Date end = sdf.parse(model.getEndDate());
 				Experience j=exp.get();
 				if(model.getInstituteName()!=null)
 				{
 					j.setJobTitle(model.getJobTitle());
 					j.setInstituteName(model.getInstituteName());
-					j.setStartDate(model.getStartDate());
-					j.setEndDate(model.getEndDate());
+					j.setStartDate(start);
+					j.setEndDate(end);
 				}
 				else {
 					j.setJobTitle(model.getJobTitle());
 					j.setInstituteName(model.getInstituteName());
-					j.setStartDate(model.getStartDate());
-					j.setEndDate(model.getEndDate());
+					j.setStartDate(start);
+					j.setEndDate(end);
 				}
 				experienceRepository.save(j);
 				res= new ApiResponse(true,"Experience data uploaded successfully");
@@ -795,6 +814,29 @@ Education  education = new Education(model.getSchool_name(),model.getBoard_name(
 		}
 		return res;
 		
+	}
+	
+	public ApiResponse viewAppication(Integer persID, Integer vacancyID) {
+		 
+        Optional<PersonalInformation> personalInfo = personalRepo.findById(persID);
+        PersonalInformation personalInformation = personalInfo.get();
+        Optional<Vacancy> vacancyInfo=vacancyRepo.findById(vacancyID);
+        Vacancy vacancy = vacancyInfo.get();
+        Date date=new Date();
+        
+       if (personalInfo.isPresent() && vacancyInfo.isPresent()) {
+               Application application=new Application(personalInformation,vacancy,date);
+               applicationRepo.save(application);
+               
+               res=new ApiResponse(true,"Apllication added successfully",application);
+           }
+       
+       else {
+       	
+       
+       res= new ApiResponse(false, "Data not found");
+       }
+       return res;
 	}
 
 

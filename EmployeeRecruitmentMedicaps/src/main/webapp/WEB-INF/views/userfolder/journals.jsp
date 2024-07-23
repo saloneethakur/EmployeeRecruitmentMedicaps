@@ -56,14 +56,14 @@
             <div class="field">
               <label for="research-indexing-1">Indexing</label>
               <select id="research-indexing-1" name="indexing">
-                <option value="">Select</option>
+                <option selected value="${journal.journalId}">Select</option>
                 <option value="Web Of Science">Web Of Science</option>
                 <option value="Scopus">Scopus</option>
                 <option value="UGC CARE">UGC Care</option>
               </select>
             </div>
           </div>
-          <input type="hidden" id="10thGrade" name="id" value="${journal.journalId}" required />
+          <input type="hidden" id="10thGrade" name="journal_id" value="${journal.journalId}" required />
           <button type="submit" id="submit-10" class="submit-btn">
             Submit
           </button>
@@ -110,14 +110,14 @@
             <div class="field">
               <label for="research-indexing-1">Indexing</label>
               <select id="research-indexing-1" name="indexing">
-                <option value="">Select</option>
+                <option selected ${journal.journalId}>Select</option>
                 <option value="Web Of Science">Web Of Science</option>
                 <option value="Scopus">Scopus</option>
                 <option value="UGC CARE">UGC Care</option>
               </select>
             </div>
           </div>
-          <input type="hidden" id="10thGrade" name="id" value="${journal.journalId}" required />
+          <input type="hidden"  name="journal_id" value="${journal.journalId}" required />
           <button type="submit" id="submit-10" class="submit-btn">
             Submit
           </button>

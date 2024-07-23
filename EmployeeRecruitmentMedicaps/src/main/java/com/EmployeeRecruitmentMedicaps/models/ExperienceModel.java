@@ -13,9 +13,10 @@ public class ExperienceModel {
    
     private String jobTitle;
     private String instituteName;
-    private Date startDate;
-    private Date endDate;
-	public ExperienceModel(String jobTitle, String instituteName, Date startDate) {
+    private String startDate;
+    private String endDate;
+	public ExperienceModel(String jobTitle, String instituteName, String
+			startDate) {
 		super();
 		this.jobTitle = jobTitle;
 		this.instituteName = instituteName;
