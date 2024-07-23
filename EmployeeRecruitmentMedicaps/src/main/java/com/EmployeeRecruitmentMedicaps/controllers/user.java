@@ -18,6 +18,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,6 +42,8 @@ import com.EmployeeRecruitmentMedicaps.repositories.PersonalRepo;
 import com.EmployeeRecruitmentMedicaps.repositories.VacancyRepository;
 import com.EmployeeRecruitmentMedicaps.services.EmployeeService;
 import com.EmployeeRecruitmentMedicaps.services.UserService;
+
+
 import org.springframework.web.bind.annotation.RequestMethod;
 
 
@@ -429,12 +432,6 @@ public class user {
 	private String extractRelativePath(String fullPath) {
 	    // Assuming the relative path always starts after 'static/'
 		return fullPath.substring(fullPath.lastIndexOf("\\") + 1);
-	}
-	@RequestMapping(value = "/saveApplication")
-	public void saveApplication(Model m)
-	{
-		ApiResponse res=empService.viewAppication(personalid,vid);
-		m.addAttribute("Application",res);
 	}
 		
 	

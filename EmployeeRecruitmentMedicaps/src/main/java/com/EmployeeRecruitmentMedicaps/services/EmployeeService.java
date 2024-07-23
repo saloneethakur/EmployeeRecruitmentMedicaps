@@ -27,6 +27,7 @@ import com.EmployeeRecruitmentMedicaps.models.JournalDetailsModel;
 import com.EmployeeRecruitmentMedicaps.models.OptionalPersonal;
 import com.EmployeeRecruitmentMedicaps.models.PHDdetailsModel;
 import com.EmployeeRecruitmentMedicaps.models.PersonalDetailsModel;
+import com.EmployeeRecruitmentMedicaps.repositories.ApplicationRepository;
 import com.EmployeeRecruitmentMedicaps.repositories.EducationRepository;
 import com.EmployeeRecruitmentMedicaps.repositories.ExperienceRepository;
 import com.EmployeeRecruitmentMedicaps.repositories.JournalRepository;
@@ -58,7 +59,7 @@ public class EmployeeService {
     private VacancyRepository vacancyRepo;
 	
 	@Autowired
-    private Application applicationRepo;
+    private ApplicationRepository applicationRepo;
 	
 	
 	ApiResponse res =null;

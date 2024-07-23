@@ -2,6 +2,7 @@ package com.EmployeeRecruitmentMedicaps.services;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.EmployeeRecruitmentMedicaps.Utils.ApiResponse;
 import com.EmployeeRecruitmentMedicaps.models.VacancyModel;
+import com.EmployeeRecruitmentMedicaps.repositories.ApplicationRepository;
 import com.EmployeeRecruitmentMedicaps.repositories.VacancyRepository;
+import com.EmployeeRecruitmentMedicaps.entities.Application;
 import com.EmployeeRecruitmentMedicaps.entities.PersonalInformation;
 import com.EmployeeRecruitmentMedicaps.entities.User;
 import com.EmployeeRecruitmentMedicaps.entities.Vacancy;
@@ -19,6 +22,8 @@ import com.EmployeeRecruitmentMedicaps.entities.Vacancy;
 public class AdminService {
 	@Autowired
 	public VacancyRepository vacancyRepo;
+	@Autowired
+	public ApplicationRepository applicationRepo;
 	ApiResponse res =null;
 
 	public ApiResponse addVacancy(VacancyModel model) {
@@ -94,6 +99,11 @@ public class AdminService {
         }
 		
 		return res;
+	}
+
+	public List<Application> getAllApplication() {
+		
+		return applicationRepo.findAll();
 	}
 
 }
