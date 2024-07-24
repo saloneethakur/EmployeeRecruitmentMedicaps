@@ -79,45 +79,56 @@ public class UserService implements UserDetailsService{
 	}
 	
 	public ApiResponse sendOtp(String email, User user) {
-		ApiResponse response = null;
-		Otp ob = null;
-		boolean status;
-		try
+		Optional<User> op=userRepo.findByEmail(email);
+		if(op.isPresent())
 		{
-			Random random = new Random();
-			
-			int number = 100000 + random.nextInt(900000);
-			String ot=String.valueOf(number);			
-			Otp otp = otpService.findByUser(user);
-			
-			if(otp!=null)
+			ApiResponse response = null;
+			Otp ob = null;
+			boolean status;
+			try
 			{
-				otp.setOtpNumber(ot);
-				otprepo.save(otp);
-				status = true;
-				mailService.verificationMail(email, ot);
-				System.out.println("otp set");
+				Random random = new Random();
+				
+				int number = 100000 + random.nextInt(900000);
+				String ot=String.valueOf(number);			
+				Otp otp = otpService.findByUser(user);
+				
+				if(otp!=null)
+				{
+					otp.setOtpNumber(ot);
+					otprepo.save(otp);
+					status = true;
+					mailService.verificationMail(email, ot);
+					System.out.println("otp set");
+					System.out.println(user);
+					response = new ApiResponse(true, "otp set !");
+				}
+				else
+				{
+					ob = new Otp(user, ot);
+					otprepo.save(ob);
+					status = true;
+					mailService.verificationMail(email, ot);
+					response= new ApiResponse(true,"otp saved") ;
+					System.out.println("otp saved");
+				}
+				
+			}
+			catch(Exception ex){	
+				System.out.println(" error");
 				System.out.println(user);
-				response = new ApiResponse(true, "otp set !");
+				System.out.println(ex.getMessage());
+				response = new ApiResponse(false, "otp was not sent !", ex.getMessage());
 			}
-			else
-			{
-				ob = new Otp(user, ot);
-				otprepo.save(ob);
-				status = true;
-				mailService.verificationMail(email, ot);
-				response= new ApiResponse(true,"otp saved") ;
-				System.out.println("otp saved");
-			}
-			
+			return response;	
 		}
-		catch(Exception ex){	
-			System.out.println(" error");
-			System.out.println(user);
-			System.out.println(ex.getMessage());
-			response = new ApiResponse(false, "otp was not sent !", ex.getMessage());
+		else
+		{
+			ApiResponse response =null;
+			response = new ApiResponse(false, "Email Not Found!");
+			return response;
 		}
-		return response;	
+		
 	}
 	public User findByEmail(String email) 
 	{

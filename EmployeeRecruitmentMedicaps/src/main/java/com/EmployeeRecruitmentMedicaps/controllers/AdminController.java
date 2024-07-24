@@ -70,6 +70,24 @@ public class AdminController {
         model.addAttribute("application", application);
         return "/admin/viewAllApplication";
     }
+	@RequestMapping(value="/viewvVacancyApplication")
+	public String viewVacancyApplication(@RequestParam("vId") Integer vId,Model m) {
+		List<Application> application = adminService.getVacancyApplication(vId);
+        m.addAttribute("application", application);
+			
+		
+		return "/admin/viewVacancyApplication";
+		
+	}
+	
+	@RequestMapping(value ="/viewMyVacanciesApplications")
+	public String viewMyVacanciesApplications(Model m)
+	{
+		List<Vacancy> vacancy= adminService.getMyvacanciesApplications();
+		m.addAttribute("My vacancy",vacancy);
+		
+		return "/admin/viewMyVacanciesApplication";
+	}
 	
 
 }
