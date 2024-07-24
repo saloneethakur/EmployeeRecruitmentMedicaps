@@ -65,11 +65,11 @@ public class AdminController {
 	}
 	
 	@GetMapping("/viewAllApplication")
-    public String displayItems(Model model) {
+    public void displayItems(Model model) {
         List<Application> application = adminService.getAllApplication();
        
         model.addAttribute("application", application);
-        return "/admin/viewAllApplication";
+        
     }
 	@RequestMapping(value="/viewvVacancyApplication")
 	public String viewVacancyApplication(@RequestParam("vId") Integer vId,Model m) {
