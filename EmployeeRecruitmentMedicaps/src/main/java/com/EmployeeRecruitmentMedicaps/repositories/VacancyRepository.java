@@ -12,6 +12,6 @@ import com.EmployeeRecruitmentMedicaps.entities.Vacancy;
 @Repository
 public interface VacancyRepository extends JpaRepository<Vacancy, Integer>{
 	Optional<Vacancy> findByUser(User user);
-	List<Vacancy> findByAdminUser(User user);
+	List<Vacancy> findAllByUser(User user);
 	//Optional<Vacancy> findById(User user);
 }

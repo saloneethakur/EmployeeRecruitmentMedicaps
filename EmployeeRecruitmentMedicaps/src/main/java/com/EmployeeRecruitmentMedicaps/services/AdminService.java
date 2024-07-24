@@ -117,7 +117,7 @@ public class AdminService {
 	public List<Vacancy> getMyvacanciesApplications() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		User user = (User)principal;
-		List<Vacancy> vac=vacancyRepo.findByAdminUser(user);
+		List<Vacancy> vac=vacancyRepo.findAllByUser(user);
 		
 		
 		return vac;
