@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.EmployeeRecruitmentMedicaps.Utils.ApiResponse;
 import com.EmployeeRecruitmentMedicaps.entities.Application;
+import com.EmployeeRecruitmentMedicaps.entities.Vacancy;
 import com.EmployeeRecruitmentMedicaps.models.UserRegistrationModel;
 import com.EmployeeRecruitmentMedicaps.models.VacancyModel;
 import com.EmployeeRecruitmentMedicaps.services.AdminService;

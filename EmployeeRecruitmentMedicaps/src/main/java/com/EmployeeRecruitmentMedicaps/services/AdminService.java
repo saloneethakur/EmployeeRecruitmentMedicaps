@@ -106,4 +106,23 @@ public class AdminService {
 		return applicationRepo.findAll();
 	}
 
+	public List<Application> getVacancyApplication(Integer vId) {
+		Optional<Vacancy> vac=  vacancyRepo.findById(vId);
+		Vacancy v=vac.get();
+		
+		return applicationRepo.findByVacancy(v);
+		
+	}
+
+	public List<Vacancy> getMyvacanciesApplications() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = (User)principal;
+		List<Vacancy> vac=vacancyRepo.findByAdminUser(user);
+		
+		
+		return vac;
+	}
+
+	
+
 }
