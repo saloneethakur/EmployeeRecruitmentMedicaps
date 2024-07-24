@@ -9,6 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import com.EmployeeRecruitmentMedicaps.entities.Vacancy;
 import com.EmployeeRecruitmentMedicaps.models.UserRegistrationModel;
 import com.EmployeeRecruitmentMedicaps.models.VacancyModel;
 import com.EmployeeRecruitmentMedicaps.services.AdminService;
+import com.EmployeeRecruitmentMedicaps.services.ApplicationService;
 
 
 @Controller
@@ -27,6 +29,9 @@ public class AdminController {
 	
 	@Autowired
 	public AdminService adminService;
+	
+	@Autowired
+	public ApplicationService applicationService;
 	
 	@RequestMapping(value="/addVacancy")
 	public String addvacancy(VacancyModel model, ModelMap map,Model m) {
@@ -88,6 +93,22 @@ public class AdminController {
 		m.addAttribute("My vacancy",vacancy);
 		
 		return "/admin/viewMyVacanciesApplication";
+	}
+	
+	@DeleteMapping("/deleteAllApplication")
+    public ApiResponse deleteAllApplications() {
+        return applicationService.deleteAllApplications();
+    }
+	
+	@DeleteMapping("/deleteSelectedApplicationOnly")
+	public ApiResponse deleteSelectedApplicationOnly(@RequestParam("id") Integer applicationId)
+	{
+		return applicationService.deleteSelectedApplicationOnly(applicationId);
+	}
+	
+	@DeleteMapping("/deleteApplicationByVacancy")
+	public ApiResponse deleteApplicationByVacancy(@RequestParam("vacancy_id") Integer vacancyId) {
+		return applicationService.deleteApplicationByVacancy(vacancyId);
 	}
 	
 
