@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.EmployeeRecruitmentMedicaps.Utils.ApiResponse;
+import com.EmployeeRecruitmentMedicaps.entities.Application;
 import com.EmployeeRecruitmentMedicaps.entities.Education;
 import com.EmployeeRecruitmentMedicaps.entities.Experience;
 import com.EmployeeRecruitmentMedicaps.entities.Journal;
@@ -439,6 +440,15 @@ public class user {
 		ApiResponse res=empService.viewAppication(personalid,vid);
 		m.addAttribute("Application",res);
 	}
+	
+	
+	@RequestMapping(value = "/userPersonalApplication")
+	public String userPersonalApplication(Model m) {
+		List<Application> personalApplication =empService.userPersonalApplication(m);
+		
+		return new String();
+	}
+	
 		
 	
 }

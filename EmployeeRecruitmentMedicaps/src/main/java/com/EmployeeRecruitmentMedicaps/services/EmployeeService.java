@@ -2,6 +2,7 @@ package com.EmployeeRecruitmentMedicaps.services;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -838,6 +839,25 @@ Education  education = new Education(model.getSchool_name(),model.getBoard_name(
        res= new ApiResponse(false, "Data not found");
        }
        return res;
+	}
+
+
+
+	public List<Application> userPersonalApplication(Model m) {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		User user = (User)principal;
+		List<Application> applications = new ArrayList<>();
+		Optional<PersonalInformation> op=personalRepo.findByUser(user);
+		if(op.isPresent())
+		{
+			
+			PersonalInformation pi=op.get();
+			applications= applicationRepo.findAllByPersonalInformation(pi);
+			
+		}
+		return applications;
+		
+		
 	}
 
 
