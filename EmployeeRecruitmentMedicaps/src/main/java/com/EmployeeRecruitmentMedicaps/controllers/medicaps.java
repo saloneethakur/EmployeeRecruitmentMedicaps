@@ -155,7 +155,7 @@ public class medicaps {
 			if(user.getRole().equals("ROLE_USER"))
 				return "/userPanel";
 			else if(user.getRole().equals("ROLE_ADMIN"))
-				return "/admin/adminHome";
+				return "redirect:/admin/viewAllApplication";
 			
 			else
 				return "register";

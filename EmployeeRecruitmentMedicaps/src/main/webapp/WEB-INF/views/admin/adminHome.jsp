@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-    
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>   
     
 <!DOCTYPE html>
 <html lang="en">
@@ -114,23 +115,29 @@
                                 <th>Delete<i class="fas fa-trash-alt"></i></th>
                             </tr>
                         </thead>
+                        
                         <tbody>
+                        <c:forEach var="application" items="${application}">
                             <tr>
-                                <td>John Doe</td>
-                                <td>johndoe@example.com</td>
-                                <td>123-456-7890</td>
-                                <td>Professor</td>
-                                <td>Engineering</td>
-                                <td>Computer Science</td>
-                                <td>10 years</td>
-                                <td>2024-07-15</td>
+                            
+                                <td>${application.personalInformation.user.name}</td>
+                                <td>${application.personalInformation.user.email}</td>
+                                <td>${application.personalInformation.user.number}</td>
+                                <td>${application.vacancy.postAppliedFor}</td>
+                                <td>${application.vacancy.faculty}</td>
+                                <td>${application.vacancy.department}</td>
+                                <td>${totalYears}</td>
+                                <td><fmt:formatDate value='${application.appliedDate}' pattern='yyyy-MM-dd'/>"</td>
                                 <td><a href="#">View Resume</a></td>
                                 <td><a href="#">View Profile</a></td>
                                 <td><button class="delete-btn" onclick="deleteRow(this)"><i class="fas fa-trash-alt"></i> </button>
                                 </td>
+                                
                             </tr>
                             <!-- Add more rows as needed -->
+                           </c:forEach>
                         </tbody>
+                        
                     </table>
                 </div>
             </div>

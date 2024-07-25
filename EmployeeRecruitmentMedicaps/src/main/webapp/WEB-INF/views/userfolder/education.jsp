@@ -44,16 +44,16 @@
 </c:forEach>
 
 
-   <c:if test="${not empty personalInformation.educations}">
+  
      
     <div class="form-container">
       <h2>Education Details Form</h2>
       
       
     
-      
-     
-     <button type="button" id="editBtn">Edit</button>
+       <c:if test="${not empty personalInformation.educations}">
+    <button type="button" id="editBtn" onclick="enableFormFields()">Edit</button>
+</c:if>
      
       <c:if test="${hasTenth}">
       <c:forEach var="education" items="${personalInformation.educations}">
@@ -74,20 +74,20 @@
               id="10thSchoolName"
               name="School_name"
               value="${education.institutionName}"
-              required
+              required disabled
             />
             
             <label for="10thBoard">Board</label>
-            <input type="text" id="10thBoard" name="Board_name" value="${education.educationClass}" required />
+            <input type="text" id="10thBoard" name="Board_name" value="${education.educationClass}" required disabled />
 
             <label for="10thYear">Passing Year</label>
-            <input type="date" id="10th-date" name="Passing_year" value="<fmt:formatDate value='${education.completionYear}' pattern='yyyy-MM-dd'/>" required />
+            <input type="date" id="10th-date" name="Passing_year" value="<fmt:formatDate value='${education.completionYear}' pattern='yyyy-MM-dd'/>" required disabled />
 
             <label for="10thGrade">Percentage</label>
-            <input type="number" min="0" max="100" id="10thGrade" name="Percentage" value="${education.percentage}" required />
+            <input type="number" min="0" max="100" id="10thGrade" name="Percentage" value="${education.percentage}" required disabled />
 
              <input type="hidden" id="10thGrade" name="courseType" value="${education.courseType}"  />
-              <input type="hidden" id="10thGrade" name="id" value="${education.educationId}" required />
+              <input type="hidden" id="10thGrade" name="id" value="${education.educationId}" required disabled />
             
 
             
@@ -101,6 +101,7 @@
         </c:if>
         </c:forEach>
         </c:if>
+        
         
         
          <!-- 10th Grade Section -->
@@ -161,20 +162,20 @@
               id="12thSchoolName"
               name="School_name"
               value="${education.institutionName}"
-              required
+              required disabled
             />
 
             <label for="12thBoard">Board</label>
-            <input type="text" id="12thBoard" name="Board_name" value="${education.educationClass}" required />
+            <input type="text" id="12thBoard" name="Board_name" value="${education.educationClass}" required disabled/>
 
             <label for="12thYear">Passing Year</label>
-            <input type="date" id="12th-date" name="Passing_year" value="<fmt:formatDate value='${education.completionYear}' pattern='yyyy-MM-dd'/>" required />
+            <input type="date" id="12th-date" name="Passing_year" value="<fmt:formatDate value='${education.completionYear}' pattern='yyyy-MM-dd'/>" required disabled/>
 
             <label for="12thGrade">Percentage</label>
-            <input type="number" min="0" max="100"  id="12thGrade" name="Percentage" value="${education.percentage}" required />
+            <input type="number" min="0" max="100"  id="12thGrade" name="Percentage" value="${education.percentage}" required disabled />
 
             <label for="12thField">Subject</label>
-            <select id="12thField" name="Field_of_study" required>
+            <select id="12thField" name="Field_of_study" required disabled>
               <option value="">Select Subject</option>
               <option value="PCM" ${education.fieldOfStudy == 'PCM' ? 'selected' : ''} >PCM</option>
               <option value="PCB" ${education.fieldOfStudy == 'PCB' ? 'selected' : ''}>PCB</option>
@@ -183,7 +184,7 @@
               <option value="CommerceMaths" ${education.fieldOfStudy == 'CommerceMaths' ? 'selected' : ''} >Commerce + Maths</option>
               <option value="Others" ${education.fieldOfStudy == 'Others' ? 'selected' : ''} >Others</option>
             </select>
-            <input type="hidden" id="10thGrade" name="id" value="${education.educationId}" required />
+            <input type="hidden" id="10thGrade" name="id" value="${education.educationId}" required disabled />
             <input type="hidden" name="courseType" value="Twelve" > 
             
             <button type="submit" id="submit-12" class="submit-btn">
@@ -259,7 +260,7 @@
           </div>
           <div class="section-details" id="diploma-details">
             <label for="diplomaDegree">Course</label>
-            <select id="diplomaDegree" name="educationClass" required>
+            <select id="diplomaDegree" name="educationClass" required disabled>
               <option value="">Select Degree</option>
               <option value="Engineering" ${education.educationClass == 'Engineering' ? 'selected' : ''} >Engineering</option>
               <option value="Management" ${education.educationClass == 'Management' ? 'selected' : ''} >Management</option>
@@ -281,16 +282,16 @@
               id="diplomaInstitution"
              name="School_name"
              value="${education.institutionName}"
-              required
+              required disabled
             />
 
             <label for="diplomaYear">Year of Completion</label>
-            <input type="date" id="diploma-date" name="Passing_year" value="<fmt:formatDate value='${education.completionYear}' pattern='yyyy-MM-dd'/>" required />
+            <input type="date" id="diploma-date" name="Passing_year" value="<fmt:formatDate value='${education.completionYear}' pattern='yyyy-MM-dd'/>" required disabled/>
 
             <label for="diplomaGrade">Percentage</label>
-            <input type="number" min="0" max="100"  id="diplomaGrade" name="Percentage" value="${education.percentage}" required />
+            <input type="number" min="0" max="100"  id="diplomaGrade" name="Percentage" value="${education.percentage}" required disabled/>
             
-            <input type="hidden" id="10thGrade" name="id" value="${education.educationId}" required />
+            <input type="hidden" id="10thGrade" name="id" value="${education.educationId}" required disabled/>
             <button type="submit" id="submit-diploma" class="submit-btn">
               Submit
             </button>
@@ -358,7 +359,7 @@
           </div>
           <div class="section-details" id="UG-details">
             <label for="UGDegree">Degree</label>
-            <select id="UGDegree" name="educationClass" required>
+            <select id="UGDegree" name="educationClass" required disabled>
               <option value="">Select Degree</option>
               <option value="Engineering" ${education.educationClass == 'Engineering' ? 'selected' : ''}>Engineering</option>
               <option value="Management" ${education.educationClass == 'Management' ? 'selected' : ''}>Management</option>
@@ -380,16 +381,16 @@
               id="UGInstitution"
               name="School_name"
               value="${education.institutionName}"
-              required
+              required disabled
             />
 
             <label for="UGYear">Year of Completion</label>
-            <input type="date" id="UG-date" name="Passing_year" value="<fmt:formatDate value='${education.completionYear}' pattern='yyyy-MM-dd'/>" required />
+            <input type="date" id="UG-date" name="Passing_year" value="<fmt:formatDate value='${education.completionYear}' pattern='yyyy-MM-dd'/>" required disabled/>
 
             <label for="UGGrade">Percentage</label>
-            <input type="number" min="0" max="100"  id="UGGrade" name="Percentage" value="${education.percentage}" required />
+            <input type="number" min="0" max="100"  id="UGGrade" name="Percentage" value="${education.percentage}" required disabled/>
             
-            <input type="hidden" id="10thGrade" name="id" value="${education.educationId}" required />
+            <input type="hidden" id="10thGrade" name="id" value="${education.educationId}" required disabled/>
             <button type="submit" id="submit-ug" class="submit-btn">
               Submit
             </button>
@@ -463,7 +464,7 @@
           </div>
           <div class="section-details" id="PG-details">
             <label for="PGDegree">Degree</label>
-            <select id="PGDegree" name="educationClass" required>
+            <select id="PGDegree" name="educationClass" required disabled>
               <option value="">Select Degree</option>
               <option value="MBA" ${education.educationClass == 'MBA' ? 'selected' : ''} >MBA</option>
               <option value="MSc" ${education.educationClass == 'MSc' ? 'selected' : ''}>MSc</option>
@@ -484,11 +485,11 @@
               id="PGInstitution"
               name="School_name"
               value="${education.institutionName}"
-              required
+              required disabled
             />
 
             <label for="PGYear">Year of Completion</label>
-            <input type="date" id="PG-date" name="Passing_year" value="<fmt:formatDate value='${education.completionYear}' pattern='yyyy-MM-dd'/>" required />
+            <input type="date" id="PG-date" name="Passing_year" value="<fmt:formatDate value='${education.completionYear}' pattern='yyyy-MM-dd'/>" required disabled />
 
             <label for="PGGrade">Percentage</label>
             <input type="number" min="0" max="100"  id="PGGrade" name="Percentage" value="${education.percentage}" required />
@@ -569,7 +570,7 @@
           </div>
           <div class="section-details" id="PhD-details">
             <label for="PhDField">Field of Study</label>
-            <input type="text" id="PhDField" name="PhDField" required />
+            <input type="text" id="PhDField" name="PhDField" required disabled />
 
             <label for="PhDInstitution">Institution Attended</label>
             <input
@@ -577,7 +578,7 @@
               id="PhDInstitution"
               name="PhDInstitution_name"
               value="${phd.institutionName}"
-              required
+              required disabled
             />
 
             <label for="PhDJoiningYear">Joining Year</label>
@@ -586,7 +587,7 @@
               id="PhD-joining-date"
               name="joiningYear" 
               value="<fmt:formatDate value='${phd.joiningYear}' pattern='yyyy-MM-dd'/>"
-              required
+              required disabled
             />
 
             <label for="PhDPassingYear">Passing Year</label>
@@ -595,22 +596,22 @@
               id="PhD-passing-date"
               name="PhD_year_of_passing" 
               value="<fmt:formatDate value='${phd.completionYear}' pattern='yyyy-MM-dd'/>"
-              required
+              required disabled
             />
 
             <label for="PhDGrade">Percentage</label>
-            <input type="number" min="0" max="100"  id="PhDGrade" name="percentage" value="${phd.percentage}" required />
+            <input type="number" min="0" max="100"  id="PhDGrade" name="percentage" value="${phd.percentage}" required disabled/>
 
             <label for="PhDSupervisor">Supervisor's Name (optional)</label>
-            <input type="text" id="PhDSupervisor" name="PhD_Supervisor_name" value="${phd.supervisorOrAdvisor}" />
+            <input type="text" id="PhDSupervisor" name="PhD_Supervisor_name" value="${phd.supervisorOrAdvisor}" disabled/>
 
             <label for="PhDThesis">Thesis Title (optional)</label>
-            <input type="text" id="PhDThesis" name="PhD_Thesis_topic" value="${phd.thesis}" />
+            <input type="text" id="PhDThesis" name="PhD_Thesis_topic" value="${phd.thesis}" disabled/>
 
             <label for="PhDSummary">Research Summary (optional)</label>
-            <textarea id="PhDSummary" name="PhDSummary" value="${phd.researchSummary}" rows="4"></textarea>
+            <textarea id="PhDSummary" name="PhDSummary" value="${phd.researchSummary}" rows="4" disabled></textarea>
             
-            <input type="hidden" id="10thGrade" name="id" value="${phd.id}" required />
+            <input type="hidden" id="10thGrade" name="id" value="${phd.id}" required disabled/>
             <button type="submit" id="submit-phd" class="submit-btn">
               Submit
             </button>
@@ -783,11 +784,20 @@
       </form>
      -->
     </div>
-</c:if>
+
    <form action="/user/checkJournal">
 <button type="submit" >next</button>
 </form>
     <!-- JavaScript File -->
+    <script>
+function enableFormFields() {
+    var form = document.getElementById('educationForm');
+    var elements = form.elements;
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].disabled = false;
+    }
+}
+</script>
     <script src="/assets/JS/education1.js"></script>
   </body>
 </html>

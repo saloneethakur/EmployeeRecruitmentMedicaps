@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
         researchCount++
         addSection(researchContainer, 'Research', researchCount)
       } else {
-        alert('You can add a maximum of 6 sections only.')
+        alert('You can add a maximum of 7 sections only.')
       }
     } else {
       alert(
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const editButton = document.getElementById('editBtn')
   const form = document.querySelector('form')
 
-  // Disable all inputs and select elements initially
+ /* // Disable all inputs and select elements initially
   if (editButton) {
     inputs.forEach((input) => {
       input.disabled = true
@@ -91,5 +91,5 @@ document.addEventListener('DOMContentLoaded', () => {
     inputs.forEach((input) => {
       input.disabled = false
     })
-  }
+  }*/
 })

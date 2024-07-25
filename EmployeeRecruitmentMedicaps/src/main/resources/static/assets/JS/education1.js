@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const editButton = document.getElementById('editBtn')
   const form = document.querySelector('form')
 
-  // Disable all inputs and select elements initially
+  /*// Disable all inputs and select elements initially
   if (editButton) {
     inputs.forEach((input) => {
       input.disabled = true
@@ -196,5 +196,5 @@ document.addEventListener('DOMContentLoaded', function () {
     inputs.forEach((input) => {
       input.disabled = false
     })
-  }
+  }*/
 })

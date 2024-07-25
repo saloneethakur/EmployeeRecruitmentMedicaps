@@ -26,18 +26,18 @@
     <section class="dashboard">
         <!-- Example card for each application -->
         
-        <c:forEach var="application" items="application">
+        <c:forEach var="application" items="${application}">
         <div class="card">
             <div class="card-header">
-                <h2>Application for Assistant Professor</h2>
+                <h2><strong> Application for:</strong>  ${application.vacancy.postAppliedFor}  </h2>
             </div>
             <div class="card-body">
-                <p><strong>Applicant Name: } </strong> John Doe</p>
+                <p><strong>Applicant Name: </strong>${application.personalInformation.user.name}</p>
      
-                <p><strong>Faculty:</strong> Engineering</p>
-                <p><strong>Department: ${ application.vacancy.department} </strong> Computer Science</p>
+                <p><strong>Faculty: </strong>${application.vacancy.faculty}</p>
+                <p><strong>Department: </strong>${application.vacancy.department}</p>
           
-                <p><strong>Status:</strong> Pending</p>
+               
             </div>
             <div class="card-footer">
                 <button class="view-details-btn">View Details</button>
